@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>AI & Digital Skills – Level 2 (Locked Preview) – Goodwill Academy</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Preview of AI & Digital Skills Level 2 for Goodwill Academy. See lessons, rewards and how to unlock using NDIS funding.">
+    <style>
+        :root {
+            --bg: #f4f7f9;
+            --card-bg: #ffffff;
+            --primary: #0e7272;
+            --secondary: #fe8427;
+            --text: #1a2c37;
+            --muted: #6b7a8d;
+            --radius: 14px;
+            --shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(100deg, var(--primary), #0b8b8b);
+            color: #ffffff;
+            padding: 20px 0 18px;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 20px 20px;
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .back-link {
+            color: #e5f5f4;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .back-link span {
+            font-size: 1.1rem;
+        }
+
+        h1 {
+            margin: 8px 0 4px;
+            font-size: 1.9rem;
+        }
+
+        header p {
+            margin: 2px 0 0;
+            color: #dff4f2;
+            font-size: 0.95rem;
+        }
+
+        .locked-banner {
+            margin-top: 12px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.22);
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .locked-banner span.icon {
+            font-size: 1.3rem;
+        }
+
+        main {
+            margin-top: 16px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1.9fr 1.4fr;
+            gap: 18px;
+        }
+
+        @media (max-width: 880px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 16px 18px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 6px;
+            font-size: 1.3rem;
+        }
+
+        .card-subtitle {
+            margin: 0 0 10px;
+            font-size: 0.88rem;
+            color: var(--muted);
+        }
+
+        .lesson-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .lesson-row {
+            border-radius: 10px;
+            border: 1px dashed #d7e3ea;
+            padding: 8px 10px;
+            display: grid;
+            grid-template-columns: auto minmax(0,1fr) auto;
+            gap: 8px;
+            align-items: center;
+            background: #f9fbfd;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 720px) {
+            .lesson-row {
+                grid-template-columns: auto minmax(0,1fr);
+            }
+        }
+
+        .lesson-index {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #d2dde3;
+            color: #ffffff;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .lesson-main h3 {
+            margin: 0 0 2px;
+            font-size: 0.96rem;
+        }
+
+        .lesson-main p {
+            margin: 0;
+            font-size: 0.84rem;
+            color: var(--muted);
+        }
+
+        .lock-pill {
+            font-size: 0.78rem;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: #fff3e8;
+            color: #b05808;
+            border: 1px solid #f7d5b2;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blur-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(244,247,249,0.7), rgba(244,247,249,0.95));
+            backdrop-filter: blur(1px);
+            pointer-events: none;
+        }
+
+        .blur-text {
+            position: absolute;
+            right: 10px;
+            bottom: 8px;
+            font-size: 0.8rem;
+            color: #9a8f8f;
+        }
+
+        .small-note {
+            margin-top: 8px;
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (max-width: 720px) {
+            .rewards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .reward-card {
+            border-radius: 10px;
+            border: 1px solid #e0e4f1;
+            padding: 10px 12px;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            position: relative;
+        }
+
+        .reward-card.locked {
+            opacity: 0.75;
+        }
+
+        .reward-title {
+            font-size: 0.96rem;
+            font-weight: bold;
+        }
+
+        .reward-points {
+            font-size: 0.82rem;
+            color: #b05808;
+        }
+
+        .reward-desc {
+            font-size: 0.84rem;
+            color: var(--muted);
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .badge {
+            font-size: 0.8rem;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: #f5f1f1;
+            color: #9a8f8f;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .badge span.icon {
+            font-size: 1rem;
+        }
+
+        .requirements-list {
+            font-size: 0.86rem;
+            padding-left: 18px;
+            margin: 4px 0 0;
+            color: var(--muted);
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.88rem;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            transition: background 0.2s ease, transform 0.08s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #ff9d4a;
+        }
+
+        .btn-secondary {
+            background: #f0f6f7;
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: #e2eff0;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .cta-block {
+            margin-top: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cta-note {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            padding: 12px 8px 16px;
+            color: var(--muted);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Simple unlock modal */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15,27,39,0.56);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+
+        .modal {
+            background: #ffffff;
+            border-radius: 14px;
+            max-width: 420px;
+            width: 92%;
+            padding: 16px 18px 14px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+        }
+
+        .modal h3 {
+            margin: 0 0 6px;
+            font-size: 1.1rem;
+        }
+
+        .modal p {
+            margin: 4px 0;
+            font-size: 0.86rem;
+            color: var(--muted);
+        }
+
+        .modal form {
+            margin-top: 8px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .modal label {
+            font-size: 0.82rem;
+        }
+
+        .modal input,
+        .modal textarea {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #d2dde3;
+            padding: 6px 8px;
+            font-size: 0.85rem;
+            font-family: inherit;
+        }
+
+        .modal textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .modal-note {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .modal-message {
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        .modal-message.success {
+            color: #027a4f;
+        }
+
+        .modal-message.error {
+            color: #b05808;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="top-row">
+            <a href="goodwill-academy-dashboard.html" class="back-link">
+                <span>←</span> Back to dashboard
+            </a>
+            <a href="goodwill-academy-full-landing.html" class="back-link">
+                Go to main hub
+            </a>
+        </div>
+        <h1>AI & Digital Skills – Level 2</h1>
+        <p>Locked preview. See what is inside, what you unlock, and how to use your NDIS plan to access it.</p>
+        <div class="locked-banner" id="locked-banner">
+            <span class="icon">🔒</span>
+            <span id="locked-banner-text">Level 2 is currently locked. Finish Level 1 and talk to your Support Coordinator to unlock.</span>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="layout">
+        <!-- LEFT: Curriculum preview -->
+        <section class="card">
+            <h2>What you learn in Level 2</h2>
+            <p class="card-subtitle">
+                Level 2 goes deeper. It is designed to be used together with support workers, therapists or family.
+            </p>
+            <div class="lesson-list">
+                <div class="lesson-row">
+                    <div class="lesson-index">1</div>
+                    <div class="lesson-main">
+                        <h3>Using Apps to Support Daily Life</h3>
+                        <p>Choose and use apps for routines, reminders, calendars and note-taking that actually match your needs.</p>
+                    </div>
+                    <div>
+                        <span class="lock-pill"><span>🔒</span> Locked</span>
+                    </div>
+                    <div class="blur-overlay"></div>
+                    <div class="blur-text">Preview only</div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-index">2</div>
+                    <div class="lesson-main">
+                        <h3>Privacy, Safety & Settings</h3>
+                        <p>Work step-by-step through phone and tablet settings: passwords, location, app permissions and screen time.</p>
+                    </div>
+                    <div>
+                        <span class="lock-pill"><span>🔒</span> Locked</span>
+                    </div>
+                    <div class="blur-overlay"></div>
+                    <div class="blur-text">Content locked</div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-index">3</div>
+                    <div class="lesson-main">
+                        <h3>Using AI as Your Digital Helper</h3>
+                        <p>Learn how to use AI to summarise information, draft simple messages, plan your week and practise new skills.</p>
+                    </div>
+                    <div>
+                        <span class="lock-pill"><span>🔒</span> Locked</span>
+                    </div>
+                    <div class="blur-overlay"></div>
+                    <div class="blur-text">Unlock to access</div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-index">4</div>
+                    <div class="lesson-main">
+                        <h3>Online Boundaries & Digital Wellbeing</h3>
+                        <p>Build simple rules for screen time, social media and healthy digital habits with your team.</p>
+                    </div>
+                    <div>
+                        <span class="lock-pill"><span>🔒</span> Locked</span>
+                    </div>
+                    <div class="blur-overlay"></div>
+                    <div class="blur-text">Unlock to access</div>
+                </div>
+            </div>
+            <p class="small-note">
+                Each Level 2 lesson includes simple worksheets, supported practice activities and scripts that support workers can use.
+            </p>
+        </section>
+
+        <!-- RIGHT: rewards + unlock CTA -->
+        <section class="card">
+            <h2>Rewards & Unlocks</h2>
+            <p class="card-subtitle">
+                When Level 2 is unlocked and completed, participants earn extra points, badges and a support-friendly summary.
+            </p>
+
+            <div class="rewards-grid">
+                <div class="reward-card locked">
+                    <div class="reward-title">XP & Points Boost</div>
+                    <div class="reward-points">+120 points</div>
+                    <div class="reward-desc">
+                        Completing all Level 2 AI lessons and the advanced quiz will add a major points boost to the dashboard.
+                    </div>
+                </div>
+
+                <div class="reward-card locked">
+                    <div class="reward-title">Digital Confidence Badge</div>
+                    <div class="reward-desc">
+                        A special badge appears on the dashboard, showing the participant can safely use AI and digital tools with support.
+                    </div>
+                </div>
+            </div>
+
+            <div class="badge-list" style="margin-top:10px;">
+                <span class="badge"><span class="icon">🔒</span> AI Level 2 completed</span>
+                <span class="badge"><span class="icon">🔒</span> Safe digital citizen</span>
+                <span class="badge"><span class="icon">🔒</span> Independent tech user</span>
+            </div>
+
+            <hr style="margin:12px 0;border:none;border-top:1px solid #e4eaee;">
+
+            <h2 style="margin-top:0;font-size:1.1rem;">How to unlock with NDIS</h2>
+            <ul class="requirements-list">
+                <li>Participant completes most Level 1 AI lessons and quiz.</li>
+                <li>Support Coordinator or Plan Manager agrees Level 2 supports the person’s goals.</li>
+                <li>Capacity Building funding is used to include Goodwill Academy sessions.</li>
+            </ul>
+
+            <div class="cta-block">
+                <button type="button" class="btn btn-primary" onclick="openUnlockModal()">
+                    Unlock Level 2 with NDIS plan
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='module-ai-level1.html'">
+                    Go back to Level 1 learning
+                </button>
+                <div class="cta-note">
+                    We can provide a short written summary to attach to NDIS reports, showing what the participant learns in Level 2.
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer>
+    Goodwill Academy – AI & Digital Skills Level 2 preview.
+    Return to <a href="goodwill-academy-dashboard.html">dashboard</a>.
+</footer>
+
+<!-- Unlock modal -->
+<div class="modal-backdrop" id="unlock-modal">
+    <div class="modal">
+        <h3>Request Level 2 Unlock</h3>
+        <p>Fill in this short form so our team can contact your coordinator or plan manager about using NDIS funding.</p>
+        <form id="unlock-form">
+            <label>
+                Participant name
+                <input type="text" id="participant-name" required>
+            </label>
+            <label>
+                Support coordinator or plan manager email
+                <input type="email" id="coordinator-email" required>
+            </label>
+            <label>
+                Anything we should know? (optional)
+                <textarea id="extra-notes" placeholder="Goals, communication needs, preferred days/times..."></textarea>
+            </label>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeUnlockModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Send request</button>
+            </div>
+            <div class="modal-note">
+                This is a demonstration form for preview. Your real site can connect this to email or your CRM.
+            </div>
+            <div class="modal-message" id="modal-message"></div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function getBool(key) {
+        return localStorage.getItem(key) === '1';
+    }
+
+    function updateLockedBanner() {
+        var completed = getBool('gw_ai_l1_completed');
+        var quizPassed = getBool('gw_ai_l1_quiz_passed');
+        var textEl = document.getElementById('locked-banner-text');
+        if (!textEl) return;
+
+        if (completed && quizPassed) {
+            textEl.textContent = 'Level 2 is ready to unlock. Use the button below to talk with your Support Coordinator or Plan Manager.';
+        } else if (completed && !quizPassed) {
+            textEl.textContent = 'You have finished the Level 1 lessons. Complete the Level 1 quiz, then talk with your team about unlocking Level 2.';
+        } else {
+            textEl.textContent = 'Level 2 is currently locked. Keep working through Level 1 and talk to your Support Coordinator to unlock.';
+        }
+    }
+
+    function openUnlockModal() {
+        var modal = document.getElementById('unlock-modal');
+        if (modal) {
+            modal.style.display = 'flex';
+        }
+    }
+
+    function closeUnlockModal() {
+        var modal = document.getElementById('unlock-modal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    var unlockForm = document.getElementById('unlock-form');
+    if (unlockForm) {
+        unlockForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var msg = document.getElementById('modal-message');
+            if (!msg) return;
+            msg.textContent = 'Sending request...';
+            msg.className = 'modal-message';
+
+            setTimeout(function () {
+                msg.textContent = 'Request sent. Our team will contact your coordinator or plan manager to discuss Level 2.';
+                msg.className = 'modal-message success';
+            }, 800);
+        });
+    }
+
+    updateLockedBanner();
+</script>
+</body>
+</html>

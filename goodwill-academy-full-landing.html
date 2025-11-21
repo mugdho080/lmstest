@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Goodwill Academy – Gamified Learning for People with Disability</title>
+    <meta name="description" content="Goodwill Academy is a gamified educational platform for people with disability. Start free modules and unlock advanced levels with NDIS support.">
+    <style>
+        :root {
+            --bg: #f9fbfc;
+            --card-bg: #ffffff;
+            --primary: #0e7272;
+            --secondary: #fe8427;
+            --text: #1a2c37;
+            --muted: #6b7a8d;
+            --radius: 12px;
+            --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(90deg, var(--primary), #0b8b8b);
+            color: #fff;
+            padding: 32px 20px;
+        }
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+        @media (min-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr 500px;
+            }
+        }
+        h1 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 2.2rem;
+            color: #ffffff;
+        }
+        p.lead {
+            margin-top: 0;
+            margin-bottom: 18px;
+            color: #e6f3f3;
+            font-size: 1.1rem;
+        }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .btn {
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            outline: none;
+        }
+        .btn-primary {
+            background: var(--secondary);
+            color: #fff;
+        }
+        .btn-secondary {
+            background: #fff;
+            color: var(--primary);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .btn-primary:hover {
+            background: #ff9951;
+        }
+        .btn-secondary:hover {
+            background: #eff7f7;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .modules {
+            display: grid;
+            gap: 16px;
+        }
+        @media (min-width: 768px) {
+            .modules {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .modules {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .module-card {
+            display: flex;
+            background: #fff;
+            border: 1px solid #e6eef1;
+            border-radius: 10px;
+            padding: 16px;
+            align-items: flex-start;
+        }
+        .module-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-right: 12px;
+            color: #fff;
+        }
+        .module-meta {
+            flex: 1;
+        }
+        .module-meta h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .module-meta p {
+            margin: 4px 0 10px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 8px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        .badge-free {
+            background: #e9fff3;
+            color: #027a4f;
+        }
+        .badge-locked {
+            background: #fff7ed;
+            color: #b05808;
+            border: 1px solid #fde6cf;
+        }
+        .hero-dashboard {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 16px;
+            box-shadow: var(--shadow);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #eef4f5;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), #ffa45c);
+            width: 0%;
+        }
+        .leaderboard {
+            margin-top: 14px;
+        }
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f5f6;
+        }
+        .leaderboard-item:last-child {
+            border-bottom: none;
+        }
+        h2, h3 {
+            margin-top: 0;
+        }
+        .how-it-works {
+            display: grid;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        @media (min-width: 768px) {
+            .how-it-works {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .faq-item {
+            margin-bottom: 14px;
+        }
+        .footer {
+            background: #f1f6f7;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>Goodwill Academy – Gamified Learning</h1>
+        <p class="lead">A new-generation educational platform for people with disability. Start free and unlock levels with your NDIS plan for deeper learning.</p>
+        <div class="button-group">
+            <button class="btn btn-primary" onclick="startFree()">Start Level 1 Free</button>
+            <button class="btn btn-secondary" onclick="openUnlock()">Unlock with NDIS Plan</button>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Dashboard card -->
+    <section class="hero-dashboard" aria-label="Progress overview">
+        <h2>Your Learning Progress</h2>
+        <div><strong id="points">Points: 0</strong></div>
+        <div class="progress-bar"><span id="progress"></span></div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+            <div class="badge badge-free">Level 1 Free</div>
+            <div class="badge badge-locked">Level 2 NDIS</div>
+            <div class="badge badge-locked">Level 3 Pathfinder</div>
+        </div>
+        <h3 style="margin-top:18px;">Leaderboard</h3>
+        <div class="leaderboard" aria-label="Leaderboard">
+            <div class="leaderboard-item"><div>Alex</div><div>300 pts</div></div>
+            <div class="leaderboard-item"><div>Maria</div><div>250 pts</div></div>
+            <div class="leaderboard-item"><div>You</div><div id="user-points">0 pts</div></div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section>
+        <h2>Explore Our Modules</h2>
+        <p>Each module is designed for people with disability and comes with gamified levels. Start with Level 1 for free; use your NDIS plan to unlock Level 2, and connect with our community for Level 3.</p>
+        <div class="modules">
+
+            <!-- Module: AI & Digital Skills -->
+            <div class="module-card">
+                <div class="module-icon" style="background:#0b8b8b;">AI</div>
+                <div class="module-meta">
+                    <h4>AI & Digital Skills</h4>
+                    <p>Learn the basics of artificial intelligence, using computers safely, and digital communication.</p>
+                    <div style="display:flex;gap:8px;margin-bottom:8px;">
+                        <span class="badge badge-free">Level 1 Free</span>
+                        <span class="badge badge-locked">Level 2 NDIS</span>
+                    </div>
+                    <button class="btn btn-primary" onclick="startModule('AI')">Start Free</button>
+                    <button class="btn btn-secondary" onclick="openUnlock()">Unlock Level 2</button>
+                </div>
+            </div>
+
+            <!-- Module: Math & Numbers -->
+            <div class="module-card">
+                <div class="module-icon" style="background:#fe8427;">M</div>
+                <div class="module-meta">
+                    <h4>Math & Numbers</h4>
+                    <p>Improve your math skills in counting, money handling, time, and problem solving.</p>
+                    <div style="display:flex;gap:8px;margin-bottom:8px;">
+                        <span class="badge badge-free">Level 1 Free</span>
+                        <span class="badge badge-locked">Level 2 NDIS</span>
+                    </div>
+                    <button class="btn btn-primary" onclick="startModule('Math')">Start Free</button>
+                    <button class="btn btn-secondary" onclick="openUnlock()">Unlock Level 2</button>
+                </div>
+            </div>
+
+            <!-- Module: Self Choice & Control -->
+            <div class="module-card">
+                <div class="module-icon" style="background:#8e5dca;">SC</div>
+                <div class="module-meta">
+                    <h4>Self Choice & Control</h4>
+                    <p>Understand your rights, make choices, control your life, and explore people behaviour.</p>
+                    <div style="display:flex;gap:8px;margin-bottom:8px;">
+                        <span class="badge badge-free">Level 1 Free</span>
+                        <span class="badge badge-locked">Level 2 NDIS</span>
+                    </div>
+                    <button class="btn btn-primary" onclick="startModule('Choice')">Start Free</button>
+                    <button class="btn btn-secondary" onclick="openUnlock()">Unlock Level 2</button>
+                </div>
+            </div>
+
+            <!-- Additional modules placeholder -->
+            <div class="module-card">
+                <div class="module-icon" style="background:#2b7a78;">LS</div>
+                <div class="module-meta">
+                    <h4>Life Skills & Independence</h4>
+                    <p>Learn cooking basics, cleaning routines, money management, safety skills, and more.</p>
+                    <div style="display:flex;gap:8px;margin-bottom:8px;">
+                        <span class="badge badge-free">Level 1 Free</span>
+                        <span class="badge badge-locked">Level 2 NDIS</span>
+                    </div>
+                    <button class="btn btn-primary" onclick="startModule('Life Skills')">Start Free</button>
+                    <button class="btn btn-secondary" onclick="openUnlock()">Unlock Level 2</button>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <div class="module-icon" style="background:#f77f00;">PS</div>
+                <div class="module-meta">
+                    <h4>Psychology & Behaviour</h4>
+                    <p>Learn about emotions, relationships, understanding yourself and others.</p>
+                    <div style="display:flex;gap:8px;margin-bottom:8px;">
+                        <span class="badge badge-free">Level 1 Free</span>
+                        <span class="badge badge-locked">Level 2 NDIS</span>
+                    </div>
+                    <button class="btn btn-primary" onclick="startModule('Psychology')">Start Free</button>
+                    <button class="btn btn-secondary" onclick="openUnlock()">Unlock Level 2</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section style="margin-top:30px;">
+        <h2>How It Works</h2>
+        <div class="how-it-works">
+            <div>
+                <h3>1. Start Free</h3>
+                <p>Sign up with your email and begin Level 1 modules immediately. No payment needed.</p>
+            </div>
+            <div>
+                <h3>2. Earn & Level Up</h3>
+                <p>Complete lessons, earn points, and badges. Progress through micro-lessons at your own pace.</p>
+            </div>
+            <div>
+                <h3>3. Unlock Advanced Levels</h3>
+                <p>Use your NDIS plan to access Level 2 modules and connect with support workers for Level 3 experiences.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Goodwill Academy -->
+    <section style="margin-top:30px;">
+        <h2>Why Goodwill Academy?</h2>
+        <div class="card">
+            <div style="display:grid;gap:16px;">
+                <div>
+                    <h3>Trust by Design</h3>
+                    <p>We are a registered NDIS provider committed to your safety and privacy. All data is protected and stored securely.</p>
+                </div>
+                <div>
+                    <h3>Accessible & Inclusive</h3>
+                    <p>Our content is designed for people with disability: visual supports, clear language, interactive games, and assistive options.</p>
+                </div>
+                <div>
+                    <h3>Gamified Learning</h3>
+                    <p>Enjoy learning with points, badges, and certificates. Track your progress and celebrate your achievements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-top:30px;">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h4>Is Level 1 really free?</h4>
+            <p>Yes! Our Level 1 modules are completely free. Just sign up to start learning.</p>
+        </div>
+        <div class="faq-item">
+            <h4>How do I unlock Level 2 with my NDIS plan?</h4>
+            <p>Click “Unlock with NDIS Plan” and fill out the form. We'll contact your plan manager or support coordinator to get approval. No charges without your consent.</p>
+        </div>
+        <div class="faq-item">
+            <h4>What about Level 3?</h4>
+            <p>Level 3 involves community-based experiences and 1:1 support. Our team will help you design a personalised learning path.</p>
+        </div>
+        <div class="faq-item">
+            <h4>What data do you collect?</h4>
+            <p>We only collect the information needed to create your account and track your learning. All data is stored securely and handled under strict privacy standards.</p>
+        </div>
+    </section>
+</main>
+
+<!-- Unlock modal -->
+<div id="unlock-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:20px;border-radius:12px;width:95%;max-width:600px;">
+        <h2>Unlock Level 2 with NDIS Plan</h2>
+        <p>Please provide your details and consent to allow us to contact your plan manager or support coordinator.</p>
+        <form id="unlock-form">
+            <label for="name">Participant Name</label><br>
+            <input type="text" id="name" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #d0d7de;"><br><br>
+            <label for="email">Email Address</label><br>
+            <input type="email" id="email" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #d0d7de;"><br><br>
+            <label for="manager">Plan Manager / Support Coordinator</label><br>
+            <input type="text" id="manager" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #d0d7de;"><br><br>
+            <label for="ndis">NDIS Number (optional)</label><br>
+            <input type="text" id="ndis" style="width:100%;padding:10px;border-radius:8px;border:1px solid #d0d7de;"><br><br>
+            <label><input type="checkbox" id="consent" required> I consent to Goodwill contacting my plan manager or support coordinator and preparing an unlock request. I agree to the <a href="#" style="color:var(--primary);">privacy policy</a>.</label><br><br>
+            <button type="button" class="btn btn-secondary" onclick="closeUnlock()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Send Unlock Request</button>
+            <p id="unlock-message" style="margin-top:10px;color:var(--primary);"></p>
+        </form>
+    </div>
+</div>
+
+<div class="footer">
+    © Goodwill Care – Goodwill Academy. All rights reserved.
+    <br>Contact us: <a href="mailto:hello@goodwillcare.com.au">hello@goodwillcare.com.au</a>
+</div>
+
+<script>
+    // Simulate progress and points for demo
+    function updateProgress() {
+        var points = localStorage.getItem('gw_academy_points') || 0;
+        document.getElementById('points').innerText = 'Points: ' + points;
+        document.getElementById('user-points').innerText = points + ' pts';
+        var progress = document.getElementById('progress');
+        var percent = Math.min(100, (points / 1000) * 100);
+        progress.style.width = percent + '%';
+    }
+
+    function awardPoints(amount) {
+        var current = parseInt(localStorage.getItem('gw_academy_points') || '0', 10);
+        localStorage.setItem('gw_academy_points', current + amount);
+    }
+
+    updateProgress();
+
+    function startModule(name) {
+        var modulePage = '';
+
+        if (name === 'AI') {
+            modulePage = 'module-ai-level1.html';
+        } else if (name === 'Life Skills') {
+            modulePage = 'module-life-skills-level1.html';
+        }
+
+        awardPoints(20); // starting bonus for opening a module
+        updateProgress();
+
+        if (modulePage) {
+            window.location.href = modulePage;
+        } else {
+            alert('Starting module: ' + name + '. You will earn points for completing lessons!');
+        }
+    }
+
+    function startFree() {
+        // Default: start AI & Digital Skills Level 1 when user clicks "Start Level 1 Free"
+        window.location.href = 'module-ai-level1.html';
+    }
+
+    function openUnlock() {
+        document.getElementById('unlock-modal').style.display = 'flex';
+    }
+
+    function closeUnlock() {
+        document.getElementById('unlock-modal').style.display = 'none';
+    }
+
+    document.getElementById('unlock-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var messageEl = document.getElementById('unlock-message');
+        messageEl.textContent = 'Sending request...';
+        setTimeout(function() {
+            messageEl.textContent = 'Your unlock request has been submitted. A team member will contact your plan manager.';
+            awardPoints(100);
+            updateProgress();
+            setTimeout(closeUnlock, 2000);
+        }, 1000);
+    });
+</script>
+</body>
+</html>

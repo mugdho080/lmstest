@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Goodwill Academy – Learning Dashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Goodwill Academy dashboard showing learning progress, points and locked levels.">
+    <style>
+        :root {
+            --bg: #f4f7f9;
+            --card-bg: #ffffff;
+            --primary: #0e7272;
+            --secondary: #fe8427;
+            --text: #1a2c37;
+            --muted: #6b7a8d;
+            --radius: 14px;
+            --shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(100deg, var(--primary), #0b8b8b);
+            color: #ffffff;
+            padding: 20px 0 18px;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 20px 20px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .header-top a {
+            color: #e7f7f6;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .header-top a span {
+            font-size: 1.1rem;
+        }
+
+        h1 {
+            margin: 6px 0 2px;
+            font-size: 1.9rem;
+        }
+
+        header p {
+            margin: 4px 0 0;
+            color: #daf3f1;
+            font-size: 0.95rem;
+        }
+
+        .points-strip {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .points-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(254,132,39,0.12);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .points-pill span.icon {
+            font-size: 1.2rem;
+        }
+
+        .points-note {
+            font-size: 0.84rem;
+            color: #e2f3f2;
+        }
+
+        main {
+            margin-top: 16px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.8fr 1.2fr;
+            gap: 18px;
+        }
+
+        @media (max-width: 880px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 16px 18px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+        }
+
+        .card-subtitle {
+            margin: 0 0 8px;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .module-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .module-card {
+            border-radius: 12px;
+            border: 1px solid #dde7ec;
+            padding: 10px 12px;
+            display: grid;
+            grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.6fr);
+            gap: 10px;
+            align-items: center;
+        }
+
+        @media (max-width: 720px) {
+            .module-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .module-title {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .module-pill {
+            font-size: 0.75rem;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background: #e9fff3;
+            color: #027a4f;
+            border: 1px solid #c4f0d5;
+        }
+
+        .module-pill.locked {
+            background: #fff3e8;
+            color: #b05808;
+            border-color: #f7d5b2;
+        }
+
+        .module-description {
+            font-size: 0.86rem;
+            color: var(--muted);
+            margin: 4px 0 6px;
+        }
+
+        .status-label {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .status-label span {
+            font-weight: bold;
+        }
+
+        .progress-bar-wrapper {
+            margin-bottom: 4px;
+        }
+
+        .progress-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 9px;
+            background: #ecf2f5;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-top: 3px;
+        }
+
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), #ff9f4b);
+            width: 0%;
+            transition: width 0.25s ease;
+        }
+
+        .module-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            justify-content: center;
+        }
+
+        @media (max-width: 720px) {
+            .module-actions {
+                align-items: flex-start;
+            }
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 7px 16px;
+            font-size: 0.86rem;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            transition: background 0.2s ease, transform 0.08s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #ff9d4a;
+        }
+
+        .btn-secondary {
+            background: #f0f6f7;
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: #e2eff0;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--muted);
+            padding-inline: 0;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .lock-label {
+            font-size: 0.8rem;
+            color: #b05808;
+        }
+
+        .lock-label span {
+            font-size: 1rem;
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .badge {
+            font-size: 0.78rem;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: #eef4ff;
+            color: #283a66;
+        }
+
+        .badge.locked {
+            background: #f5f1f1;
+            color: #9a8f8f;
+        }
+
+        .badge.completed {
+            background: #e9fff3;
+            color: #027a4f;
+        }
+
+        .small-note {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        .side-card {
+            margin-bottom: 12px;
+        }
+
+        .side-list {
+            font-size: 0.85rem;
+            padding-left: 18px;
+            margin: 4px 0 0;
+            color: var(--muted);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            padding: 12px 8px 16px;
+            color: var(--muted);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="header-top">
+            <a href="goodwill-academy-full-landing.html"><span>←</span> Back to Goodwill Academy</a>
+            <a href="goodwill-academy-full-landing.html">Go to Learning Hub</a>
+        </div>
+        <h1>Goodwill Academy Dashboard</h1>
+        <p>See your points, track progress, and preview what unlocks next.</p>
+        <div class="points-strip">
+            <div class="points-pill">
+                <span class="icon">★</span>
+                <span id="total-points-label">Total Points: 0</span>
+            </div>
+            <div class="points-note">
+                Points are earned when you complete lessons, finish quizzes and unlock levels.
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="grid">
+        <!-- LEFT COLUMN – ACTIVE MODULES -->
+        <section class="card">
+            <h2>Level 1 Modules</h2>
+            <p class="card-subtitle">Start here. These modules are free and build your foundation.</p>
+            <div class="module-list">
+                <!-- AI & Digital Skills L1 -->
+                <article class="module-card" id="mod-ai-l1">
+                    <div>
+                        <div class="module-header">
+                            <div class="module-title">AI & Digital Skills – Level 1</div>
+                            <div class="module-pill">Level 1 · Free</div>
+                        </div>
+                        <p class="module-description">
+                            Learn what AI is, use computers safely, and understand how digital tools can support your life.
+                        </p>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-label-row">
+                                <span>Lessons & quiz</span>
+                                <span id="ai-l1-progress-label">0% complete</span>
+                            </div>
+                            <div class="progress-bar">
+                                <span id="ai-l1-progress-bar"></span>
+                            </div>
+                        </div>
+                        <div class="status-label" id="ai-l1-status">
+                            Status: <span>Not started yet</span>
+                        </div>
+                        <div class="badge-list" id="ai-l1-badges">
+                            <span class="badge locked">Lesson streak</span>
+                            <span class="badge locked">Quiz completed</span>
+                            <span class="badge locked">Level 1 finished</span>
+                        </div>
+                    </div>
+                    <div class="module-actions">
+                        <a href="module-ai-level1.html" id="ai-l1-main-btn" class="btn btn-primary">
+                            Start module
+                        </a>
+                        <button type="button" class="btn btn-ghost" onclick="openModuleInfo('ai')">
+                            View details
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Life Skills L1 -->
+                <article class="module-card" id="mod-ls-l1">
+                    <div>
+                        <div class="module-header">
+                            <div class="module-title">Life Skills & Independence – Level 1</div>
+                            <div class="module-pill">Level 1 · Free</div>
+                        </div>
+                        <p class="module-description">
+                            Build routines for mornings, kitchen safety, cleaning and simple money skills to feel more independent.
+                        </p>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-label-row">
+                                <span>Lessons & quiz</span>
+                                <span id="ls-l1-progress-label">0% complete</span>
+                            </div>
+                            <div class="progress-bar">
+                                <span id="ls-l1-progress-bar"></span>
+                            </div>
+                        </div>
+                        <div class="status-label" id="ls-l1-status">
+                            Status: <span>Not started yet</span>
+                        </div>
+                        <div class="badge-list" id="ls-l1-badges">
+                            <span class="badge locked">Morning routine builder</span>
+                            <span class="badge locked">Safety checklist</span>
+                            <span class="badge locked">Level 1 finished</span>
+                        </div>
+                    </div>
+                    <div class="module-actions">
+                        <a href="module-life-skills-level1.html" id="ls-l1-main-btn" class="btn btn-primary">
+                            Start module
+                        </a>
+                        <button type="button" class="btn btn-ghost" onclick="openModuleInfo('ls')">
+                            View details
+                        </button>
+                    </div>
+                </article>
+            </div>
+            <p class="small-note">
+                Support workers, coordinators and family can use this dashboard with participants to pick which modules to focus on next.
+            </p>
+        </section>
+
+        <!-- RIGHT COLUMN – LOCKED & NEXT STEPS -->
+        <section>
+            <div class="card side-card">
+                <h2>Level 2 – Locked Previews</h2>
+                <p class="card-subtitle">
+                    Finish Level 1 lessons and quizzes, then use your NDIS plan to unlock these deeper levels.
+                </p>
+
+                <div class="module-list">
+                    <!-- AI L2 Locked -->
+                    <article class="module-card">
+                        <div>
+                            <div class="module-header">
+                                <div class="module-title">AI & Digital Skills – Level 2</div>
+                                <div class="module-pill locked">Locked</div>
+                            </div>
+                            <p class="module-description">
+                                Go deeper into AI and digital tools: using apps, privacy settings, and using AI to support learning and work.
+                            </p>
+                            <div class="lock-label" id="ai-l2-lock-label">
+                                <span>🔒</span> Keep going in Level 1 to prepare for this.
+                            </div>
+                        </div>
+                        <div class="module-actions">
+                            <a href="ai-level2-locked.html" class="btn btn-secondary">
+                                Preview & unlock options
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Life Skills L2 Locked -->
+                    <article class="module-card">
+                        <div>
+                            <div class="module-header">
+                                <div class="module-title">Life Skills & Independence – Level 2</div>
+                                <div class="module-pill locked">Locked</div>
+                            </div>
+                            <p class="module-description">
+                                Practice weekly planning, travel skills, community access and more advanced money and safety skills.
+                            </p>
+                            <div class="lock-label" id="ls-l2-lock-label">
+                                <span>🔒</span> Build consistency in Level 1 first.
+                            </div>
+                        </div>
+                        <div class="module-actions">
+                            <a href="life-skills-level2-locked.html" class="btn btn-secondary">
+                                Preview & unlock options
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="card side-card">
+                <h2>How to Unlock Level 2</h2>
+                <ul class="side-list">
+                    <li>Work through Level 1 lessons with your support team.</li>
+                    <li>Finish the quick quiz at the end of Level 1.</li>
+                    <li>Talk to your Support Coordinator or Plan Manager.</li>
+                    <li>Use Capacity Building funding to include Goodwill Academy.</li>
+                </ul>
+                <p class="small-note">
+                    We can provide a simple report to show progress and goals to your NDIS planner or coordinator.
+                </p>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer>
+    Goodwill Academy – Dashboard. Return to <a href="goodwill-academy-full-landing.html">main hub</a>.
+</footer>
+
+<script>
+    function getBool(key) {
+        return localStorage.getItem(key) === '1';
+    }
+
+    function countLessons(prefix, total) {
+        var count = 0;
+        for (var i = 1; i <= total; i++) {
+            if (localStorage.getItem(prefix + 'lesson_' + i) === '1') {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    function updateModuleCard(config) {
+        var lessonsDone = countLessons(config.prefix, config.totalLessons);
+        var quizDone = getBool(config.quizKey);
+        var moduleDone = getBool(config.completeKey);
+
+        var scorePieces = lessonsDone + (quizDone ? 1 : 0);
+        var totalPieces = config.totalLessons + 1; // + quiz
+        var percent = Math.round((scorePieces / totalPieces) * 100);
+
+        var bar = document.getElementById(config.id + '-progress-bar');
+        var label = document.getElementById(config.id + '-progress-label');
+        var status = document.getElementById(config.id + '-status');
+        var mainBtn = document.getElementById(config.id + '-main-btn');
+        var badgesWrap = document.getElementById(config.id + '-badges');
+
+        if (bar) bar.style.width = percent + '%';
+        if (label) label.textContent = percent + '% complete';
+
+        var stateText = 'Not started yet';
+        if (percent > 0 && percent < 100) {
+            stateText = 'In progress';
+        }
+        if (moduleDone && quizDone) {
+            stateText = 'Level 1 complete';
+        }
+        if (status) {
+            status.innerHTML = 'Status: <span>' + stateText + '</span>';
+        }
+
+        if (mainBtn) {
+            if (percent === 0) {
+                mainBtn.textContent = 'Start module';
+            } else {
+                mainBtn.textContent = 'Continue module';
+            }
+        }
+
+        if (badgesWrap) {
+            var badges = badgesWrap.querySelectorAll('.badge');
+            if (badges.length >= 3) {
+                // Badge 1: some lessons done
+                if (lessonsDone > 0) {
+                    badges[0].classList.add('completed');
+                    badges[0].classList.remove('locked');
+                }
+                // Badge 2: quiz done
+                if (quizDone) {
+                    badges[1].classList.add('completed');
+                    badges[1].classList.remove('locked');
+                }
+                // Badge 3: module complete
+                if (moduleDone && quizDone) {
+                    badges[2].classList.add('completed');
+                    badges[2].classList.remove('locked');
+                }
+            }
+        }
+
+        return { lessonsDone: lessonsDone, quizDone: quizDone, moduleDone: moduleDone, percent: percent };
+    }
+
+    function updateLockLabels(aiStatus, lsStatus) {
+        var aiLabel = document.getElementById('ai-l2-lock-label');
+        var lsLabel = document.getElementById('ls-l2-lock-label');
+
+        if (aiLabel) {
+            if (aiStatus.moduleDone && aiStatus.quizDone) {
+                aiLabel.innerHTML = '<span>🔓</span> Ready to unlock – talk to your coordinator or plan manager.';
+            }
+        }
+
+        if (lsLabel) {
+            if (lsStatus.moduleDone && lsStatus.quizDone) {
+                lsLabel.innerHTML = '<span>🔓</span> Ready to unlock – you have finished Level 1.';
+            }
+        }
+    }
+
+    function updatePoints() {
+        var total = parseInt(localStorage.getItem('gw_academy_points') || '0', 10);
+        var label = document.getElementById('total-points-label');
+        if (label) {
+            label.textContent = 'Total Points: ' + total;
+        }
+    }
+
+    function openModuleInfo(code) {
+        if (code === 'ai') {
+            alert('AI & Digital Skills – Level 1 helps participants understand AI, online safety and digital tools using simple language. It can be completed with support in small steps.');
+        } else if (code === 'ls') {
+            alert('Life Skills & Independence – Level 1 focuses on daily routines, kitchen safety, cleaning and money basics to build confidence and independence.');
+        }
+    }
+
+    // On load
+    var aiStatus = updateModuleCard({
+        id: 'ai-l1',
+        prefix: 'gw_ai_l1_',
+        totalLessons: 4,
+        completeKey: 'gw_ai_l1_completed',
+        quizKey: 'gw_ai_l1_quiz_passed'
+    });
+
+    var lsStatus = updateModuleCard({
+        id: 'ls-l1',
+        prefix: 'gw_ls_l1_',
+        totalLessons: 4,
+        completeKey: 'gw_ls_l1_completed',
+        quizKey: 'gw_ls_l1_quiz_passed'
+    });
+
+    updateLockLabels(aiStatus, lsStatus);
+    updatePoints();
+</script>
+</body>
+</html>

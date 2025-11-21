@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Goodwill Academy – AI & Digital Skills – Level 1</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Goodwill Academy Level 1 module: AI & Digital Skills for people with disability. Learn what AI is, use computers safely, and practice simple digital skills.">
+    <style>
+        :root {
+            --bg: #f9fbfc;
+            --card-bg: #ffffff;
+            --primary: #0e7272;
+            --secondary: #fe8427;
+            --text: #1a2c37;
+            --muted: #6b7a8d;
+            --radius: 12px;
+            --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(90deg, var(--primary), #0b8b8b);
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        a.back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        a.back-link span {
+            font-size: 1.1rem;
+        }
+
+        h1 {
+            margin: 4px 0 0;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            color: #e6f3f3;
+            font-size: 0.98rem;
+        }
+
+        .module-shell {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        @media (min-width: 900px) {
+            .module-shell {
+                grid-template-columns: 2fr 1.4fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+        }
+
+        .module-meta h2 {
+            margin: 0 0 8px;
+            font-size: 1.4rem;
+        }
+
+        .chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 8px 0 10px;
+        }
+
+        .chip {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: #e9fff3;
+            color: #027a4f;
+            font-weight: bold;
+        }
+
+        .chip-secondary {
+            background: #fff7ed;
+            color: #b05808;
+            border: 1px solid #fde6cf;
+        }
+
+        .points-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: rgba(254,132,39,0.08);
+            color: #b05808;
+            font-weight: bold;
+        }
+
+        .points-pill span {
+            font-size: 1.1rem;
+        }
+
+        .progress-wrapper {
+            margin-top: 12px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #eef4f5;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), #ffa45c);
+            width: 0%;
+            transition: width 0.25s ease;
+        }
+
+        .lesson-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .lesson-card {
+            border: 1px solid #e6eef1;
+            border-radius: 10px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #ffffff;
+        }
+
+        .lesson-index {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .lesson-body {
+            flex: 1;
+        }
+
+        .lesson-title {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .lesson-summary {
+            margin: 3px 0 8px;
+            font-size: 0.86rem;
+            color: var(--muted);
+        }
+
+        .lesson-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .lesson-status {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .lesson-card.completed {
+            border-color: #c6f2d9;
+            background: #f4fff9;
+        }
+
+        .lesson-card.completed .lesson-index {
+            background: #22a365;
+        }
+
+        .lesson-card.completed .lesson-status {
+            color: #22a365;
+            font-weight: bold;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 7px 14px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            transition: background 0.2s ease, transform 0.08s ease;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #ff9951;
+        }
+
+        .btn-secondary {
+            background: #f1f6f7;
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: #e3f1f1;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .lesson-content-card {
+            margin-top: 14px;
+        }
+
+        .lesson-content-card h3 {
+            margin-top: 0;
+        }
+
+        .lesson-content {
+            font-size: 0.95rem;
+        }
+
+        .lesson-content ul {
+            padding-left: 18px;
+        }
+
+        .lesson-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .lesson-tab {
+            font-size: 0.82rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid #d0dde2;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        .lesson-tab.active {
+            background: #0e7272;
+            color: #ffffff;
+            border-color: #0e7272;
+        }
+
+        .completion-banner {
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: #f4fff9;
+            border: 1px solid #c6f2d9;
+            font-size: 0.9rem;
+            color: #056b3c;
+            display: none;
+        }
+
+        .completion-banner strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .quiz-card h2 {
+            margin-top: 0;
+        }
+
+        .quiz-question {
+            margin-bottom: 10px;
+            font-size: 0.92rem;
+        }
+
+        .quiz-option {
+            display: block;
+            margin: 2px 0;
+            font-size: 0.9rem;
+        }
+
+        .quiz-footer {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .quiz-message {
+            font-size: 0.86rem;
+        }
+
+        .quiz-message.success {
+            color: #056b3c;
+        }
+
+        .quiz-message.error {
+            color: #b05808;
+        }
+
+        .badge-quiz {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #fff7ed;
+            color: #b05808;
+            font-size: 0.8rem;
+        }
+
+        .badge-quiz-earned {
+            background: #e9fff3;
+            color: #027a4f;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            padding: 16px 8px 20px;
+            color: var(--muted);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <a href="goodwill-academy-full-landing.html" class="back-link">
+            <span>←</span> Back to Goodwill Academy
+        </a>
+        <h1>AI & Digital Skills – Level 1</h1>
+        <p>Learn what AI is, how to use computers safely, and how to be smart online. Designed in simple steps for people with disability.</p>
+    </div>
+</header>
+
+<main class="container">
+    <div class="module-shell">
+        <!-- Left: lessons -->
+        <section class="card module-meta">
+            <h2>Lessons</h2>
+            <div class="chip-row">
+                <span class="chip">Level 1 Free</span>
+                <span class="chip chip-secondary">Unlock Level 2 with NDIS</span>
+            </div>
+            <div class="points-pill">
+                <span>★</span> Complete all lessons and quiz to earn extra points.
+            </div>
+
+            <div class="progress-wrapper">
+                <div class="progress-label">
+                    <span>Lesson progress</span>
+                    <span id="lesson-count-label">0 / 4 complete</span>
+                </div>
+                <div class="progress-bar">
+                    <span id="lesson-progress-bar"></span>
+                </div>
+            </div>
+
+            <div class="lesson-list" style="margin-top:12px;">
+                <article class="lesson-card" data-lesson="1">
+                    <div class="lesson-index">1</div>
+                    <div class="lesson-body">
+                        <h3 class="lesson-title">What is AI?</h3>
+                        <p class="lesson-summary">Understand AI in simple language with everyday examples like phone voice assistants.</p>
+                        <div class="lesson-actions">
+                            <span class="lesson-status" id="lesson-status-1">Not completed</span>
+                            <button class="btn btn-secondary" type="button" onclick="openLesson(1)">Open</button>
+                            <button class="btn btn-primary" type="button" onclick="completeLesson(1)">Mark complete</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="lesson-card" data-lesson="2">
+                    <div class="lesson-index">2</div>
+                    <div class="lesson-body">
+                        <h3 class="lesson-title">Using Computers & Phones Safely</h3>
+                        <p class="lesson-summary">Learn safe passwords, not clicking strange links, and asking for help when unsure.</p>
+                        <div class="lesson-actions">
+                            <span class="lesson-status" id="lesson-status-2">Not completed</span>
+                            <button class="btn btn-secondary" type="button" onclick="openLesson(2)">Open</button>
+                            <button class="btn btn-primary" type="button" onclick="completeLesson(2)">Mark complete</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="lesson-card" data-lesson="3">
+                    <div class="lesson-index">3</div>
+                    <div class="lesson-body">
+                        <h3 class="lesson-title">AI in Everyday Life</h3>
+                        <p class="lesson-summary">See where AI already helps you – maps, captions, recommendations and more.</p>
+                        <div class="lesson-actions">
+                            <span class="lesson-status" id="lesson-status-3">Not completed</span>
+                            <button class="btn btn-secondary" type="button" onclick="openLesson(3)">Open</button>
+                            <button class="btn btn-primary" type="button" onclick="completeLesson(3)">Mark complete</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="lesson-card" data-lesson="4">
+                    <div class="lesson-index">4</div>
+                    <div class="lesson-body">
+                        <h3 class="lesson-title">Talking to AI & Being Kind Online</h3>
+                        <p class="lesson-summary">Learn how to ask questions, check information, and be safe and respectful online.</p>
+                        <div class="lesson-actions">
+                            <span class="lesson-status" id="lesson-status-4">Not completed</span>
+                            <button class="btn btn-secondary" type="button" onclick="openLesson(4)">Open</button>
+                            <button class="btn btn-primary" type="button" onclick="completeLesson(4)">Mark complete</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="completion-banner" id="lesson-completion-banner">
+                <strong>Great work!</strong>
+                <span>You finished all Level 1 AI lessons. Extra points have been added to your Goodwill Academy total.</span>
+            </div>
+        </section>
+
+        <!-- Right: active lesson + quiz -->
+        <section class="card lesson-content-card">
+            <div class="lesson-tabs">
+                <button class="lesson-tab active" type="button" id="tab-lesson" onclick="switchTab('lesson')">
+                    Lesson content
+                </button>
+                <button class="lesson-tab" type="button" id="tab-quiz" onclick="switchTab('quiz')">
+                    Quick quiz
+                </button>
+            </div>
+
+            <div id="lesson-content-block" class="lesson-content">
+                <h3 id="lesson-content-title">Lesson 1 – What is AI?</h3>
+                <p>
+                    Artificial Intelligence (AI) means computers that can learn patterns and make smart guesses.
+                    They do not “think” like humans, but they can help with tasks.
+                </p>
+                <ul>
+                    <li>AI can recognise pictures and voices (for example, your phone’s voice assistant).</li>
+                    <li>AI can suggest videos, songs or shows based on what you watched before.</li>
+                    <li>AI can help people with disability by providing captions, reading text out loud, or translating languages.</li>
+                </ul>
+                <p>
+                    <strong>Key idea:</strong> AI is a tool. People are still in charge. You can choose when to use it
+                    and when to say no.
+                </p>
+            </div>
+
+            <div id="quiz-content-block" style="display:none;">
+                <h2>Quick Quiz – AI & Digital Skills</h2>
+                <div class="badge-quiz" id="quiz-badge">
+                    Quiz points: Locked – finish with all correct answers to unlock.
+                </div>
+
+                <form id="ai-quiz-form" style="margin-top:10px;">
+                    <div class="quiz-question">
+                        <strong>1. What is a simple way to describe AI?</strong>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="a">
+                            A magical brain that can feel emotions like a human.
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="b">
+                            A computer system that learns patterns and helps with tasks.
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="c">
+                            A normal calculator with no learning.
+                        </label>
+                    </div>
+
+                    <div class="quiz-question">
+                        <strong>2. Which action is the safest when you receive a strange link in an email?</strong>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="a">
+                            Click it quickly before it disappears.
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="b">
+                            Delete it or ask a trusted person before opening anything.
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="c">
+                            Share it with all your friends.
+                        </label>
+                    </div>
+
+                    <div class="quiz-question">
+                        <strong>3. When you talk to an AI chat tool, which information should you keep private?</strong>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="a">
+                            Your favourite colour.
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="b">
+                            Personal details like your full address or bank card number.
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="c">
+                            The name of your favourite movie.
+                        </label>
+                    </div>
+
+                    <div class="quiz-footer">
+                        <button class="btn btn-primary" type="button" onclick="submitQuiz()">Submit answers</button>
+                        <div class="quiz-message" id="quiz-message"></div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer>
+    Goodwill Academy – AI & Digital Skills Level 1.
+    <br>
+    Return to <a href="goodwill-academy-full-landing.html">Goodwill Academy home</a>.
+</footer>
+
+<script>
+    var TOTAL_LESSONS = 4;
+    var MODULE_PREFIX = 'gw_ai_l1_';
+    var MODULE_COMPLETED_KEY = 'gw_ai_l1_completed';
+    var MODULE_QUIZ_PASSED_KEY = 'gw_ai_l1_quiz_passed';
+    var QUIZ_POINTS = 40;
+    var LESSON_POINTS_ON_COMPLETE = 80;
+
+    function awardPoints(amount) {
+        var current = parseInt(localStorage.getItem('gw_academy_points') || '0', 10);
+        localStorage.setItem('gw_academy_points', current + amount);
+    }
+
+    function getLessonCompleted(id) {
+        return localStorage.getItem(MODULE_PREFIX + 'lesson_' + id) === '1';
+    }
+
+    function setLessonCompleted(id) {
+        localStorage.setItem(MODULE_PREFIX + 'lesson_' + id, '1');
+    }
+
+    function getQuizPassed() {
+        return localStorage.getItem(MODULE_QUIZ_PASSED_KEY) === '1';
+    }
+
+    function setQuizPassed() {
+        localStorage.setItem(MODULE_QUIZ_PASSED_KEY, '1');
+    }
+
+    function getModuleCompleted() {
+        return localStorage.getItem(MODULE_COMPLETED_KEY) === '1';
+    }
+
+    function setModuleCompleted() {
+        localStorage.setItem(MODULE_COMPLETED_KEY, '1');
+    }
+
+    function refreshLessonUI() {
+        var completedCount = 0;
+        for (var i = 1; i <= TOTAL_LESSONS; i++) {
+            var completed = getLessonCompleted(i);
+            var card = document.querySelector('.lesson-card[data-lesson="' + i + '"]');
+            var statusLabel = document.getElementById('lesson-status-' + i);
+            if (completed) {
+                completedCount++;
+                if (card) {
+                    card.classList.add('completed');
+                }
+                if (statusLabel) {
+                    statusLabel.textContent = 'Completed';
+                }
+            } else {
+                if (card) {
+                    card.classList.remove('completed');
+                }
+                if (statusLabel) {
+                    statusLabel.textContent = 'Not completed';
+                }
+            }
+        }
+
+        var label = document.getElementById('lesson-count-label');
+        var bar = document.getElementById('lesson-progress-bar');
+        if (label) {
+            label.textContent = completedCount + ' / ' + TOTAL_LESSONS + ' complete';
+        }
+        if (bar) {
+            var percent = Math.round((completedCount / TOTAL_LESSONS) * 100);
+            bar.style.width = percent + '%';
+        }
+
+        var banner = document.getElementById('lesson-completion-banner');
+        if (completedCount === TOTAL_LESSONS) {
+            if (!getModuleCompleted()) {
+                setModuleCompleted();
+                awardPoints(LESSON_POINTS_ON_COMPLETE);
+            }
+            if (banner) {
+                banner.style.display = 'block';
+            }
+        } else {
+            if (banner) {
+                banner.style.display = 'none';
+            }
+        }
+    }
+
+    function openLesson(id) {
+        var titleEl = document.getElementById('lesson-content-title');
+        var contentEl = document.getElementById('lesson-content-block');
+
+        if (!titleEl || !contentEl) {
+            return;
+        }
+
+        var title = '';
+        var html = '';
+
+        if (id === 1) {
+            title = 'Lesson 1 – What is AI?';
+            html = '' +
+                '<p>Artificial Intelligence (AI) is when computers are trained to recognise patterns and make smart guesses.</p>' +
+                '<ul>' +
+                '<li>AI notices patterns in data, like which videos people watch.</li>' +
+                '<li>AI can help with accessibility, like turning speech into text or adding captions.</li>' +
+                '<li>AI follows rules given by people. It does not have feelings or real understanding.</li>' +
+                '</ul>' +
+                '<p><strong>Remember:</strong> AI is a tool to help you. You are always more important than the computer.</p>';
+        } else if (id === 2) {
+            title = 'Lesson 2 – Using Computers & Phones Safely';
+            html = '' +
+                '<p>Safe digital habits protect you and your information.</p>' +
+                '<ul>' +
+                '<li>Use strong passwords that are hard to guess. Do not share them with friends.</li>' +
+                '<li>Do not open links or files from people you do not know or trust.</li>' +
+                '<li>If something feels wrong or scary online, stop and talk to a trusted person.</li>' +
+                '</ul>' +
+                '<p><strong>Tip:</strong> If you are unsure, it is okay to ask for help before clicking anything.</p>';
+        } else if (id === 3) {
+            title = 'Lesson 3 – AI in Everyday Life';
+            html = '' +
+                '<p>AI is already around you every day.</p>' +
+                '<ul>' +
+                '<li>Maps apps can suggest the fastest route. This uses AI to read traffic.</li>' +
+                '<li>Streaming apps suggest movies and songs that you might like.</li>' +
+                '<li>Phones can add automatic captions for people who are deaf or hard of hearing.</li>' +
+                '</ul>' +
+                '<p>AI can make life easier, especially when combined with good human support.</p>';
+        } else if (id === 4) {
+            title = 'Lesson 4 – Talking to AI & Being Kind Online';
+            html = '' +
+                '<p>AI chat tools can answer questions, write text, and help you practise skills.</p>' +
+                '<ul>' +
+                '<li>Ask clear and simple questions. You can say, “Explain in easy words.”</li>' +
+                '<li>Do not share private information like your full address, card numbers, or passwords.</li>' +
+                '<li>Remember that not everything online is true. Check important facts with a trusted person or official website.</li>' +
+                '</ul>' +
+                '<p><strong>Kindness:</strong> Whether you talk to humans or AI, you can choose respectful language and positive actions.</p>';
+        }
+
+        titleEl.textContent = title;
+        contentEl.innerHTML = '<h3>' + title + '</h3>' + html;
+        switchTab('lesson');
+    }
+
+    function completeLesson(id) {
+        if (!getLessonCompleted(id)) {
+            setLessonCompleted(id);
+        }
+        refreshLessonUI();
+    }
+
+    function switchTab(tab) {
+        var lessonBlock = document.getElementById('lesson-content-block');
+        var quizBlock = document.getElementById('quiz-content-block');
+        var tabLesson = document.getElementById('tab-lesson');
+        var tabQuiz = document.getElementById('tab-quiz');
+
+        if (!lessonBlock || !quizBlock || !tabLesson || !tabQuiz) {
+            return;
+        }
+
+        if (tab === 'lesson') {
+            lessonBlock.style.display = 'block';
+            quizBlock.style.display = 'none';
+            tabLesson.classList.add('active');
+            tabQuiz.classList.remove('active');
+        } else {
+            lessonBlock.style.display = 'none';
+            quizBlock.style.display = 'block';
+            tabQuiz.classList.add('active');
+            tabLesson.classList.remove('active');
+        }
+    }
+
+    function updateQuizBadge() {
+        var badge = document.getElementById('quiz-badge');
+        if (!badge) {
+            return;
+        }
+        if (getQuizPassed()) {
+            badge.textContent = 'Quiz points unlocked and added to your Goodwill Academy total.';
+            badge.classList.add('badge-quiz-earned');
+        } else {
+            badge.textContent = 'Quiz points: Locked – finish with all correct answers to unlock.';
+            badge.classList.remove('badge-quiz-earned');
+        }
+    }
+
+    function submitQuiz() {
+        var form = document.getElementById('ai-quiz-form');
+        var messageEl = document.getElementById('quiz-message');
+        if (!form || !messageEl) {
+            return;
+        }
+
+        var q1 = form.querySelector('input[name="q1"]:checked');
+        var q2 = form.querySelector('input[name="q2"]:checked');
+        var q3 = form.querySelector('input[name="q3"]:checked');
+
+        if (!q1 || !q2 || !q3) {
+            messageEl.textContent = 'Please answer all questions.';
+            messageEl.className = 'quiz-message error';
+            return;
+        }
+
+        var correct = q1.value === 'b' && q2.value === 'b' && q3.value === 'b';
+
+        if (!correct) {
+            messageEl.textContent = 'Some answers are not correct yet. Read the lessons again and try once more.';
+            messageEl.className = 'quiz-message error';
+            return;
+        }
+
+        if (!getQuizPassed()) {
+            setQuizPassed();
+            awardPoints(QUIZ_POINTS);
+        }
+
+        messageEl.textContent = 'Great job! All answers are correct and your quiz points have been added.';
+        messageEl.className = 'quiz-message success';
+        updateQuizBadge();
+    }
+
+    // Initial load
+    refreshLessonUI();
+    updateQuizBadge();
+    openLesson(1);
+</script>
+</body>
+</html>
