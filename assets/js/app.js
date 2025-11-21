@@ -9,7 +9,8 @@ const getLevelFromUrl = () => new URLSearchParams(window.location.search).get('l
 // Simple localStorage-backed client directory (works on static hosting)
 const STORAGE_KEYS = {
   clients: 'ga-clients',
-  currentClientId: 'ga-current-client-id'
+  currentClientId: 'ga-current-client-id',
+  progress: 'ga-progress'
 };
 
 const loadClients = () => {
@@ -58,6 +59,60 @@ const unlockClientLevels = (id, unlocked = true) => {
   clients[idx].unlockedAll = unlocked;
   saveClients(clients);
   return clients[idx];
+};
+
+const loadProgressStore = () => {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEYS.progress)) || {};
+  } catch (e) {
+    return {};
+  }
+};
+
+const saveProgressStore = (store) => {
+  localStorage.setItem(STORAGE_KEYS.progress, JSON.stringify(store));
+};
+
+const getProgressKey = () => getCurrentClientId() || 'guest';
+
+const readProgress = () => {
+  const store = loadProgressStore();
+  return store[getProgressKey()] || {};
+};
+
+const writeProgress = (progress) => {
+  const store = loadProgressStore();
+  store[getProgressKey()] = progress;
+  saveProgressStore(store);
+};
+
+const getLevelProgress = (chapterId, levelId) => {
+  const progress = readProgress();
+  const levelProgress = progress[chapterId]?.[levelId] || { lessons: [] };
+  const completedLessons = levelProgress.lessons || [];
+  const level = chapters?.[chapterId]?.levels.find((l) => l.id === levelId);
+  const totalLessons = level?.lessons?.length || 0;
+  const percent = totalLessons ? Math.round((completedLessons.length / totalLessons) * 100) : 0;
+  return { completedLessons, totalLessons, percent };
+};
+
+const markLessonComplete = (chapterId, levelId, lessonId) => {
+  const progress = readProgress();
+  if (!progress[chapterId]) progress[chapterId] = {};
+  if (!progress[chapterId][levelId]) progress[chapterId][levelId] = { lessons: [] };
+  if (!progress[chapterId][levelId].lessons.includes(lessonId)) {
+    progress[chapterId][levelId].lessons.push(lessonId);
+  }
+  writeProgress(progress);
+  return getLevelProgress(chapterId, levelId);
+};
+
+const showToast = (message) => {
+  const toast = qs('#celebrate-toast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
 };
 
 const renderChapterGrid = () => {
@@ -135,6 +190,8 @@ const renderLevels = (chapterId) => {
   grid.innerHTML = '';
   chapter.levels.forEach((level) => {
     const open = level.free || unlocked;
+    const progress = getLevelProgress(chapterId, level.id);
+    const lessonsLabel = level.lessons?.length ? `${progress.completedLessons.length}/${level.lessons.length} lessons` : `${level.topics.length} topics`;
     const card = document.createElement('article');
     card.className = 'level-card';
     card.innerHTML = `
@@ -149,6 +206,10 @@ const renderLevels = (chapterId) => {
       <div class="card-row">${level.topics
         .map((t) => `<span class="badge">${t}</span>`)
         .join('')}</div>
+      <div class="level-progress-box">
+        <div class="progress-row"><span class="subtle">${lessonsLabel}</span><span class="badge">${progress.percent}%</span></div>
+        <div class="progress-bar"><span style="width:${progress.percent}%"></span></div>
+      </div>
       <div class="level-actions">
         ${open
           ? `<a class="btn btn-primary" href="level.html?chapter=${chapterId}&level=${level.id}">Start level</a>`
@@ -161,6 +222,23 @@ const renderLevels = (chapterId) => {
 
   qsa('[data-register]').forEach((btn) => {
     btn.addEventListener('click', () => openAuthModal('signup'));
+  });
+};
+
+const renderChapterProgress = (chapterId) => {
+  const wrap = qs('#chapter-progress');
+  if (!wrap || !chapters[chapterId]) return;
+  wrap.innerHTML = '';
+  chapters[chapterId].levels.forEach((level) => {
+    const progress = getLevelProgress(chapterId, level.id);
+    const row = document.createElement('div');
+    row.className = 'progress-row';
+    row.innerHTML = `
+      <span>${level.title}</span>
+      <div class="progress-bar"><span style="width:${progress.percent}%"></span></div>
+      <span class="badge">${progress.percent}%</span>
+    `;
+    wrap.appendChild(row);
   });
 };
 
@@ -184,6 +262,104 @@ const renderLevelContent = (chapterId, levelId) => {
       ${level.content.steps.map((step) => `<li>✅ <span>${step}</span></li>`).join('')}
     </ul>
   `;
+
+  renderLessonList(chapterId, levelId, level);
+  updateLessonProgressUI(chapterId, levelId);
+};
+
+const updateLessonProgressUI = (chapterId, levelId) => {
+  const progress = getLevelProgress(chapterId, levelId);
+  const bar = qs('#lesson-progress-bar');
+  const label = qs('#lesson-progress-label');
+  if (bar) bar.style.width = `${progress.percent}%`;
+  if (label) label.textContent = progress.totalLessons
+    ? `${progress.percent}% (${progress.completedLessons.length}/${progress.totalLessons})`
+    : `${progress.percent}%`;
+};
+
+const renderLessonList = (chapterId, levelId, level) => {
+  const list = qs('#lesson-list');
+  if (!list) return;
+  if (!level?.lessons?.length) {
+    list.innerHTML = '<p class="subtle">This level will add lesson cards soon.</p>';
+    return;
+  }
+
+  const progress = getLevelProgress(chapterId, levelId);
+  list.innerHTML = '';
+  level.lessons.forEach((lesson) => {
+    const completed = progress.completedLessons.includes(lesson.id);
+    const card = document.createElement('article');
+    card.className = 'lesson-card';
+    card.innerHTML = `
+      <div class="glow-ring"></div>
+      <header>
+        <div class="lesson-meta">
+          <span class="badge">Lesson ${lesson.id}</span>
+          <strong>${lesson.title}</strong>
+        </div>
+        <span class="badge ${completed ? '' : 'locked'}">${completed ? 'Completed' : 'Take the quiz'}</span>
+      </header>
+      <div class="lesson-body">
+        <p>${lesson.summary}</p>
+        <p class="subtle">${lesson.content.intro}</p>
+        <ul class="checklist">${lesson.content.bullets.map((b) => `<li>✅ ${b}</li>`).join('')}</ul>
+      </div>
+    `;
+
+    const form = document.createElement('form');
+    form.className = 'quiz-form';
+    lesson.quiz.forEach((q, idx) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'quiz-question';
+      wrap.innerHTML = `<p><strong>Q${idx + 1}.</strong> ${q.question}</p>`;
+      const optionsWrap = document.createElement('div');
+      optionsWrap.className = 'quiz-options';
+      q.options.forEach((opt, optIdx) => {
+        const label = document.createElement('label');
+        label.innerHTML = `<input type="radio" name="l${lesson.id}-q${idx}" value="${optIdx}"> ${opt}`;
+        optionsWrap.appendChild(label);
+      });
+      wrap.appendChild(optionsWrap);
+      form.appendChild(wrap);
+    });
+
+    const result = document.createElement('div');
+    result.className = 'quiz-result subtle';
+    const buttonRow = document.createElement('div');
+    buttonRow.className = 'level-actions';
+    const submitBtn = document.createElement('button');
+    submitBtn.type = 'submit';
+    submitBtn.className = 'btn btn-primary';
+    submitBtn.textContent = completed ? 'Quiz completed' : 'Check answers';
+    if (completed) submitBtn.disabled = true;
+    buttonRow.appendChild(submitBtn);
+    form.appendChild(buttonRow);
+    form.appendChild(result);
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const allCorrect = lesson.quiz.every((q, qIdx) => {
+        const checked = form.querySelector(`input[name="l${lesson.id}-q${qIdx}"]:checked`);
+        return checked && Number(checked.value) === q.answer;
+      });
+
+      if (allCorrect) {
+        markLessonComplete(chapterId, levelId, lesson.id);
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Completed';
+        result.textContent = '🎉 Perfect! You passed this lesson.';
+        showToast('Congrats! Lesson passed');
+        updateLessonProgressUI(chapterId, levelId);
+        renderChapterProgress(chapterId);
+      } else {
+        result.textContent = 'Try again — check the hints above and retry.';
+      }
+    });
+
+    card.appendChild(form);
+    list.appendChild(card);
+  });
 };
 
 const openAuthModal = (mode = 'signup') => {
@@ -370,6 +546,7 @@ const init = () => {
     headerTitle.textContent = chapters[chapterId].title;
     qs('#chapter-blurb').textContent = chapters[chapterId].blurb;
     renderLevels(chapterId);
+    renderChapterProgress(chapterId);
   }
 
   if (page === 'level') {
