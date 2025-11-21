@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goodwill Academy – Calm LMS</title>
+  <link rel="stylesheet" href="assets/css/theme.css">
+</head>
+<body data-page="home">
+  <header>
+    <div class="container topbar">
+      <div class="logo"><span>Goodwill Academy</span> Neuro-friendly LMS</div>
+      <nav aria-label="Main navigation">
+        <a class="nav-link" href="#chapters">Chapters</a>
+        <a class="nav-link" href="#how">How it works</a>
+        <a class="nav-link" href="#support">Support</a>
+      </nav>
+    </div>
+    <div class="container hero">
+      <div class="hero-text">
+        <div class="tag">🧡 Built for autistic learners</div>
+        <h1 id="page-title">Goodwill Academy</h1>
+        <p>Soft colors, large buttons, and guided journeys that feel safe. Start with open Level 1 lessons, then register to unlock more.</p>
+        <div class="level-actions">
+          <a class="btn btn-primary btn-pill" href="#chapters">Browse chapters</a>
+          <a class="btn btn-secondary btn-pill" href="goodwill-academy-dashboard.html">View legacy dashboard</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Calm navigation highlights</h3>
+        <div class="progress-track">
+          <div class="progress-row"><span>Predictable layouts</span><div class="progress-bar"><span style="width: 100%"></span></div></div>
+          <div class="progress-row"><span>Large, clear buttons</span><div class="progress-bar"><span style="width: 95%"></span></div></div>
+          <div class="progress-row"><span>Reduced motion</span><div class="progress-bar"><span style="width: 88%"></span></div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="chapters" class="surface">
+      <div class="section-title">
+        <h2>Chapters</h2>
+        <p class="subtle">Level 1 is open to everyone. Levels 2+ ask for a simple registration per chapter.</p>
+      </div>
+      <div id="chapter-grid" class="chapter-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="how">
+      <div class="section-title">
+        <h2>How it works</h2>
+        <p class="subtle">Same theme everywhere, so learners always know what to expect.</p>
+      </div>
+      <div class="layout-two-col">
+        <div class="surface">
+          <h3>Step-by-step flow</h3>
+          <ol class="simple-list">
+            <li>Open any chapter and begin with the free Level 1 lesson.</li>
+            <li>When ready for Level 2 or higher, click Register to fill in your details.</li>
+            <li>We store a local unlock flag for calm navigation and link to the official agreement.</li>
+            <li>Add new chapters or levels by editing <strong>assets/js/chapters.js</strong>.</li>
+          </ol>
+          <div class="info-banner" id="support">
+            <span>🧠</span>
+            <div>
+              <strong>Tip:</strong> Keep sentences short and buttons large. All spacing and colors come from <code>assets/css/theme.css</code> so pages stay consistent.
+            </div>
+          </div>
+        </div>
+        <div class="surface">
+          <h3>Design choices for autistic learners</h3>
+          <ul class="checklist">
+            <li>✅ Soft gradients and generous white space.</li>
+            <li>✅ Reduced motion and clear focus states.</li>
+            <li>✅ Short sentences with icons to anchor attention.</li>
+            <li>✅ Calm progress blocks instead of flashing badges.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>Platform features</h2>
+        <p class="subtle">Everything runs on simple HTML, CSS, and JS—easy to host on GoDaddy.</p>
+      </div>
+      <div id="feature-grid" class="feature-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Goodwill Academy – calm learning journeys. Need help? Email support@example.com.</p>
+  </footer>
+
+  <script src="assets/js/chapters.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

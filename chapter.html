@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter – Goodwill Academy</title>
+  <link rel="stylesheet" href="assets/css/theme.css">
+</head>
+<body data-page="chapter">
+  <header>
+    <div class="container topbar">
+      <div class="logo"><span>Goodwill Academy</span> Neuro-friendly LMS</div>
+      <nav aria-label="Main navigation">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="#levels">Levels</a>
+        <a class="nav-link" href="goodwill-academy-dashboard.html">Legacy dashboard</a>
+      </nav>
+    </div>
+    <div class="container hero">
+      <div class="hero-text">
+        <div class="tag" id="chapter-pill">Chapter</div>
+        <h1 id="chapter-title">Chapter name</h1>
+        <p id="chapter-blurb">Description</p>
+        <div class="level-actions">
+          <a class="btn btn-primary btn-pill" href="index.html">Back to chapters</a>
+          <a class="btn btn-secondary btn-pill" href="https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">Registration</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Levels roadmap</h3>
+        <div class="progress-track" id="levels">
+          <div class="progress-row"><span>Level 1</span><div class="progress-bar"><span style="width: 100%"></span></div><span class="badge">Open</span></div>
+          <div class="progress-row"><span>Level 2</span><div class="progress-bar"><span style="width: 35%"></span></div><span class="badge locked">Register</span></div>
+          <div class="progress-row"><span>Level 3+</span><div class="progress-bar"><span style="width: 15%"></span></div><span class="badge locked">Register</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="surface">
+      <div class="section-title">
+        <h2>Levels</h2>
+        <p class="subtle">Level 1 is always open. Level 2 and onward ask for a short registration (saved locally + official link).</p>
+      </div>
+      <div id="level-grid" class="level-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Stay kind to yourself—take breaks between levels.</p>
+  </footer>
+
+  <div class="modal" id="registration-modal" role="dialog" aria-modal="true" aria-labelledby="registration-title">
+    <div class="modal-card">
+      <button class="modal-close" data-close-modal aria-label="Close">✕</button>
+      <h3 id="registration-title">Register to unlock this chapter</h3>
+      <p class="subtle">Fill these details to unlock Level 2 and above. We also link you to the official service agreement form.</p>
+      <div id="registration-alert" class="alert" style="display:none"></div>
+      <form id="registration-form" class="form-grid">
+        <label>First name<input required name="firstName" placeholder="First name"></label>
+        <label>Last name<input required name="lastName" placeholder="Last name"></label>
+        <label>Date of birth<input type="date" required name="dob"></label>
+        <label>NDIS number<input required name="ndis" placeholder="000000000"></label>
+        <p class="subtle">By continuing you agree to the <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">service agreement</a>.</p>
+        <div class="level-actions">
+          <button type="submit" class="btn btn-primary">Save & unlock</button>
+          <a class="btn btn-secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">Open agreement</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/chapters.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
