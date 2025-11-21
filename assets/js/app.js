@@ -6,12 +6,58 @@ const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)
 const getChapterFromUrl = () => new URLSearchParams(window.location.search).get('chapter');
 const getLevelFromUrl = () => new URLSearchParams(window.location.search).get('level');
 
-const isRegistered = (chapterId) => {
-  return localStorage.getItem(`registered-${chapterId}`) === 'true';
+// Simple localStorage-backed client directory (works on static hosting)
+const STORAGE_KEYS = {
+  clients: 'ga-clients',
+  currentClientId: 'ga-current-client-id'
 };
 
-const markRegistered = (chapterId) => {
-  localStorage.setItem(`registered-${chapterId}`, 'true');
+const loadClients = () => {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEYS.clients)) || [];
+  } catch (e) {
+    return [];
+  }
+};
+
+const saveClients = (clients) => {
+  localStorage.setItem(STORAGE_KEYS.clients, JSON.stringify(clients));
+};
+
+const getCurrentClientId = () => localStorage.getItem(STORAGE_KEYS.currentClientId);
+
+const setCurrentClientId = (id) => {
+  if (id) {
+    localStorage.setItem(STORAGE_KEYS.currentClientId, id);
+  } else {
+    localStorage.removeItem(STORAGE_KEYS.currentClientId);
+  }
+};
+
+const getCurrentClient = () => {
+  const id = getCurrentClientId();
+  if (!id) return null;
+  return loadClients().find((c) => c.id === id) || null;
+};
+
+const upsertClient = (client) => {
+  const clients = loadClients();
+  const existingIdx = clients.findIndex((c) => c.id === client.id);
+  if (existingIdx >= 0) {
+    clients[existingIdx] = client;
+  } else {
+    clients.push(client);
+  }
+  saveClients(clients);
+};
+
+const unlockClientLevels = (id, unlocked = true) => {
+  const clients = loadClients();
+  const idx = clients.findIndex((c) => c.id === id);
+  if (idx === -1) return null;
+  clients[idx].unlockedAll = unlocked;
+  saveClients(clients);
+  return clients[idx];
 };
 
 const renderChapterGrid = () => {
@@ -83,11 +129,12 @@ const renderLevels = (chapterId) => {
   const grid = qs('#level-grid');
   if (!grid || !chapters[chapterId]) return;
   const chapter = chapters[chapterId];
-  const registered = isRegistered(chapterId);
+  const currentClient = getCurrentClient();
+  const unlocked = currentClient?.unlockedAll;
 
   grid.innerHTML = '';
   chapter.levels.forEach((level) => {
-    const open = level.free || registered;
+    const open = level.free || unlocked;
     const card = document.createElement('article');
     card.className = 'level-card';
     card.innerHTML = `
@@ -105,7 +152,7 @@ const renderLevels = (chapterId) => {
       <div class="level-actions">
         ${open
           ? `<a class="btn btn-primary" href="level.html?chapter=${chapterId}&level=${level.id}">Start level</a>`
-          : `<button class="btn btn-secondary" data-register="${chapterId}">Register to unlock</button>`}
+          : `<button class="btn btn-secondary" data-register="${chapterId}">Sign up to unlock</button>`}
         <a class="btn btn-secondary" href="${chapter.formLink}" target="_blank" rel="noreferrer">Service agreement</a>
       </div>
     `;
@@ -113,7 +160,7 @@ const renderLevels = (chapterId) => {
   });
 
   qsa('[data-register]').forEach((btn) => {
-    btn.addEventListener('click', () => openRegistrationModal(chapterId));
+    btn.addEventListener('click', () => openAuthModal('signup'));
   });
 };
 
@@ -139,41 +186,162 @@ const renderLevelContent = (chapterId, levelId) => {
   `;
 };
 
-const openRegistrationModal = (chapterId) => {
-  const modal = qs('#registration-modal');
+const openAuthModal = (mode = 'signup') => {
+  const modal = qs('#auth-modal');
   if (!modal) return;
-  modal.dataset.chapter = chapterId;
   modal.classList.add('active');
+  modal.dataset.mode = mode;
+  qs('#auth-title').textContent = mode === 'login' ? 'Log in to unlock all levels' : 'Sign up to unlock all levels';
+  qs('#signup-form').style.display = mode === 'signup' ? 'grid' : 'none';
+  qs('#login-form').style.display = mode === 'login' ? 'grid' : 'none';
 };
 
-const closeRegistrationModal = () => {
-  const modal = qs('#registration-modal');
+const closeAuthModal = () => {
+  const modal = qs('#auth-modal');
   if (!modal) return;
   modal.classList.remove('active');
 };
 
-const bindRegistrationForm = () => {
-  const form = qs('#registration-form');
-  if (!form) return;
-  const modal = qs('#registration-modal');
-  const alert = qs('#registration-alert');
+const handleSignup = (form) => {
+  const formData = new FormData(form);
+  const client = {
+    id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}`,
+    name: formData.get('name'),
+    email: formData.get('email'),
+    ndis: formData.get('ndis'),
+    planManager: formData.get('planManager'),
+    unlockedAll: true,
+    createdAt: new Date().toISOString()
+  };
+  upsertClient(client);
+  setCurrentClientId(client.id);
+  updateAuthBadge();
+  closeAuthModal();
+  if (window.location.pathname.includes('chapter.html')) {
+    const chapterId = getChapterFromUrl();
+    if (chapterId) renderLevels(chapterId);
+  }
+};
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const chapterId = modal?.dataset.chapter;
-    if (!chapterId) return;
-    markRegistered(chapterId);
-    if (alert) {
-      alert.textContent = 'Saved locally. You can also submit the official agreement form.';
-      alert.style.display = 'block';
+const handleLogin = (form, alertNode) => {
+  const formData = new FormData(form);
+  const email = (formData.get('email') || '').toLowerCase();
+  const clients = loadClients();
+  const client = clients.find((c) => c.email?.toLowerCase() === email);
+  if (!client) {
+    alertNode.textContent = 'No account found. Please sign up first.';
+    alertNode.style.display = 'block';
+    return;
+  }
+  setCurrentClientId(client.id);
+  updateAuthBadge();
+  closeAuthModal();
+  if (window.location.pathname.includes('chapter.html')) {
+    const chapterId = getChapterFromUrl();
+    if (chapterId) renderLevels(chapterId);
+  }
+};
+
+const bindAuthForms = () => {
+  const signupForm = qs('#signup-form');
+  const loginForm = qs('#login-form');
+  const alert = qs('#auth-alert');
+
+  if (signupForm) {
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleSignup(signupForm);
+    });
+  }
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (alert) {
+        alert.style.display = 'none';
+        alert.textContent = '';
+      }
+      handleLogin(loginForm, alert);
+    });
+  }
+
+  qsa('[data-close-modal]').forEach((btn) => btn.addEventListener('click', closeAuthModal));
+  qsa('[data-auth-mode]').forEach((btn) =>
+    btn.addEventListener('click', () => openAuthModal(btn.dataset.authMode))
+  );
+};
+
+const logoutClient = () => {
+  setCurrentClientId(null);
+  updateAuthBadge();
+  if (window.location.pathname.includes('chapter.html')) {
+    const chapterId = getChapterFromUrl();
+    if (chapterId) renderLevels(chapterId);
+  }
+};
+
+const updateAuthBadge = () => {
+  const badge = qs('#auth-badge');
+  const btn = qs('#auth-button');
+  const logoutBtn = qs('#logout-button');
+  const current = getCurrentClient();
+  if (current) {
+    if (badge) {
+      badge.textContent = `Welcome, ${current.name || 'learner'} (all levels unlocked)`;
+      badge.style.display = 'inline-flex';
     }
-    closeRegistrationModal();
-    if (window.location.pathname.includes('chapter.html')) {
-      renderLevels(chapterId);
+    if (btn) {
+      btn.textContent = 'Account';
     }
+    if (logoutBtn) {
+      logoutBtn.style.display = 'inline-flex';
+    }
+  } else {
+    if (badge) badge.style.display = 'none';
+    if (btn) btn.textContent = 'Sign up / Log in';
+    if (logoutBtn) logoutBtn.style.display = 'none';
+  }
+};
+
+const renderAdminTable = () => {
+  const body = qs('#client-table-body');
+  if (!body) return;
+  const clients = loadClients();
+  body.innerHTML = '';
+  if (!clients.length) {
+    body.innerHTML = '<tr><td colspan="5" class="subtle">No clients yet. Signups will appear here.</td></tr>';
+    return;
+  }
+
+  clients.forEach((client) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${client.name || 'Unknown'}</td>
+      <td>${client.email || '—'}</td>
+      <td>${client.ndis || '—'}</td>
+      <td>${client.planManager || '—'}</td>
+      <td>
+        <button class="btn btn-secondary" data-toggle-client="${client.id}">
+          ${client.unlockedAll ? 'Lock levels' : 'Unlock levels'}
+        </button>
+      </td>
+    `;
+    body.appendChild(row);
   });
 
-  qsa('[data-close-modal]').forEach((btn) => btn.addEventListener('click', closeRegistrationModal));
+  qsa('[data-toggle-client]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.toggleClient;
+      const clients = loadClients();
+      const target = clients.find((c) => c.id === id);
+      if (!target) return;
+      const updated = unlockClientLevels(id, !target.unlockedAll);
+      if (updated && getCurrentClientId() === id && window.location.pathname.includes('chapter.html')) {
+        renderLevels(getChapterFromUrl());
+      }
+      renderAdminTable();
+    });
+  });
 };
 
 const hydrateHero = () => {
@@ -187,7 +355,13 @@ const init = () => {
   hydrateHero();
   renderChapterGrid();
   renderFeatures();
-  bindRegistrationForm();
+  bindAuthForms();
+  updateAuthBadge();
+
+  const authButton = qs('#auth-button');
+  if (authButton) authButton.addEventListener('click', () => openAuthModal('signup'));
+  const logoutBtn = qs('#logout-button');
+  if (logoutBtn) logoutBtn.addEventListener('click', logoutClient);
 
   if (page === 'chapter') {
     const chapterId = getChapterFromUrl();
@@ -203,6 +377,10 @@ const init = () => {
     const levelId = getLevelFromUrl();
     if (!chapterId || !levelId) return;
     renderLevelContent(chapterId, levelId);
+  }
+
+  if (page === 'admin') {
+    renderAdminTable();
   }
 };
 

@@ -13,7 +13,13 @@
       <nav aria-label="Main navigation">
         <a class="nav-link" href="index.html">Home</a>
         <a class="nav-link" href="chapter.html" id="back-to-chapter">Back to chapter</a>
+        <a class="nav-link" href="admin.html">Admin</a>
       </nav>
+      <div class="nav-actions">
+        <span id="auth-badge" class="auth-badge" style="display:none"></span>
+        <button class="btn btn-secondary" id="auth-button" type="button">Sign up / Log in</button>
+        <button class="btn btn-ghost" id="logout-button" type="button" style="display:none">Log out</button>
+      </div>
     </div>
     <div class="container hero">
       <div class="hero-text">
@@ -57,6 +63,33 @@
   <footer class="footer">
     <p id="breadcrumb-title">Goodwill Academy</p>
   </footer>
+
+  <div class="modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <div class="modal-card">
+      <button class="modal-close" data-close-modal aria-label="Close">✕</button>
+      <h3 id="auth-title">Sign up to unlock all levels</h3>
+      <p class="subtle">Level 1 is always open. Signing up unlocks Levels 2+ across every chapter.</p>
+      <div id="auth-alert" class="alert" style="display:none"></div>
+      <form id="signup-form" class="form-grid">
+        <label>Name<input required name="name" placeholder="Your full name"></label>
+        <label>Email<input required type="email" name="email" placeholder="you@example.com"></label>
+        <label>NDIS number<input required name="ndis" placeholder="000000000"></label>
+        <label>Plan manager name<input required name="planManager" placeholder="Plan manager"></label>
+        <div class="level-actions">
+          <button type="submit" class="btn btn-primary">Create account & unlock</button>
+          <button type="button" class="btn btn-ghost" data-auth-mode="login">Already have an account? Log in</button>
+        </div>
+      </form>
+
+      <form id="login-form" class="form-grid" style="display:none">
+        <label>Email<input required type="email" name="email" placeholder="you@example.com"></label>
+        <div class="level-actions">
+          <button type="submit" class="btn btn-primary">Log in</button>
+          <button type="button" class="btn btn-ghost" data-auth-mode="signup">Need an account? Sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script src="assets/js/chapters.js"></script>
   <script src="assets/js/app.js"></script>

@@ -3,18 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapter – Goodwill Academy</title>
+  <title>Admin – Goodwill Academy</title>
   <link rel="stylesheet" href="assets/css/theme.css">
 </head>
-<body data-page="chapter">
+<body data-page="admin">
   <header>
     <div class="container topbar">
-      <div class="logo"><span>Goodwill Academy</span> Neuro-friendly LMS</div>
+      <div class="logo"><span>Goodwill Academy</span> Admin</div>
       <nav aria-label="Main navigation">
         <a class="nav-link" href="index.html">Home</a>
-        <a class="nav-link" href="#levels">Levels</a>
-        <a class="nav-link" href="goodwill-academy-dashboard.html">Legacy dashboard</a>
-        <a class="nav-link" href="admin.html">Admin</a>
+        <a class="nav-link" href="chapter.html">Chapters</a>
       </nav>
       <div class="nav-actions">
         <span id="auth-badge" class="auth-badge" style="display:none"></span>
@@ -24,21 +22,16 @@
     </div>
     <div class="container hero">
       <div class="hero-text">
-        <div class="tag" id="chapter-pill">Chapter</div>
-        <h1 id="chapter-title">Chapter name</h1>
-        <p id="chapter-blurb">Description</p>
+        <div class="tag">Admin</div>
+        <h1>Client unlocks</h1>
+        <p>Review client submissions, verify details, and toggle access to higher levels.</p>
         <div class="level-actions">
-          <a class="btn btn-primary btn-pill" href="index.html">Back to chapters</a>
-          <a class="btn btn-secondary btn-pill" href="https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">Registration</a>
+          <a class="btn btn-primary btn-pill" href="index.html">Return to learner site</a>
         </div>
       </div>
       <div class="hero-card">
-        <h3>Levels roadmap</h3>
-        <div class="progress-track" id="levels">
-          <div class="progress-row"><span>Level 1</span><div class="progress-bar"><span style="width: 100%"></span></div><span class="badge">Open</span></div>
-          <div class="progress-row"><span>Level 2</span><div class="progress-bar"><span style="width: 35%"></span></div><span class="badge locked">Register</span></div>
-          <div class="progress-row"><span>Level 3+</span><div class="progress-bar"><span style="width: 15%"></span></div><span class="badge locked">Register</span></div>
-        </div>
+        <h3>At-a-glance</h3>
+        <p class="subtle">Entries are stored locally for demos. For production, swap localStorage for your server database.</p>
       </div>
     </div>
   </header>
@@ -46,15 +39,28 @@
   <main class="container">
     <section class="surface">
       <div class="section-title">
-        <h2>Levels</h2>
-        <p class="subtle">Level 1 is always open. Sign up to unlock every level instantly.</p>
+        <h2>Clients</h2>
+        <p class="subtle">Use the Unlock/Lock buttons to control access for each learner.</p>
       </div>
-      <div id="level-grid" class="level-grid"></div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>NDIS</th>
+              <th>Plan manager</th>
+              <th>Level access</th>
+            </tr>
+          </thead>
+          <tbody id="client-table-body"></tbody>
+        </table>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>Stay kind to yourself—take breaks between levels.</p>
+    <p>Admin tools for Goodwill Academy demos.</p>
   </footer>
 
   <div class="modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">

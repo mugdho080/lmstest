@@ -484,3 +484,55 @@ nav {
     animation: none !important;
   }
 }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-badge {
+  background: #eef2ff;
+  color: #312e81;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--primary);
+  border: 1px dashed var(--primary-light);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.data-table th,
+.data-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.data-table th {
+  background: #f7f9fd;
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.2px;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
