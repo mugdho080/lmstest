@@ -273,6 +273,8 @@ nav {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, rgba(124, 245, 255, 0.06), rgba(192, 132, 252, 0.06));
+  pointer-events: none;
+  z-index: 0;
   opacity: 0;
   transition: opacity 0.2s ease;
 }
@@ -280,6 +282,12 @@ nav {
 .chapter-card:hover::before,
 .level-card:hover::before {
   opacity: 1;
+}
+
+.chapter-card > *,
+.level-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .chapter-card .meta,
