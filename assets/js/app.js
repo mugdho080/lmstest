@@ -287,8 +287,38 @@ const renderLessonList = (chapterId, levelId, level) => {
 
   const progress = getLevelProgress(chapterId, levelId);
   list.innerHTML = '';
+
+  const tabBar = document.createElement('div');
+  tabBar.className = 'lesson-tabs';
+  const panelWrap = document.createElement('div');
+  panelWrap.className = 'lesson-panels';
+
+  const initialLesson = progress.completedLessons.at(-1) || level.lessons[0].id;
+
+  const setActive = (lessonId) => {
+    qsa('.lesson-tab', tabBar).forEach((tab) => {
+      tab.classList.toggle('active', tab.dataset.lesson === String(lessonId));
+    });
+    qsa('.lesson-panel', panelWrap).forEach((panel) => {
+      panel.classList.toggle('active', panel.dataset.lesson === String(lessonId));
+    });
+  };
+
   level.lessons.forEach((lesson) => {
     const completed = progress.completedLessons.includes(lesson.id);
+
+    const tabBtn = document.createElement('button');
+    tabBtn.type = 'button';
+    tabBtn.className = `lesson-tab ${completed ? 'completed' : ''}`;
+    tabBtn.dataset.lesson = lesson.id;
+    tabBtn.textContent = `Lesson ${lesson.id}: ${lesson.title}`;
+    tabBtn.addEventListener('click', () => setActive(lesson.id));
+    tabBar.appendChild(tabBtn);
+
+    const panel = document.createElement('div');
+    panel.className = 'lesson-panel';
+    panel.dataset.lesson = lesson.id;
+
     const card = document.createElement('article');
     card.className = 'lesson-card';
     card.innerHTML = `
@@ -298,7 +328,7 @@ const renderLessonList = (chapterId, levelId, level) => {
           <span class="badge">Lesson ${lesson.id}</span>
           <strong>${lesson.title}</strong>
         </div>
-        <span class="badge ${completed ? '' : 'locked'}">${completed ? 'Completed' : 'Take the quiz'}</span>
+        <span class="badge ${completed ? '' : 'locked'}" data-lesson-status> ${completed ? 'Completed' : 'Take the quiz'} </span>
       </header>
       <div class="lesson-body">
         <p>${lesson.summary}</p>
@@ -349,6 +379,12 @@ const renderLessonList = (chapterId, levelId, level) => {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Completed';
         result.textContent = '🎉 Perfect! You passed this lesson.';
+        const status = card.querySelector('[data-lesson-status]');
+        if (status) {
+          status.textContent = 'Completed';
+          status.classList.remove('locked');
+        }
+        tabBtn.classList.add('completed');
         showToast('Congrats! Lesson passed');
         updateLessonProgressUI(chapterId, levelId);
         renderChapterProgress(chapterId);
@@ -358,8 +394,13 @@ const renderLessonList = (chapterId, levelId, level) => {
     });
 
     card.appendChild(form);
-    list.appendChild(card);
+    panel.appendChild(card);
+    panelWrap.appendChild(panel);
   });
+
+  list.appendChild(tabBar);
+  list.appendChild(panelWrap);
+  setActive(initialLesson);
 };
 
 const openAuthModal = (mode = 'signup') => {

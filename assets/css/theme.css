@@ -19,6 +19,7 @@
 body {
   margin: 0;
   font-family: var(--font);
+  font-size: 17px;
   background: radial-gradient(circle at 20% 20%, rgba(124, 245, 255, 0.08), transparent 25%),
     radial-gradient(circle at 80% 0%, rgba(192, 132, 252, 0.12), transparent 25%),
     linear-gradient(180deg, #050811 0%, #060a14 50%, #05060d 100%);
@@ -583,6 +584,58 @@ select {
   background: rgba(255, 255, 255, 0.03);
   cursor: pointer;
   color: var(--text);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.quiz-options input[type='radio'] {
+  width: 18px;
+  height: 18px;
+}
+
+.lesson-tabs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.lesson-tab {
+  border: 1px solid rgba(124, 245, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.16s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lesson-tab.active {
+  border-color: rgba(124, 245, 255, 0.5);
+  box-shadow: 0 12px 28px rgba(124, 245, 255, 0.18);
+  background: linear-gradient(120deg, rgba(124, 245, 255, 0.12), rgba(192, 132, 252, 0.14));
+}
+
+.lesson-tab.completed {
+  border-color: rgba(124, 245, 255, 0.45);
+  color: var(--primary);
+}
+
+.lesson-panels {
+  display: grid;
+  gap: 12px;
+}
+
+.lesson-panel {
+  display: none;
+}
+
+.lesson-panel.active {
+  display: block;
 }
 
 .quiz-result {
@@ -626,6 +679,7 @@ select {
   background: radial-gradient(circle, rgba(124, 245, 255, 0.12) 0%, transparent 60%);
   filter: blur(48px);
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.2s ease;
 }
 
