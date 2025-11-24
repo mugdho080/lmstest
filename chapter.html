@@ -7,63 +7,76 @@
   <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 <body data-page="chapter">
-  <header>
-    <div class="container topbar">
-      <div class="logo"><span>Goodwill Academy</span> Neuro-friendly LMS</div>
-      <nav aria-label="Main navigation">
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand-row">
+        <img src="assets/logo.png" alt="Goodwill Care Academy" class="brand-logo">
+        <div class="brand-text">
+          <h1>Welcome to Goodwill Care Academy</h1>
+          <p>Keep growing, one calm lesson at a time.</p>
+        </div>
+      </div>
+      <div class="side-quote">“Your courage to learn lights the way.”</div>
+      <nav class="side-nav">
         <a class="nav-link" href="index.html">Home</a>
         <a class="nav-link" href="#levels">Levels</a>
-        <a class="nav-link" href="goodwill-academy-dashboard.html">Legacy dashboard</a>
         <a class="nav-link" href="admin.html">Admin</a>
       </nav>
       <div class="nav-actions">
         <span id="auth-badge" class="auth-badge" style="display:none"></span>
-        <button class="btn btn-secondary" id="auth-button" type="button">Sign up / Log in</button>
+        <button class="btn btn-primary" id="auth-button" type="button">Sign up / Log in</button>
         <button class="btn btn-ghost" id="logout-button" type="button" style="display:none">Log out</button>
       </div>
-    </div>
-    <div class="container hero">
-      <div class="hero-text">
-        <div class="tag" id="chapter-pill">Chapter</div>
-        <h1 id="chapter-title">Chapter name</h1>
-        <p id="chapter-blurb">Description</p>
-        <div class="level-actions">
-          <a class="btn btn-primary btn-pill floating" href="index.html">Back to chapters</a>
-          <a class="btn btn-secondary btn-pill" href="https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">Registration</a>
+      <div class="mascot-stack" aria-hidden="true">
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F984.svg" alt="Unicorn mascot"></div>
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F431.svg" alt="Cat mascot"></div>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="container hero">
+        <div class="hero-text">
+          <div class="tag" id="chapter-pill">Chapter</div>
+          <h1 id="chapter-title">Goodwill Care Academy</h1>
+          <p id="chapter-blurb">Description</p>
+          <div class="level-actions">
+            <a class="btn btn-primary btn-pill floating" href="index.html">Back to chapters</a>
+            <a class="btn btn-secondary btn-pill" href="https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">Registration</a>
+          </div>
         </div>
-      </div>
-      <div class="hero-card">
-        <div class="glow-ring"></div>
-        <h3>Levels roadmap</h3>
-        <div class="progress-track" id="chapter-progress"></div>
-      </div>
+        <div class="hero-card">
+          <div class="glow-ring"></div>
+          <h3>Levels roadmap</h3>
+          <div class="progress-track" id="chapter-progress"></div>
+        </div>
+      </header>
+
+      <main class="container">
+        <section class="surface" id="levels">
+          <div class="section-title">
+            <h2>Levels</h2>
+            <p class="subtle">Level 1 is always open. Sign up to unlock every level instantly.</p>
+          </div>
+          <div id="level-grid" class="level-grid"></div>
+        </section>
+
+        <section class="surface">
+          <div class="section-title">
+            <h2>How progress works</h2>
+            <p class="subtle">See every lesson before you start—quizzes unlock a celebratory animation when you get them all right.</p>
+          </div>
+          <div class="level-progress-box">
+            <p class="subtle">🕹️ Lesson cards show what’s inside each level. Finish quizzes in a level to fill the progress bars and celebrate with a 3-second pop-up.</p>
+            <p class="subtle">✨ Your progress is saved per account, so it follows you as you browse chapters.</p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>Keep breathing and celebrate every milestone.</p>
+      </footer>
     </div>
-  </header>
-
-  <main class="container">
-    <section class="surface">
-      <div class="section-title">
-        <h2>Levels</h2>
-        <p class="subtle">Level 1 is always open. Sign up to unlock every level instantly.</p>
-      </div>
-      <div id="level-grid" class="level-grid"></div>
-    </section>
-
-    <section class="surface">
-      <div class="section-title">
-        <h2>How progress works</h2>
-        <p class="subtle">See every lesson before you start—quizzes unlock a celebratory animation when you get them all right.</p>
-      </div>
-      <div class="level-progress-box">
-        <p class="subtle">🕹️ Lesson cards show what’s inside each level. Finish quizzes in a level to fill the progress bars and celebrate with a 3-second pop-up.</p>
-        <p class="subtle">✨ Your progress is saved locally per account, so it follows you as you browse chapters.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>Stay kind to yourself—take breaks between levels.</p>
-  </footer>
+  </div>
 
   <div class="modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
     <div class="modal-card">

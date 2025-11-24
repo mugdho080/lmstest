@@ -7,61 +7,76 @@
   <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 <body data-page="admin">
-  <header>
-    <div class="container topbar">
-      <div class="logo"><span>Goodwill Academy</span> Admin</div>
-      <nav aria-label="Main navigation">
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Admin navigation">
+      <div class="brand-row">
+        <img src="assets/logo.png" alt="Goodwill Care Academy" class="brand-logo">
+        <div class="brand-text">
+          <h1>Welcome to Goodwill Care Academy</h1>
+          <p>Support every learner with kindness.</p>
+        </div>
+      </div>
+      <div class="side-quote">“When we unlock one door, more dreams open.”</div>
+      <nav class="side-nav">
         <a class="nav-link" href="index.html">Home</a>
         <a class="nav-link" href="chapter.html">Chapters</a>
       </nav>
       <div class="nav-actions">
         <span id="auth-badge" class="auth-badge" style="display:none"></span>
-        <button class="btn btn-secondary" id="auth-button" type="button">Sign up / Log in</button>
+        <button class="btn btn-primary" id="auth-button" type="button">Sign up / Log in</button>
         <button class="btn btn-ghost" id="logout-button" type="button" style="display:none">Log out</button>
       </div>
-    </div>
-    <div class="container hero">
-      <div class="hero-text">
-        <div class="tag">Admin</div>
-        <h1>Client unlocks</h1>
-        <p>Review client submissions, verify details, and toggle access to higher levels.</p>
-        <div class="level-actions">
-          <a class="btn btn-primary btn-pill" href="index.html">Return to learner site</a>
+      <div class="mascot-stack" aria-hidden="true">
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F64C.svg" alt="Cheering mascot"></div>
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F4A1.svg" alt="Bright idea"></div>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="container hero">
+        <div class="hero-text">
+          <div class="tag">Admin</div>
+          <h1>Client unlocks</h1>
+          <p>Review client submissions, celebrate their progress, and toggle access to higher levels.</p>
+          <div class="level-actions">
+            <a class="btn btn-primary btn-pill" href="index.html">Return to learner site</a>
+          </div>
         </div>
-      </div>
-      <div class="hero-card">
-        <h3>At-a-glance</h3>
-        <p class="subtle">Entries are stored locally for demos. For production, swap localStorage for your server database.</p>
-      </div>
+        <div class="hero-card">
+          <div class="glow-ring"></div>
+          <h3>At-a-glance</h3>
+          <p class="subtle">Client records live in this browser for demos. Replace the storage with your preferred database when ready.</p>
+        </div>
+      </header>
+
+      <main class="container">
+        <section class="surface">
+          <div class="section-title">
+            <h2>Clients</h2>
+            <p class="subtle">Use the Unlock/Lock buttons to control access for each learner.</p>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>NDIS</th>
+                  <th>Plan manager</th>
+                  <th>Level access</th>
+                </tr>
+              </thead>
+              <tbody id="client-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>Admin tools for Goodwill Care Academy.</p>
+      </footer>
     </div>
-  </header>
-
-  <main class="container">
-    <section class="surface">
-      <div class="section-title">
-        <h2>Clients</h2>
-        <p class="subtle">Use the Unlock/Lock buttons to control access for each learner.</p>
-      </div>
-      <div class="table-wrapper">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>NDIS</th>
-              <th>Plan manager</th>
-              <th>Level access</th>
-            </tr>
-          </thead>
-          <tbody id="client-table-body"></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>Admin tools for Goodwill Academy demos.</p>
-  </footer>
+  </div>
 
   <div class="modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
     <div class="modal-card">

@@ -7,10 +7,17 @@
   <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 <body data-page="home">
-  <header>
-    <div class="container topbar">
-      <div class="logo"><span>Goodwill Academy</span> Neuro-friendly LMS</div>
-      <nav aria-label="Main navigation">
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand-row">
+        <img src="assets/logo.png" alt="Goodwill Care Academy" class="brand-logo">
+        <div class="brand-text">
+          <h1>Welcome to Goodwill Care Academy</h1>
+          <p>Learn with calm focus and supportive guidance.</p>
+        </div>
+      </div>
+      <div class="side-quote">“Your strengths grow each day you show up.”</div>
+      <nav class="side-nav">
         <a class="nav-link" href="#chapters">Chapters</a>
         <a class="nav-link" href="#how">How it works</a>
         <a class="nav-link" href="#support">Support</a>
@@ -18,87 +25,96 @@
       </nav>
       <div class="nav-actions">
         <span id="auth-badge" class="auth-badge" style="display:none"></span>
-        <button class="btn btn-secondary" id="auth-button" type="button">Sign up / Log in</button>
+        <button class="btn btn-primary" id="auth-button" type="button">Sign up / Log in</button>
         <button class="btn btn-ghost" id="logout-button" type="button" style="display:none">Log out</button>
       </div>
-    </div>
-    <div class="container hero">
-      <div class="hero-text">
-        <div class="tag">🧡 Built for autistic learners</div>
-        <h1 id="page-title">Goodwill Academy</h1>
-        <p>Futuristic, calming dark mode with big, visible buttons. Level 1 stays open for everyone—sign up once to unlock every other level.</p>
-        <div class="level-actions">
-          <a class="btn btn-primary btn-pill floating" href="#chapters">Browse chapters</a>
-          <a class="btn btn-secondary btn-pill" href="goodwill-academy-dashboard.html">View legacy dashboard</a>
-        </div>
+      <div class="side-quote">“Every small step builds big confidence.”</div>
+      <div class="mascot-stack" aria-hidden="true">
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F916.svg" alt="Friendly robot"></div>
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F331.svg" alt="Growing sprout"></div>
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F680.svg" alt="Rocket mascot"></div>
       </div>
-      <div class="hero-card">
-        <div class="glow-ring"></div>
-        <h3>Calm navigation highlights</h3>
-        <div class="progress-track">
-          <div class="progress-row"><span>Predictable layouts</span><div class="progress-bar"><span style="width: 100%"></span></div></div>
-          <div class="progress-row"><span>Large, clear buttons</span><div class="progress-bar"><span style="width: 96%"></span></div></div>
-          <div class="progress-row"><span>Reduced motion</span><div class="progress-bar"><span style="width: 90%"></span></div></div>
-          <div class="progress-row"><span>Gamified progress</span><div class="progress-bar"><span style="width: 85%"></span></div></div>
-        </div>
-      </div>
-    </div>
-  </header>
+    </aside>
 
-  <main class="container">
-    <section id="chapters" class="surface">
-      <div class="section-title">
-        <h2>Chapters</h2>
-        <p class="subtle">Level 1 is open to everyone. Sign up once to unlock Levels 2+ across every chapter.</p>
-      </div>
-      <div id="chapter-grid" class="chapter-grid" aria-live="polite"></div>
-    </section>
-
-    <section id="how">
-      <div class="section-title">
-        <h2>How it works</h2>
-        <p class="subtle">Same theme everywhere, so learners always know what to expect.</p>
-      </div>
-      <div class="layout-two-col">
-        <div class="surface">
-          <h3>Step-by-step flow</h3>
-          <ol class="simple-list">
-              <li>Open any chapter and begin with the free Level 1 lesson.</li>
-              <li>Sign up (name, email, NDIS, plan manager) to unlock every Level 2+ instantly.</li>
-              <li>Admins can review clients on the Admin page and lock/unlock access.</li>
-              <li>Add new chapters or levels by editing <strong>assets/js/chapters.js</strong>.</li>
-          </ol>
-          <div class="info-banner" id="support">
-            <span>🧠</span>
-            <div>
-              <strong>Tip:</strong> Keep sentences short and buttons large. All spacing and colors come from <code>assets/css/theme.css</code> so pages stay consistent.
-            </div>
+    <div class="app-main">
+      <header class="container hero">
+        <div class="hero-text">
+          <div class="tag">🧡 Built for autistic learners</div>
+          <h1 id="page-title">Welcome to Goodwill Care Academy</h1>
+          <p>Clear layouts, big buttons, and gentle animations help you explore every chapter. Level 1 is open to all—sign up once to unlock the rest.</p>
+          <div class="level-actions">
+            <a class="btn btn-primary btn-pill floating" href="#chapters">Browse chapters</a>
+            <a class="btn btn-secondary btn-pill" href="admin.html">Admin tools</a>
           </div>
         </div>
-        <div class="surface">
-          <h3>Design choices for autistic learners</h3>
-          <ul class="checklist">
-            <li>✅ Soft gradients and generous white space.</li>
-            <li>✅ Reduced motion and clear focus states.</li>
-            <li>✅ Short sentences with icons to anchor attention.</li>
-            <li>✅ Calm progress blocks instead of flashing badges.</li>
-          </ul>
+        <div class="hero-card">
+          <div class="glow-ring"></div>
+          <h3>Inspiring reminders</h3>
+          <div class="progress-track">
+            <div class="progress-row"><span>“You belong here.”</span><div class="progress-bar"><span style="width: 100%"></span></div></div>
+            <div class="progress-row"><span>“Practice grows power.”</span><div class="progress-bar"><span style="width: 92%"></span></div></div>
+            <div class="progress-row"><span>“Your pace is perfect.”</span><div class="progress-bar"><span style="width: 88%"></span></div></div>
+            <div class="progress-row"><span>“Celebrate every win.”</span><div class="progress-bar"><span style="width: 96%"></span></div></div>
+          </div>
         </div>
-      </div>
-    </section>
+      </header>
 
-    <section>
-      <div class="section-title">
-        <h2>Platform features</h2>
-        <p class="subtle">Everything runs on simple HTML, CSS, and JS—easy to host on GoDaddy.</p>
-      </div>
-      <div id="feature-grid" class="feature-grid"></div>
-    </section>
-  </main>
+      <main class="container">
+        <section id="chapters" class="surface">
+          <div class="section-title">
+            <h2>Chapters</h2>
+            <p class="subtle">Level 1 is open to everyone. Sign up once to unlock Levels 2+ across every chapter.</p>
+          </div>
+          <div id="chapter-grid" class="chapter-grid" aria-live="polite"></div>
+        </section>
 
-  <footer class="footer">
-    <p>Goodwill Academy – calm learning journeys. Need help? Email support@example.com.</p>
-  </footer>
+        <section id="how">
+          <div class="section-title">
+            <h2>How it works</h2>
+            <p class="subtle">Same calm theme everywhere so you can focus on learning.</p>
+          </div>
+          <div class="layout-two-col">
+            <div class="surface">
+              <h3>Step-by-step flow</h3>
+              <ol class="simple-list">
+                  <li>Open any chapter and begin with the free Level 1 lesson.</li>
+                  <li>Sign up (name, email, NDIS, plan manager) to unlock every Level 2+ instantly.</li>
+                  <li>Admins can review clients on the Admin page and lock/unlock access.</li>
+                  <li>Fresh lessons and levels are added regularly to keep skills growing.</li>
+              </ol>
+              <div class="info-banner" id="support">
+                <span>🧠</span>
+                <div>
+                  <strong>Tip:</strong> Use short sentences and bright icons to stay focused. All pages follow one theme so every click feels familiar.
+                </div>
+              </div>
+            </div>
+            <div class="surface">
+              <h3>Comfort-first design</h3>
+              <ul class="checklist">
+                <li>✅ Soft gradients and generous breathing room.</li>
+                <li>✅ Reduced motion and clear focus states.</li>
+                <li>✅ Encouraging callouts and progress bars for motivation.</li>
+                <li>✅ Visible, high-contrast buttons with rounded edges.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-title">
+            <h2>Platform features</h2>
+            <p class="subtle">Built for accessibility, joy, and easy hosting on GoDaddy or any static service.</p>
+          </div>
+          <div id="feature-grid" class="feature-grid"></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>Goodwill Care Academy — learning with heart. Need help? Email support@example.com.</p>
+      </footer>
+    </div>
+  </div>
 
   <div class="modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
     <div class="modal-card">

@@ -159,12 +159,12 @@ const renderFeatures = () => {
     },
     {
       title: 'Easy to extend',
-      text: 'Add chapters and levels by editing a single data file.',
+      text: 'New chapters and levels can appear without changing how you navigate.',
       icon: '📚'
     },
     {
       title: 'Offline friendly',
-      text: 'Static HTML, CSS, and JS that can be uploaded anywhere (including GoDaddy).',
+      text: 'Works on simple hosting like GoDaddy while keeping the same smooth feel.',
       icon: '🌐'
     }
   ];

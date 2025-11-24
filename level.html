@@ -7,67 +7,81 @@
   <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 <body data-page="level">
-  <header>
-    <div class="container topbar">
-      <div class="logo"><span>Goodwill Academy</span> Neuro-friendly LMS</div>
-      <nav aria-label="Main navigation">
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand-row">
+        <img src="assets/logo.png" alt="Goodwill Care Academy" class="brand-logo">
+        <div class="brand-text">
+          <h1>Welcome to Goodwill Care Academy</h1>
+          <p>Focus on one lesson at a time—you’ve got this.</p>
+        </div>
+      </div>
+      <div class="side-quote">“Progress is progress, even in tiny steps.”</div>
+      <nav class="side-nav">
         <a class="nav-link" href="index.html">Home</a>
         <a class="nav-link" href="chapter.html" id="back-to-chapter">Back to chapter</a>
         <a class="nav-link" href="admin.html">Admin</a>
       </nav>
       <div class="nav-actions">
         <span id="auth-badge" class="auth-badge" style="display:none"></span>
-        <button class="btn btn-secondary" id="auth-button" type="button">Sign up / Log in</button>
+        <button class="btn btn-primary" id="auth-button" type="button">Sign up / Log in</button>
         <button class="btn btn-ghost" id="logout-button" type="button" style="display:none">Log out</button>
       </div>
-    </div>
-    <div class="container hero">
-      <div class="hero-text">
-        <div class="tag" id="chapter-pill">Chapter</div>
-        <h1 id="level-title">Level name</h1>
-        <p id="level-summary">Short description.</p>
-        <div class="level-actions">
-          <a class="btn btn-primary btn-pill floating" href="#lesson">Jump to lesson</a>
-          <a class="btn btn-secondary btn-pill" href="chapter.html">See other levels</a>
-        </div>
+      <div class="mascot-stack" aria-hidden="true">
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F31F.svg" alt="Star mascot"></div>
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F47E.svg" alt="Friendly space creature"></div>
       </div>
-      <div class="hero-card">
-        <div class="glow-ring"></div>
-        <h3>Lesson status</h3>
-        <p><span class="badge" id="level-badge">Level</span></p>
-        <div class="level-progress-box">
-          <div class="progress-row">
-            <span class="subtle">Lessons complete</span>
-            <span class="badge" id="lesson-progress-label">0%</span>
+    </aside>
+
+    <div class="app-main">
+      <header class="container hero">
+        <div class="hero-text">
+          <div class="tag" id="chapter-pill">Chapter</div>
+          <h1 id="level-title">Level name</h1>
+          <p id="level-summary">Short description.</p>
+          <div class="level-actions">
+            <a class="btn btn-primary btn-pill floating" href="#lesson">Jump to lesson</a>
+            <a class="btn btn-secondary btn-pill" href="chapter.html" id="back-to-chapter-cta">See other levels</a>
           </div>
-          <div class="progress-bar"><span id="lesson-progress-bar" style="width:0%"></span></div>
         </div>
-        <p class="subtle" id="level-status">Open for everyone.</p>
-      </div>
+        <div class="hero-card">
+          <div class="glow-ring"></div>
+          <h3>Lesson status</h3>
+          <p><span class="badge" id="level-badge">Level</span></p>
+          <div class="level-progress-box">
+            <div class="progress-row">
+              <span class="subtle">Lessons complete</span>
+              <span class="badge" id="lesson-progress-label">0%</span>
+            </div>
+            <div class="progress-bar"><span id="lesson-progress-bar" style="width:0%"></span></div>
+          </div>
+          <p class="subtle" id="level-status">Open for everyone.</p>
+        </div>
+      </header>
+
+      <main class="container" id="lesson">
+        <section class="surface">
+          <div class="section-title">
+            <h2>Level overview</h2>
+            <p class="subtle">Short, sensory-friendly steps with simple icons.</p>
+          </div>
+          <div id="level-intro"></div>
+        </section>
+
+        <section class="surface">
+          <div class="section-title">
+            <h2>Lessons & quizzes</h2>
+            <p class="subtle">Interactive cards show progress, activities, and a quick quiz for each lesson.</p>
+          </div>
+          <div id="lesson-list" class="lesson-list"></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p id="breadcrumb-title">Goodwill Care Academy</p>
+      </footer>
     </div>
-  </header>
-
-  <main class="container" id="lesson">
-    <section class="surface">
-      <div class="section-title">
-        <h2>Level overview</h2>
-        <p class="subtle">Short, sensory-friendly steps with simple icons.</p>
-      </div>
-      <div id="level-intro"></div>
-    </section>
-
-    <section class="surface">
-      <div class="section-title">
-        <h2>Lessons & quizzes</h2>
-        <p class="subtle">Interactive cards show progress, activities, and a quick quiz for each lesson.</p>
-      </div>
-      <div id="lesson-list" class="lesson-list"></div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p id="breadcrumb-title">Goodwill Academy</p>
-  </footer>
+  </div>
 
   <div class="modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
     <div class="modal-card">
@@ -103,8 +117,12 @@
     const chapterId = params.get('chapter');
     const levelId = params.get('level');
     const backLink = document.getElementById('back-to-chapter');
+    const backLinkCta = document.getElementById('back-to-chapter-cta');
     if (chapterId && backLink) {
       backLink.href = `chapter.html?chapter=${chapterId}`;
+    }
+    if (chapterId && backLinkCta) {
+      backLinkCta.href = `chapter.html?chapter=${chapterId}`;
     }
   </script>
 
