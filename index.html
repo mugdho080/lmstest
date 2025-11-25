@@ -11,18 +11,18 @@
     <aside class="sidebar" aria-label="Main navigation">
       <div class="brand-row">
         <img src="assets/logo.png" alt="Goodwill Care Academy" class="brand-logo">
-        <div class="brand-text">
+      <div class="brand-text">
           <h1>Welcome to Goodwill Care Academy</h1>
           <p>Learn with calm focus and supportive guidance.</p>
-        </div>
+      </div>
       </div>
       <div class="side-quote">“Your strengths grow each day you show up.”</div>
       <nav class="side-nav">
         <a class="nav-link" href="#chapters">Chapters</a>
-        <a class="nav-link" href="#how">How it works</a>
-        <a class="nav-link" href="#support">Support</a>
+        <a class="nav-link" href="#ndis">NDIS boost</a>
       </nav>
       <div class="nav-actions">
+        <button class="btn btn-ghost" type="button" data-theme-toggle aria-pressed="false">Switch to light mode</button>
         <span id="auth-badge" class="auth-badge" style="display:none"></span>
         <button class="btn btn-primary" id="auth-button" type="button">Sign up / Log in</button>
         <button class="btn btn-ghost" id="logout-button" type="button" style="display:none">Log out</button>
@@ -41,6 +41,7 @@
           <div class="tag">🧡 Built for autistic learners</div>
           <h1 id="page-title">Welcome to Goodwill Care Academy</h1>
           <p>Clear layouts, big buttons, and gentle animations help you explore every chapter. Level 1 is open to all—sign up once to unlock the rest.</p>
+          <p class="ndis-promise">Time to level up using your own NDIS plan.</p>
           <div class="level-actions">
             <a class="btn btn-primary btn-pill floating" href="#chapters">Browse chapters</a>
             <button class="btn btn-games btn-pill" type="button" data-games-button>Want some relaxation? Play some exciting games!</button>
@@ -62,53 +63,23 @@
       </header>
 
       <main class="container">
+        <section id="ndis" class="surface ndis-cta">
+          <div>
+            <h2>Level up with your NDIS plan</h2>
+            <p class="subtle">One friendly signup unlocks every level across all chapters. Keep your growth in one place and celebrate each win.</p>
+          </div>
+          <div class="ndis-actions">
+            <button class="btn btn-primary" type="button" id="auth-button-cta">Unlock with my NDIS details</button>
+            <a class="btn btn-secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">View service agreement</a>
+          </div>
+        </section>
+
         <section id="chapters" class="surface">
           <div class="section-title">
             <h2>Chapters</h2>
             <p class="subtle">Level 1 is open to everyone. Sign up once to unlock Levels 2+ across every chapter.</p>
           </div>
           <div id="chapter-grid" class="chapter-grid" aria-live="polite"></div>
-        </section>
-
-        <section id="how">
-          <div class="section-title">
-            <h2>How it works</h2>
-            <p class="subtle">Same calm theme everywhere so you can focus on learning.</p>
-          </div>
-          <div class="layout-two-col">
-            <div class="surface">
-              <h3>Step-by-step flow</h3>
-              <ol class="simple-list">
-                  <li>Open any chapter and begin with the free Level 1 lesson.</li>
-                  <li>Sign up (name, email, NDIS, plan manager) to unlock every Level 2+ instantly.</li>
-                  <li>Admins can review clients on the Admin page and lock/unlock access.</li>
-                  <li>Fresh lessons and levels are added regularly to keep skills growing.</li>
-              </ol>
-              <div class="info-banner" id="support">
-                <span>🧠</span>
-                <div>
-                  <strong>Tip:</strong> Use short sentences and bright icons to stay focused. All pages follow one theme so every click feels familiar.
-                </div>
-              </div>
-            </div>
-            <div class="surface">
-              <h3>Comfort-first design</h3>
-              <ul class="checklist">
-                <li>✅ Soft gradients and generous breathing room.</li>
-                <li>✅ Reduced motion and clear focus states.</li>
-                <li>✅ Encouraging callouts and progress bars for motivation.</li>
-                <li>✅ Visible, high-contrast buttons with rounded edges.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div class="section-title">
-            <h2>Platform features</h2>
-            <p class="subtle">Built for accessibility, joy, and easy hosting on GoDaddy or any static service.</p>
-          </div>
-          <div id="feature-grid" class="feature-grid"></div>
         </section>
       </main>
 

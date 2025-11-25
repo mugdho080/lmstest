@@ -4,6 +4,7 @@ const qs = (selector, scope = document) => scope.querySelector(selector);
 const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 
 const GAMES_URL = 'https://www.crazygames.com/';
+const THEME_KEY = 'ga-theme';
 
 const getChapterFromUrl = () => new URLSearchParams(window.location.search).get('chapter');
 const getLevelFromUrl = () => new URLSearchParams(window.location.search).get('level');
@@ -135,6 +136,30 @@ const showToast = (message) => {
   setTimeout(() => toast.classList.remove('show'), 3000);
 };
 
+const applyTheme = (theme) => {
+  const clean = theme === 'light' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', clean);
+  localStorage.setItem(THEME_KEY, clean);
+  const toggle = qs('[data-theme-toggle]');
+  if (toggle) {
+    const toLight = clean === 'dark';
+    toggle.textContent = toLight ? 'Switch to light mode' : 'Switch to dark mode';
+    toggle.setAttribute('aria-pressed', (!toLight).toString());
+  }
+};
+
+const bindThemeToggle = () => {
+  const saved = localStorage.getItem(THEME_KEY) || 'dark';
+  applyTheme(saved);
+  const toggle = qs('[data-theme-toggle]');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const next = (document.documentElement.getAttribute('data-theme') || 'dark') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+    });
+  }
+};
+
 const openGamesPopup = () => {
   const win = window.open(GAMES_URL, 'goodwill-games', 'width=1200,height=800,noopener');
   if (!win) {
@@ -217,13 +242,16 @@ const renderChapterGrid = () => {
   Object.entries(window.chapters).forEach(([id, chapter]) => {
     const card = document.createElement('article');
     card.className = 'chapter-card';
+    card.style.setProperty('--chapter-accent', chapter.color || '#7cf5ff');
     card.innerHTML = `
+      <div class="chapter-aurora"></div>
       <div class="meta">
         <div class="badge">${chapter.icon} ${chapter.title}</div>
         <span class="subtle">${chapter.levels.length} levels</span>
       </div>
       <div class="chapter-icon" style="background:${chapter.color}">${chapter.icon}</div>
       <p>${chapter.blurb}</p>
+      <p class="ndis-note">Time to level up using your own NDIS plan.</p>
       <div class="card-row">
         <span class="badge">Level 1: Open</span>
         <span class="badge locked">Level 2+: Registration</span>
@@ -729,6 +757,7 @@ const hydrateHero = () => {
 };
 
 const init = () => {
+  bindThemeToggle();
   const page = document.body.dataset.page;
   hydrateHero();
   renderChapterGrid();
@@ -740,6 +769,8 @@ const init = () => {
 
   const authButton = qs('#auth-button');
   if (authButton) authButton.addEventListener('click', () => openAuthModal('signup'));
+  const authButtonCta = qs('#auth-button-cta');
+  if (authButtonCta) authButtonCta.addEventListener('click', () => openAuthModal('signup'));
   const logoutBtn = qs('#logout-button');
   if (logoutBtn) logoutBtn.addEventListener('click', logoutClient);
 
