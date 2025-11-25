@@ -1164,6 +1164,18 @@ select {
   color: var(--text);
 }
 
+:root[data-theme='light'] .chapter-card,
+:root[data-theme='light'] .level-card {
+  color: var(--text);
+}
+
+:root[data-theme='light'] .chapter-card .meta strong,
+:root[data-theme='light'] .chapter-card .meta span,
+:root[data-theme='light'] .level-card .meta strong,
+:root[data-theme='light'] .level-card .meta span {
+  color: #0a1b2b;
+}
+
 :root[data-theme='light'] .chapter-card p,
 :root[data-theme='light'] .level-card p,
 :root[data-theme='light'] .ndis-note {
@@ -1180,6 +1192,15 @@ select {
   color: #0b1c2a;
   background: rgba(29, 156, 102, 0.18);
   border-color: rgba(10, 40, 22, 0.24);
+}
+
+:root[data-theme='light'] .inspire-ticker {
+  background: linear-gradient(90deg, rgba(29, 156, 102, 0.16), rgba(29, 122, 191, 0.16));
+  border-color: rgba(10, 40, 22, 0.2);
+}
+
+:root[data-theme='light'] .inspire-track span {
+  color: #0b1c2a;
 }
 
 @keyframes floaty {
