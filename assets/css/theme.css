@@ -1109,6 +1109,18 @@ select {
   color: #0b1729;
 }
 
+:root[data-theme='light'] .badge {
+  background: rgba(10, 40, 22, 0.12);
+  color: #0b1c2a;
+  border-color: rgba(10, 40, 22, 0.24);
+}
+
+:root[data-theme='light'] .badge.locked {
+  background: rgba(148, 38, 38, 0.16);
+  color: #3b0c0c;
+  border-color: rgba(148, 38, 38, 0.32);
+}
+
 :root[data-theme='light'] .mascot {
   background: rgba(0, 0, 0, 0.02);
   border-color: var(--surface-border);
@@ -1194,6 +1206,12 @@ select {
   border-color: rgba(10, 40, 22, 0.24);
 }
 
+:root[data-theme='light'] .alert {
+  background: rgba(148, 38, 38, 0.16);
+  color: #3b0c0c;
+  border-color: rgba(148, 38, 38, 0.32);
+}
+
 :root[data-theme='light'] .inspire-ticker {
   background: linear-gradient(90deg, rgba(29, 156, 102, 0.16), rgba(29, 122, 191, 0.16));
   border-color: rgba(10, 40, 22, 0.2);
@@ -1201,6 +1219,16 @@ select {
 
 :root[data-theme='light'] .inspire-track span {
   color: #0b1c2a;
+}
+
+:root[data-theme='light'] .swipe-hint {
+  color: #0b1c2a;
+}
+
+:root[data-theme='light'] .auth-badge {
+  background: rgba(10, 40, 22, 0.12);
+  color: #0b1c2a;
+  border-color: rgba(10, 40, 22, 0.26);
 }
 
 @keyframes floaty {
