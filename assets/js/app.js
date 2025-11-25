@@ -151,15 +151,37 @@ const bindGamesButtons = () => {
 const hydrateLessonVideo = () => {
   const iframe = qs('[data-lesson-video]');
   if (!iframe) return;
-  const baseSrc = iframe.dataset.videoSrc || iframe.src;
-  const joiner = baseSrc.includes('?') ? '&' : '?';
-  const origin = encodeURIComponent(window.location.origin);
-  iframe.src = `${baseSrc}${joiner}rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&cc_load_policy=1&origin=${origin}`;
 
   const help = qs('#video-help');
   const showHelp = () => {
     if (help) help.classList.add('visible');
   };
+
+  const baseSrc = iframe.dataset.videoSrc || iframe.src;
+  const allowOrigin = ['http:', 'https:'].includes(window.location.protocol);
+
+  const buildSrc = (src, useNoCookie = true) => {
+    const url = new URL(src);
+    if (!useNoCookie && url.hostname.includes('youtube-nocookie.com')) {
+      url.hostname = 'www.youtube.com';
+    }
+    const params = url.searchParams;
+    params.set('rel', '0');
+    params.set('modestbranding', '1');
+    params.set('playsinline', '1');
+    params.set('iv_load_policy', '3');
+    params.set('cc_load_policy', '1');
+    if (allowOrigin) {
+      params.set('origin', window.location.origin);
+    } else {
+      params.delete('origin');
+    }
+    url.search = params.toString();
+    return url.toString();
+  };
+
+  const fallbackHostSrc = buildSrc(baseSrc.replace('youtube-nocookie.com', 'youtube.com'), false);
+  const primarySrc = buildSrc(baseSrc, true);
 
   const timer = setTimeout(() => {
     if (!iframe.dataset.loaded) showHelp();
@@ -170,7 +192,17 @@ const hydrateLessonVideo = () => {
     clearTimeout(timer);
   });
 
-  iframe.addEventListener('error', showHelp);
+  iframe.addEventListener('error', () => {
+    if (iframe.dataset.fallbackTried) {
+      showHelp();
+      return;
+    }
+    iframe.dataset.fallbackTried = 'true';
+    iframe.src = fallbackHostSrc;
+    showHelp();
+  });
+
+  iframe.src = primarySrc;
 };
 
 const startInspireTicker = () => {
