@@ -158,29 +158,24 @@ const hydrateLessonVideo = () => {
   };
 
   const baseSrc = iframe.dataset.videoSrc || iframe.src;
-  const allowOrigin = ['http:', 'https:'].includes(window.location.protocol);
 
-  const buildSrc = (src, useNoCookie = true) => {
+  iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+
+  const buildSrc = (src, useNoCookieHost = true) => {
     const url = new URL(src);
-    if (!useNoCookie && url.hostname.includes('youtube-nocookie.com')) {
-      url.hostname = 'www.youtube.com';
-    }
+    url.hostname = useNoCookieHost ? 'www.youtube-nocookie.com' : 'www.youtube.com';
     const params = url.searchParams;
     params.set('rel', '0');
     params.set('modestbranding', '1');
     params.set('playsinline', '1');
     params.set('iv_load_policy', '3');
     params.set('cc_load_policy', '1');
-    if (allowOrigin) {
-      params.set('origin', window.location.origin);
-    } else {
-      params.delete('origin');
-    }
+    params.delete('origin');
     url.search = params.toString();
     return url.toString();
   };
 
-  const fallbackHostSrc = buildSrc(baseSrc.replace('youtube-nocookie.com', 'youtube.com'), false);
+  const fallbackHostSrc = buildSrc(baseSrc, false);
   const primarySrc = buildSrc(baseSrc, true);
 
   const timer = setTimeout(() => {
