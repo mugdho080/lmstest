@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goodwill Academy – Calm LMS</title>
+  <link rel="stylesheet" href="assets/css/theme.css">
+</head>
+<body data-page="home">
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand-row">
+        <img src="assets/logo.png" alt="Goodwill Care Academy" class="brand-logo">
+        <div class="brand-text">
+          <h1>Welcome to Goodwill Care Academy</h1>
+          <p>Learn with calm focus and supportive guidance.</p>
+        </div>
+      </div>
+      <div class="side-quote">“Your strengths grow each day you show up.”</div>
+      <nav class="side-nav">
+        <a class="nav-link" href="#chapters">Chapters</a>
+        <a class="nav-link" href="#how">How it works</a>
+        <a class="nav-link" href="#support">Support</a>
+      </nav>
+      <div class="nav-actions">
+        <span id="auth-badge" class="auth-badge" style="display:none"></span>
+        <button class="btn btn-primary" id="auth-button" type="button">Sign up / Log in</button>
+        <button class="btn btn-ghost" id="logout-button" type="button" style="display:none">Log out</button>
+      </div>
+      <div class="side-quote">“Every small step builds big confidence.”</div>
+      <div class="mascot-stack" aria-hidden="true">
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F916.svg" alt="Friendly robot"></div>
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F331.svg" alt="Growing sprout"></div>
+        <div class="mascot"><img src="https://openmoji.org/data/color/svg/1F680.svg" alt="Rocket mascot"></div>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="container hero">
+        <div class="hero-text">
+          <div class="tag">🧡 Built for autistic learners</div>
+          <h1 id="page-title">Welcome to Goodwill Care Academy</h1>
+          <p>Clear layouts, big buttons, and gentle animations help you explore every chapter. Level 1 is open to all—sign up once to unlock the rest.</p>
+          <div class="level-actions">
+            <a class="btn btn-primary btn-pill floating" href="#chapters">Browse chapters</a>
+            <button class="btn btn-secondary btn-pill" type="button" data-games-button>Want some relaxation? Play some exciting games!</button>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="glow-ring"></div>
+          <h3>Inspiring reminders</h3>
+          <div class="inspire-ticker" aria-live="polite">
+            <div class="inspire-track">
+              <span>“You belong here.”</span>
+              <span>“Practice grows power.”</span>
+              <span>“Your pace is perfect.”</span>
+              <span>“Celebrate every win.”</span>
+              <span>“Small steps, big confidence.”</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="container">
+        <section id="chapters" class="surface">
+          <div class="section-title">
+            <h2>Chapters</h2>
+            <p class="subtle">Level 1 is open to everyone. Sign up once to unlock Levels 2+ across every chapter.</p>
+          </div>
+          <div id="chapter-grid" class="chapter-grid" aria-live="polite"></div>
+        </section>
+
+        <section id="how">
+          <div class="section-title">
+            <h2>How it works</h2>
+            <p class="subtle">Same calm theme everywhere so you can focus on learning.</p>
+          </div>
+          <div class="layout-two-col">
+            <div class="surface">
+              <h3>Step-by-step flow</h3>
+              <ol class="simple-list">
+                  <li>Open any chapter and begin with the free Level 1 lesson.</li>
+                  <li>Sign up (name, email, NDIS, plan manager) to unlock every Level 2+ instantly.</li>
+                  <li>Admins can review clients on the Admin page and lock/unlock access.</li>
+                  <li>Fresh lessons and levels are added regularly to keep skills growing.</li>
+              </ol>
+              <div class="info-banner" id="support">
+                <span>🧠</span>
+                <div>
+                  <strong>Tip:</strong> Use short sentences and bright icons to stay focused. All pages follow one theme so every click feels familiar.
+                </div>
+              </div>
+            </div>
+            <div class="surface">
+              <h3>Comfort-first design</h3>
+              <ul class="checklist">
+                <li>✅ Soft gradients and generous breathing room.</li>
+                <li>✅ Reduced motion and clear focus states.</li>
+                <li>✅ Encouraging callouts and progress bars for motivation.</li>
+                <li>✅ Visible, high-contrast buttons with rounded edges.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-title">
+            <h2>Platform features</h2>
+            <p class="subtle">Built for accessibility, joy, and easy hosting on GoDaddy or any static service.</p>
+          </div>
+          <div id="feature-grid" class="feature-grid"></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>Goodwill Care Academy — learning with heart. Need help? Email support@example.com.</p>
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <div class="modal-card">
+      <button class="modal-close" data-close-modal aria-label="Close">✕</button>
+      <h3 id="auth-title">Sign up to unlock all levels</h3>
+      <p class="subtle">Level 1 is always open. Signing up unlocks Levels 2+ across every chapter.</p>
+      <div id="auth-alert" class="alert" style="display:none"></div>
+      <form id="signup-form" class="form-grid">
+        <label>Name<input required name="name" placeholder="Your full name"></label>
+        <label>Email<input required type="email" name="email" placeholder="you@example.com"></label>
+        <label>NDIS number<input required name="ndis" placeholder="000000000"></label>
+        <label>Plan manager name<input required name="planManager" placeholder="Plan manager"></label>
+        <div class="level-actions">
+          <button type="submit" class="btn btn-primary">Create account & unlock</button>
+          <button type="button" class="btn btn-ghost" data-auth-mode="login">Already have an account? Log in</button>
+        </div>
+      </form>
+
+      <form id="login-form" class="form-grid" style="display:none">
+        <label>Email<input required type="email" name="email" placeholder="you@example.com"></label>
+        <div class="level-actions">
+          <button type="submit" class="btn btn-primary">Log in</button>
+          <button type="button" class="btn btn-ghost" data-auth-mode="signup">Need an account? Sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/chapters.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
