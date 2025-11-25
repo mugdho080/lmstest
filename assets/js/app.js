@@ -148,6 +148,31 @@ const bindGamesButtons = () => {
   });
 };
 
+const hydrateLessonVideo = () => {
+  const iframe = qs('[data-lesson-video]');
+  if (!iframe) return;
+  const baseSrc = iframe.dataset.videoSrc || iframe.src;
+  const joiner = baseSrc.includes('?') ? '&' : '?';
+  const origin = encodeURIComponent(window.location.origin);
+  iframe.src = `${baseSrc}${joiner}rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&cc_load_policy=1&origin=${origin}`;
+
+  const help = qs('#video-help');
+  const showHelp = () => {
+    if (help) help.classList.add('visible');
+  };
+
+  const timer = setTimeout(() => {
+    if (!iframe.dataset.loaded) showHelp();
+  }, 3500);
+
+  iframe.addEventListener('load', () => {
+    iframe.dataset.loaded = 'true';
+    clearTimeout(timer);
+  });
+
+  iframe.addEventListener('error', showHelp);
+};
+
 const startInspireTicker = () => {
   qsa('.inspire-track').forEach((track) => {
     if (!track.dataset.cloned) {
@@ -706,6 +731,7 @@ const init = () => {
     const levelId = getLevelFromUrl();
     if (!chapterId || !levelId) return;
     renderLevelContent(chapterId, levelId);
+    hydrateLessonVideo();
   }
 
   if (page === 'admin') {
