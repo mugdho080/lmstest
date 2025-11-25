@@ -20,20 +20,20 @@
 }
 
 :root[data-theme='light'] {
-  --bg: #f6fbf7;
+  --bg: #f4fbf6;
   --surface: #ffffff;
-  --surface-2: #f1fbf3;
-  --primary: #2dbf7f;
-  --primary-strong: #1f9a55;
-  --accent: #57d3ff;
-  --muted: #2e3c4d;
-  --text: #0b1729;
+  --surface-2: #eef8f0;
+  --primary: #1d9c66;
+  --primary-strong: #14724b;
+  --accent: #3f9bc0;
+  --muted: #153040;
+  --text: #08131f;
   --bg-gradient: linear-gradient(180deg, #f7fcf8 0%, #eef8f1 50%, #e6f4eb 100%);
-  --shadow: 0 12px 30px rgba(12, 48, 24, 0.12);
+  --shadow: 0 12px 30px rgba(10, 40, 22, 0.14);
   --sidebar-bg: linear-gradient(160deg, #f1fbf4, #e6f6ec);
   --surface-bg: linear-gradient(160deg, #ffffff, #eef8f1);
-  --surface-border: rgba(12, 48, 24, 0.14);
-  --card-border: rgba(12, 48, 24, 0.18);
+  --surface-border: rgba(10, 40, 22, 0.18);
+  --card-border: rgba(10, 40, 22, 0.24);
 }
 
 * {
@@ -1127,11 +1127,11 @@ select {
 }
 
 :root[data-theme='light'] .btn {
-  color: #0b1729;
+  color: var(--text);
 }
 
 :root[data-theme='light'] .btn-primary {
-  color: #042015;
+  color: #06271a;
   box-shadow: none;
 }
 
@@ -1148,7 +1148,7 @@ select {
 }
 
 :root[data-theme='light'] .btn-games {
-  color: #042015;
+  color: #06271a;
   border-color: #ffd27a;
   box-shadow: none;
 }
@@ -1161,7 +1161,25 @@ select {
 
 :root[data-theme='light'] .chapter-card h3,
 :root[data-theme='light'] .level-card h3 {
-  color: #0b1729;
+  color: var(--text);
+}
+
+:root[data-theme='light'] .chapter-card p,
+:root[data-theme='light'] .level-card p,
+:root[data-theme='light'] .ndis-note {
+  color: #0b1c2a;
+}
+
+:root[data-theme='light'] .chapter-card .meta,
+:root[data-theme='light'] .level-card header {
+  color: #0b1c2a;
+}
+
+:root[data-theme='light'] .chapter-card .status-pill,
+:root[data-theme='light'] .level-card .status-pill {
+  color: #0b1c2a;
+  background: rgba(29, 156, 102, 0.18);
+  border-color: rgba(10, 40, 22, 0.24);
 }
 
 @keyframes floaty {
