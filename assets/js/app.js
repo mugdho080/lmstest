@@ -8,6 +8,24 @@ const GAMES_URL = 'https://www.crazygames.com/';
 const getChapterFromUrl = () => new URLSearchParams(window.location.search).get('chapter');
 const getLevelFromUrl = () => new URLSearchParams(window.location.search).get('level');
 
+// Speech helpers for read-aloud support
+const canSpeak = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+const stopSpeech = () => {
+  if (canSpeak) {
+    window.speechSynthesis.cancel();
+  }
+};
+
+const speakText = (text) => {
+  if (!canSpeak || !text) return;
+  stopSpeech();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'en-US';
+  utterance.rate = 0.97;
+  utterance.pitch = 1;
+  window.speechSynthesis.speak(utterance);
+};
+
 // Simple localStorage-backed client directory (works on static hosting)
 const STORAGE_KEYS = {
   clients: 'ga-clients',
@@ -266,6 +284,54 @@ const renderChapterProgress = (chapterId) => {
   });
 };
 
+const createSwipeSteps = (steps = []) => {
+  const wrap = document.createElement('div');
+  wrap.className = 'swipe-steps';
+
+  const hint = document.createElement('p');
+  hint.className = 'swipe-hint';
+  hint.textContent = 'Swipe sideways or tap arrows to see each step.';
+
+  const track = document.createElement('div');
+  track.className = 'swipe-track';
+
+  steps.forEach((step, idx) => {
+    const card = document.createElement('article');
+    card.className = 'swipe-step';
+    card.innerHTML = `<div class="step-index">${idx + 1}</div><p>${step}</p>`;
+    track.appendChild(card);
+  });
+
+  const scrollAmount = () => Math.max(track.clientWidth * 0.9, 280);
+  const prev = document.createElement('button');
+  prev.type = 'button';
+  prev.className = 'swipe-nav prev';
+  prev.textContent = '←';
+  prev.addEventListener('click', () => track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
+
+  const next = document.createElement('button');
+  next.type = 'button';
+  next.className = 'swipe-nav next';
+  next.textContent = '→';
+  next.addEventListener('click', () => track.scrollBy({ left: scrollAmount(), behavior: 'smooth' }));
+
+  wrap.append(hint, track, prev, next);
+  return wrap;
+};
+
+const makeReadButton = (label, text) => {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'btn btn-voice';
+  btn.textContent = label;
+  if (!canSpeak) {
+    btn.disabled = true;
+    btn.title = 'Read-aloud not supported in this browser';
+  }
+  btn.addEventListener('click', () => speakText(text));
+  return btn;
+};
+
 const renderLevelContent = (chapterId, levelId) => {
   const intro = qs('#level-intro');
   if (!intro || !chapters[chapterId]) return;
@@ -280,12 +346,19 @@ const renderLevelContent = (chapterId, levelId) => {
   qs('#level-status').textContent = level.free ? 'Open for everyone' : 'Requires registration after Level 1';
   qs('#chapter-pill').textContent = chapter.title;
 
-  intro.innerHTML = `
-    <p class="subtle">${level.content.intro}</p>
-    <ul class="checklist">
-      ${level.content.steps.map((step) => `<li>✅ <span>${step}</span></li>`).join('')}
-    </ul>
-  `;
+  intro.innerHTML = '';
+  const introText = document.createElement('p');
+  introText.className = 'subtle highlight';
+  introText.textContent = level.content.intro;
+  intro.appendChild(introText);
+
+  const overviewActions = document.createElement('div');
+  overviewActions.className = 'level-actions tight';
+  overviewActions.appendChild(
+    makeReadButton('🔊 Read this overview aloud', `${level.content.intro}. ${level.content.steps.join('. ')}`)
+  );
+  intro.appendChild(overviewActions);
+  intro.appendChild(createSwipeSteps(level.content.steps));
 
   renderLessonList(chapterId, levelId, level);
   updateLessonProgressUI(chapterId, levelId);
@@ -320,6 +393,7 @@ const renderLessonList = (chapterId, levelId, level) => {
   const initialLesson = progress.completedLessons.at(-1) || level.lessons[0].id;
 
   const setActive = (lessonId) => {
+    stopSpeech();
     qsa('.lesson-tab', tabBar).forEach((tab) => {
       tab.classList.toggle('active', tab.dataset.lesson === String(lessonId));
     });
@@ -330,6 +404,10 @@ const renderLessonList = (chapterId, levelId, level) => {
 
   level.lessons.forEach((lesson) => {
     const completed = progress.completedLessons.includes(lesson.id);
+    const lessonSpeech = `Lesson ${lesson.id}: ${lesson.title}. ${lesson.summary}. ${lesson.content.intro}. ${lesson.content.bullets.join('. ')}`;
+    const quizSpeech = `Quiz for ${lesson.title}. ${lesson.quiz
+      .map((q, idx) => `Question ${idx + 1}: ${q.question}. Options: ${q.options.join(', ')}`)
+      .join('. ')}`;
 
     const tabBtn = document.createElement('button');
     tabBtn.type = 'button';
@@ -360,6 +438,13 @@ const renderLessonList = (chapterId, levelId, level) => {
         <ul class="checklist">${lesson.content.bullets.map((b) => `<li>✅ ${b}</li>`).join('')}</ul>
       </div>
     `;
+
+    const lessonBody = card.querySelector('.lesson-body');
+    const audioRow = document.createElement('div');
+    audioRow.className = 'audio-row';
+    audioRow.appendChild(makeReadButton('🔊 Read this lesson', lessonSpeech));
+    audioRow.appendChild(makeReadButton('🧠 Read the quiz', quizSpeech));
+    lessonBody.appendChild(audioRow);
 
     const form = document.createElement('form');
     form.className = 'quiz-form';
@@ -629,3 +714,6 @@ const init = () => {
 };
 
 document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) stopSpeech();
+});
