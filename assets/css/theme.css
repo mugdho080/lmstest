@@ -1126,8 +1126,13 @@ select {
   color: #0b1729;
 }
 
+:root[data-theme='light'] .btn {
+  color: #0b1729;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
 :root[data-theme='light'] .btn-primary {
-  color: #ffffff;
+  color: #0a1524;
   box-shadow: 0 12px 28px rgba(12, 24, 56, 0.22);
 }
 
@@ -1141,6 +1146,12 @@ select {
 :root[data-theme='light'] .btn-ghost {
   color: var(--primary-strong);
   border-color: rgba(29, 122, 191, 0.4);
+}
+
+:root[data-theme='light'] .btn-games {
+  color: #0a1524;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
+  border-color: #ffba57;
 }
 
 :root[data-theme='light'] .btn-voice {
