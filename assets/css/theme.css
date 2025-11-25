@@ -20,20 +20,20 @@
 }
 
 :root[data-theme='light'] {
-  --bg: #f5f8ff;
+  --bg: #f6fbf7;
   --surface: #ffffff;
-  --surface-2: #f2f6ff;
-  --primary: #1d7abf;
-  --primary-strong: #0f65a1;
-  --accent: #8b5cf6;
-  --muted: #4a5568;
+  --surface-2: #f1fbf3;
+  --primary: #2dbf7f;
+  --primary-strong: #1f9a55;
+  --accent: #57d3ff;
+  --muted: #2e3c4d;
   --text: #0b1729;
-  --bg-gradient: linear-gradient(180deg, #f9fbff 0%, #eef3ff 50%, #e4ebff 100%);
-  --shadow: 0 16px 40px rgba(12, 24, 56, 0.14);
-  --sidebar-bg: linear-gradient(160deg, #eef4ff, #e3ecff);
-  --surface-bg: linear-gradient(160deg, #ffffff, #f3f6ff);
-  --surface-border: rgba(12, 24, 56, 0.12);
-  --card-border: rgba(12, 24, 56, 0.16);
+  --bg-gradient: linear-gradient(180deg, #f7fcf8 0%, #eef8f1 50%, #e6f4eb 100%);
+  --shadow: 0 12px 30px rgba(12, 48, 24, 0.12);
+  --sidebar-bg: linear-gradient(160deg, #f1fbf4, #e6f6ec);
+  --surface-bg: linear-gradient(160deg, #ffffff, #eef8f1);
+  --surface-border: rgba(12, 48, 24, 0.14);
+  --card-border: rgba(12, 48, 24, 0.18);
 }
 
 * {
@@ -1117,47 +1117,51 @@ select {
 
 :root[data-theme='light'] .chapter-card,
 :root[data-theme='light'] .level-card {
-  box-shadow: 0 12px 28px rgba(12, 24, 56, 0.12);
+  box-shadow: 0 10px 22px rgba(12, 48, 24, 0.12);
 }
 
 :root[data-theme='light'] .nav-link {
-  background: rgba(29, 122, 191, 0.06);
+  background: rgba(45, 191, 127, 0.08);
   border-color: var(--surface-border);
   color: #0b1729;
 }
 
 :root[data-theme='light'] .btn {
   color: #0b1729;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 :root[data-theme='light'] .btn-primary {
-  color: #0a1524;
-  box-shadow: 0 12px 28px rgba(12, 24, 56, 0.22);
+  color: #042015;
+  box-shadow: none;
 }
 
 :root[data-theme='light'] .btn-secondary {
-  background: linear-gradient(135deg, #eef4ff, #dfe9ff);
+  background: linear-gradient(135deg, #f2faf4, #e6f6ec);
   color: #0b1729;
   border-color: var(--surface-border);
-  box-shadow: 0 10px 20px rgba(12, 24, 56, 0.12);
+  box-shadow: none;
 }
 
 :root[data-theme='light'] .btn-ghost {
   color: var(--primary-strong);
-  border-color: rgba(29, 122, 191, 0.4);
+  border-color: rgba(45, 191, 127, 0.45);
 }
 
 :root[data-theme='light'] .btn-games {
-  color: #0a1524;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
-  border-color: #ffba57;
+  color: #042015;
+  border-color: #ffd27a;
+  box-shadow: none;
 }
 
 :root[data-theme='light'] .btn-voice {
   color: var(--primary-strong);
-  background: rgba(29, 122, 191, 0.12);
-  border-color: rgba(29, 122, 191, 0.32);
+  background: rgba(45, 191, 127, 0.14);
+  border-color: rgba(45, 191, 127, 0.32);
+}
+
+:root[data-theme='light'] .chapter-card h3,
+:root[data-theme='light'] .level-card h3 {
+  color: #0b1729;
 }
 
 @keyframes floaty {
