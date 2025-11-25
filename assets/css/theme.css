@@ -1126,6 +1126,29 @@ select {
   color: #0b1729;
 }
 
+:root[data-theme='light'] .btn-primary {
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgba(12, 24, 56, 0.22);
+}
+
+:root[data-theme='light'] .btn-secondary {
+  background: linear-gradient(135deg, #eef4ff, #dfe9ff);
+  color: #0b1729;
+  border-color: var(--surface-border);
+  box-shadow: 0 10px 20px rgba(12, 24, 56, 0.12);
+}
+
+:root[data-theme='light'] .btn-ghost {
+  color: var(--primary-strong);
+  border-color: rgba(29, 122, 191, 0.4);
+}
+
+:root[data-theme='light'] .btn-voice {
+  color: var(--primary-strong);
+  background: rgba(29, 122, 191, 0.12);
+  border-color: rgba(29, 122, 191, 0.32);
+}
+
 @keyframes floaty {
   0% {
     transform: translateY(0);
