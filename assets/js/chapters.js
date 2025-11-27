@@ -7,7 +7,7 @@
 // Pages read window.chapters dynamically, so new entries appear automatically.
 const registrationLink = "https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor";
 
-const chapters = {
+let chapters = {
   "ai-digital-skills": {
     title: "AI & Digital Skills",
     icon: "🤖",
@@ -420,5 +420,8 @@ const chapters = {
     ]
   }
 };
+
+// Expose for dynamic updates (e.g., pulling from the backend)
+window.chapters = chapters;
 
 window.chapters = chapters;

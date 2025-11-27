@@ -5,6 +5,7 @@ const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)
 
 const GAMES_URL = 'https://www.crazygames.com/';
 const THEME_KEY = 'ga-theme';
+const API_BASE = '/backend/api.php';
 
 const getChapterFromUrl = () => new URLSearchParams(window.location.search).get('chapter');
 const getLevelFromUrl = () => new URLSearchParams(window.location.search).get('level');
@@ -32,6 +33,84 @@ const STORAGE_KEYS = {
   clients: 'ga-clients',
   currentClientId: 'ga-current-client-id',
   progress: 'ga-progress'
+};
+
+const safeJson = async (res) => {
+  try {
+    return await res.json();
+  } catch (e) {
+    return null;
+  }
+};
+
+const fetchChaptersFromApi = async () => {
+  try {
+    const res = await fetch(`${API_BASE}?action=chapters`, { cache: 'no-store' });
+    if (!res.ok) return false;
+    const data = await safeJson(res);
+    if (data?.chapters) {
+      chapters = data.chapters;
+      window.chapters = chapters;
+      return true;
+    }
+  } catch (e) {
+    console.warn('Falling back to bundled chapter data', e);
+  }
+  return false;
+};
+
+const postApi = async (action, payload = {}) => {
+  const res = await fetch(`${API_BASE}?action=${action}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) throw new Error('API call failed');
+  return safeJson(res);
+};
+
+const pushClientToApi = async (client) => {
+  try {
+    await postApi('signup', { client });
+  } catch (e) {
+    console.warn('Signup sync skipped', e);
+  }
+};
+
+const loginFromApi = async (email) => {
+  try {
+    const data = await postApi('login', { email });
+    return data?.client || null;
+  } catch (e) {
+    return null;
+  }
+};
+
+const syncProgressToApi = async (chapterId, levelId) => {
+  const clientId = getCurrentClientId();
+  if (!clientId) return;
+  const progress = readProgress();
+  const lessons = progress?.[chapterId]?.[levelId]?.lessons || [];
+  try {
+    await postApi('progress_save', { clientId, chapter: chapterId, level: levelId, lessons });
+  } catch (e) {
+    console.warn('Progress sync skipped', e);
+  }
+};
+
+const pullProgressFromApi = async () => {
+  const clientId = getCurrentClientId();
+  if (!clientId) return;
+  try {
+    const data = await postApi('progress_get', { clientId });
+    if (data?.progress) {
+      const store = loadProgressStore();
+      store[getProgressKey()] = data.progress;
+      saveProgressStore(store);
+    }
+  } catch (e) {
+    console.warn('Progress fetch skipped', e);
+  }
 };
 
 const loadClients = () => {
@@ -125,6 +204,7 @@ const markLessonComplete = (chapterId, levelId, lessonId) => {
     progress[chapterId][levelId].lessons.push(lessonId);
   }
   writeProgress(progress);
+  syncProgressToApi(chapterId, levelId);
   return getLevelProgress(chapterId, levelId);
 };
 
@@ -608,7 +688,7 @@ const closeAuthModal = () => {
   modal.classList.remove('active');
 };
 
-const handleSignup = (form) => {
+const handleSignup = async (form) => {
   const formData = new FormData(form);
   const client = {
     id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}`,
@@ -623,17 +703,35 @@ const handleSignup = (form) => {
   setCurrentClientId(client.id);
   updateAuthBadge();
   closeAuthModal();
+  pushClientToApi(client);
   if (window.location.pathname.includes('chapter.html')) {
     const chapterId = getChapterFromUrl();
     if (chapterId) renderLevels(chapterId);
   }
 };
 
-const handleLogin = (form, alertNode) => {
+const handleLogin = async (form, alertNode) => {
   const formData = new FormData(form);
   const email = (formData.get('email') || '').toLowerCase();
   const clients = loadClients();
-  const client = clients.find((c) => c.email?.toLowerCase() === email);
+  let client = clients.find((c) => c.email?.toLowerCase() === email);
+
+  if (!client) {
+    const remote = await loginFromApi(email);
+    if (remote) {
+      client = {
+        id: remote.id,
+        name: remote.name,
+        email: remote.email,
+        ndis: remote.ndis,
+        planManager: remote.planManager,
+        unlockedAll: remote.unlockedAll,
+      };
+      upsertClient(client);
+      await pullProgressFromApi();
+    }
+  }
+
   if (!client) {
     alertNode.textContent = 'No account found. Please sign up first.';
     alertNode.style.display = 'block';
@@ -654,20 +752,20 @@ const bindAuthForms = () => {
   const alert = qs('#auth-alert');
 
   if (signupForm) {
-    signupForm.addEventListener('submit', (e) => {
+    signupForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      handleSignup(signupForm);
+      await handleSignup(signupForm);
     });
   }
 
   if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (alert) {
         alert.style.display = 'none';
         alert.textContent = '';
       }
-      handleLogin(loginForm, alert);
+      await handleLogin(loginForm, alert);
     });
   }
 
@@ -797,7 +895,15 @@ const init = () => {
   }
 };
 
-document.addEventListener('DOMContentLoaded', init);
+const boot = async () => {
+  await fetchChaptersFromApi();
+  if (getCurrentClientId()) {
+    await pullProgressFromApi();
+  }
+  init();
+};
+
+document.addEventListener('DOMContentLoaded', boot);
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) stopSpeech();
 });

@@ -53,3 +53,12 @@ If you want server-side storage instead of localStorage:
 - If a page looks unstyled, confirm the `link` tag for `assets/css/theme.css` points to the correct relative path.
 - If levels do not unlock after registration, clear browser storage and ensure the chapter key in the URL matches the key used in `chapters.js`.
 - For new chapters not showing, double-check that the object key matches the `chapter` query parameter used in links (e.g., `chapter.html?chapter=your-key`).
+
+## Backend + GoDaddy deployment quick start
+1) In cPanel, create a MySQL database and user. Note the host, db name, user, and password.
+2) Upload the entire project (including the `backend/` folder) into `public_html/`.
+3) In `backend/`, copy `config.sample.php` to `config.php` and fill in your MySQL credentials plus a strong `api_key`.
+4) In phpMyAdmin, run `backend/schema.sql` to create the tables.
+5) Run `backend/seed.php` once (visit `https://your-domain.com/backend/seed.php`) to load the full chapter/lesson/quiz content into the `chapters` table.
+6) The frontend will call `backend/api.php` to fetch chapters, register/log in clients, and sync progress. Admin tools can call `backend/api.php?action=admin_clients` with the `X-API-Key` header you set.
+7) If you want to edit content later, update `backend/data/chapters.json` and re-run `backend/seed.php`.

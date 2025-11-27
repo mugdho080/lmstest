@@ -1,0 +1,2229 @@
+{
+  "ai-digital-skills": {
+    "title": "AI & Digital Skills",
+    "icon": "🤖",
+    "color": "linear-gradient(120deg,#c3f3f2,#e0f5f3)",
+    "blurb": "Learn the basics of artificial intelligence, digital safety, and online communication.",
+    "formLink": "https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor",
+    "levels": [
+      {
+        "id": "1",
+        "title": "Level 1: Friendly Tech Start",
+        "summary": "Meet AI, explore safe passwords, and learn calm online chats.",
+        "free": true,
+        "topics": [
+          "What is AI?",
+          "Keeping your devices safe",
+          "Kind words online",
+          "Asking for help"
+        ],
+        "lessons": [
+          {
+            "id": "1",
+            "title": "Lesson 1 — What is AI?",
+            "summary": "AI is a helpful robot inside your phone that suggests and guides.",
+            "content": {
+              "intro": "Imagine AI as a friendly helper that notices what you like and recommends things.",
+              "bullets": [
+                "Helps you find places, songs, and routes.",
+                "Cannot feel angry or sad.",
+                "You stay in charge of every choice."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "AI is like...",
+                "options": [
+                  "a balloon",
+                  "a helpful robot in your device",
+                  "a person with feelings"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "Can AI feel sad?",
+                "options": [
+                  "Yes",
+                  "No"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "Which app uses AI?",
+                "options": [
+                  "Google Maps",
+                  "A broom"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "title": "Lesson 2 — Using Computers & Phones Safely",
+            "summary": "Use strong passwords and avoid strange links.",
+            "content": {
+              "intro": "Be a tech superhero: protect your device from bad links and scammers.",
+              "bullets": [
+                "Mix letters, numbers, and symbols in passwords.",
+                "Avoid links that yell or look fake.",
+                "Ask a trusted person if unsure."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Strong password?",
+                "options": [
+                  "Dog123",
+                  "RedLion#34"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "Weird link arrives. What now?",
+                "options": [
+                  "Click it fast",
+                  "Ask for help or delete"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "'You won a prize!' is usually...",
+                "options": [
+                  "Fake",
+                  "Always real"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "title": "Lesson 3 — AI in Everyday Life",
+            "summary": "Spot AI helpers around you—maps, music, and photos.",
+            "content": {
+              "intro": "AI quietly powers maps, playlists, and even your camera brightness.",
+              "bullets": [
+                "Recommends songs and shows.",
+                "Fixes blurry photos.",
+                "Turns speech into text."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Which one uses AI?",
+                "options": [
+                  "Google Maps",
+                  "Grapes"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "AI helps with...",
+                "options": [
+                  "Recommending music",
+                  "Growing trees"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Camera auto-brightness is AI?",
+                "options": [
+                  "Yes",
+                  "No"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "4",
+            "title": "Lesson 4 — Talking to AI & Being Kind Online",
+            "summary": "Ask clear questions and use kind words online.",
+            "content": {
+              "intro": "Talking to AI is like chatting with a friendly robot—be clear and kind.",
+              "bullets": [
+                "Say please and thank you.",
+                "Ask for simple explanations.",
+                "Double-check important info with a person."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "How to talk to AI?",
+                "options": [
+                  "Angry",
+                  "Kindly"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "Clear question?",
+                "options": [
+                  "What is stuff?",
+                  "Explain this in easy words"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "Check important info with a person?",
+                "options": [
+                  "Yes",
+                  "No"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "5",
+            "title": "Lesson 5 — Making a Strong Password",
+            "summary": "Create a superhero-style password and keep it secret.",
+            "content": {
+              "intro": "A strong password protects your accounts from sneaky villains.",
+              "bullets": [
+                "Use 8+ characters with symbols.",
+                "Never share passwords.",
+                "Choose words not tied to birthdays."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Strong password?",
+                "options": [
+                  "Pizza123",
+                  "StarLion#21"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "Share your password?",
+                "options": [
+                  "Yes",
+                  "No"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "Why mix symbols?",
+                "options": [
+                  "Harder to guess",
+                  "Looks pretty"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "6",
+            "title": "Lesson 6 — Safe Searching on the Internet",
+            "summary": "Spot safe websites and close suspicious pages.",
+            "content": {
+              "intro": "Safe sites look clean, avoid pop-ups, and often end in .gov or .edu.",
+              "bullets": [
+                "Close weird tabs and ask for help.",
+                "Trust clear spelling and simple layouts.",
+                "Never enter private info on random sites."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Safe site sign?",
+                "options": [
+                  "Correct spelling",
+                  "Lots of flashing ads"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Which ending is safe?",
+                "options": [
+                  ".gov",
+                  ".sus"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Website feels strange. You...",
+                "options": [
+                  "Keep clicking",
+                  "Close it and ask"
+                ],
+                "answer": 1
+              }
+            ]
+          },
+          {
+            "id": "7",
+            "title": "Lesson 7 — Using Email Safely",
+            "summary": "Spot fake emails and only open trusted messages.",
+            "content": {
+              "intro": "Fake emails often shout, have typos, or ask for bank info—skip them.",
+              "bullets": [
+                "Open emails from people you know.",
+                "Ignore urgent prize messages.",
+                "Real companies never ask for passwords by email."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Sign of a fake email?",
+                "options": [
+                  "Spelling mistakes",
+                  "Friendly emoji"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Share bank info by email?",
+                "options": [
+                  "Yes",
+                  "No"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "Who to open emails from?",
+                "options": [
+                  "People you know",
+                  "Random strangers"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "8",
+            "title": "Lesson 8 — Social Media Safety",
+            "summary": "Keep accounts private and think before you post.",
+            "content": {
+              "intro": "Stay safe by sharing only kind words and no private details.",
+              "bullets": [
+                "Keep profiles private.",
+                "Only add people you know.",
+                "Avoid posting address or bank info."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Add strangers online?",
+                "options": [
+                  "Yes",
+                  "No"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "Safe to post?",
+                "options": [
+                  "Your lunch photo",
+                  "Your bank card"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Safest account type",
+                "options": [
+                  "Private",
+                  "Public"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "9",
+            "title": "Lesson 9 — Using AI in Everyday Life",
+            "summary": "Use AI to plan days, make lists, and find ideas.",
+            "content": {
+              "intro": "AI can draft polite messages, suggest meals, and simplify routines.",
+              "bullets": [
+                "Ask AI for simple explanations.",
+                "Use AI to plan shopping lists.",
+                "You choose what advice to follow."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "AI can help you...",
+                "options": [
+                  "Make a list",
+                  "Walk your dog"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Good AI question?",
+                "options": [
+                  "Tell me my bank password",
+                  "Explain this simply"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "Double-check important info?",
+                "options": [
+                  "Yes",
+                  "No"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "10",
+            "title": "Lesson 10 — Staying Calm with Tech",
+            "summary": "Tech breaks happen—breathe and try simple fixes.",
+            "content": {
+              "intro": "Use the Take 3 rule: breathe in, out, and try again—restart or ask for help.",
+              "bullets": [
+                "Check Wi-Fi and volume.",
+                "Restart frozen devices.",
+                "Close weird tabs and ask a trusted person."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Phone freezes. You...",
+                "options": [
+                  "Restart it",
+                  "Throw it"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Weird website?",
+                "options": [
+                  "Close it",
+                  "Type your details"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Is tech breaking normal?",
+                "options": [
+                  "Yes",
+                  "No"
+                ],
+                "answer": 0
+              }
+            ]
+          }
+        ],
+        "content": {
+          "intro": "Welcome to your first AI & Digital Skills adventure. Everything here is calm and easy to follow.",
+          "steps": [
+            "Discover simple examples of AI you see every day like voice assistants.",
+            "Practice making strong passwords and keeping them in a safe place.",
+            "Learn the 'pause and breathe' rule before posting messages.",
+            "Try asking for help from a trusted adult when something feels confusing online."
+          ]
+        }
+      },
+      {
+        "id": "2",
+        "title": "Level 2: Smart Searching & Safety",
+        "summary": "Search the web kindly and spot tricky links.",
+        "free": false,
+        "topics": [
+          "Finding good sources",
+          "Spotting scams",
+          "Staying balanced with screen time"
+        ],
+        "content": {
+          "intro": "Let's build calm habits for browsing the web.",
+          "steps": [
+            "Use short keywords and filters to find friendly sources.",
+            "Check website addresses and icons before clicking links.",
+            "Create a simple screen-time plan with breaks and movement.",
+            "Practice reporting harmful messages with a support person."
+          ]
+        }
+      },
+      {
+        "id": "3",
+        "title": "Level 3: Creating with AI",
+        "summary": "Make creative prompts and share safely.",
+        "free": false,
+        "topics": [
+          "Prompt basics",
+          "Respectful sharing",
+          "Saving your projects"
+        ],
+        "content": {
+          "intro": "Turn ideas into calm creative projects with AI.",
+          "steps": [
+            "Write short prompts with feelings, colors, or sounds you enjoy.",
+            "Save your projects in organized folders with simple names.",
+            "Ask a support person to review anything before sharing.",
+            "Celebrate small wins and stretch breaks between tasks."
+          ]
+        }
+      }
+    ]
+  },
+  "math-numbers": {
+    "title": "Math & Numbers",
+    "icon": "🔢",
+    "color": "linear-gradient(120deg,#e8f0ff,#f3f6ff)",
+    "blurb": "Improve counting, handling money, telling time, and solving gentle puzzles.",
+    "formLink": "https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor",
+    "levels": [
+      {
+        "id": "1",
+        "title": "Level 1: Everyday Numbers",
+        "summary": "Counting, matching coins, and reading clocks.",
+        "free": true,
+        "topics": [
+          "Counting groups",
+          "Coins and notes",
+          "Morning, afternoon, night"
+        ],
+        "lessons": [
+          {
+            "id": "1",
+            "title": "Lesson 1 — Number Basics & Counting",
+            "summary": "Count friendly objects and say numbers aloud.",
+            "content": {
+              "intro": "Use items you like to practice counting slowly.",
+              "bullets": [
+                "Count toys or snacks together.",
+                "Group items by tens for fun.",
+                "Use deep breaths when stuck."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Counting helps you...",
+                "options": [
+                  "Feel confident",
+                  "Get confused"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "You can count using...",
+                "options": [
+                  "Snacks",
+                  "Only a calculator"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "If stuck, you should...",
+                "options": [
+                  "Take a breath",
+                  "Give up"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "title": "Lesson 2 — Money Skills for Daily Life",
+            "summary": "Know coins, notes, and simple change.",
+            "content": {
+              "intro": "Match coins to prices in a pretend shop.",
+              "bullets": [
+                "Sort coins by size and color.",
+                "Practice adding small amounts.",
+                "Check change with a support person."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Which is money?",
+                "options": [
+                  "Coins",
+                  "Leaves"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Who can check your change?",
+                "options": [
+                  "A trusted helper",
+                  "A random stranger"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "What is change?",
+                "options": [
+                  "Money returned",
+                  "A snack"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "title": "Lesson 3 — Simple Adding & Subtracting",
+            "summary": "Add and subtract small numbers using objects.",
+            "content": {
+              "intro": "Use fingers or counters to see numbers clearly.",
+              "bullets": [
+                "Add snacks together.",
+                "Take some away to subtract.",
+                "Say totals out loud."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Subtract means...",
+                "options": [
+                  "Take away",
+                  "Add more"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Tools that help?",
+                "options": [
+                  "Counters",
+                  "Nothing"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Saying totals helps you...",
+                "options": [
+                  "Remember",
+                  "Forget"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "4",
+            "title": "Lesson 4 — Time Skills & Reading Clocks",
+            "summary": "Spot morning, afternoon, and evening on clocks.",
+            "content": {
+              "intro": "Use simple clocks and routines to know times.",
+              "bullets": [
+                "Match activities to times.",
+                "Notice hour and minute hands.",
+                "Use alarms for reminders."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Morning is for...",
+                "options": [
+                  "Breakfast",
+                  "Sleeping all day"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "A timer can...",
+                "options": [
+                  "Remind you",
+                  "Make noise only"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Hour hand is...",
+                "options": [
+                  "Shorter",
+                  "Longer"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "5",
+            "title": "Lesson 5 — Shopping & Budgeting Basics",
+            "summary": "Make lists and check prices calmly.",
+            "content": {
+              "intro": "Plan what to buy and how much to spend.",
+              "bullets": [
+                "Write a short shopping list.",
+                "Compare prices for best value.",
+                "Keep receipts."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "A list helps you...",
+                "options": [
+                  "Remember items",
+                  "Forget"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Receipts show...",
+                "options": [
+                  "What you paid",
+                  "Your birthday"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Budget means...",
+                "options": [
+                  "Plan spending",
+                  "Skip planning"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "6",
+            "title": "Lesson 6 — Everyday Problem Solving",
+            "summary": "Use calm steps to solve simple number problems.",
+            "content": {
+              "intro": "Pause, think of options, choose the safest one.",
+              "bullets": [
+                "Name the problem.",
+                "List options.",
+                "Pick the best choice."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "First step is...",
+                "options": [
+                  "Name the problem",
+                  "Rush"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Good choices are...",
+                "options": [
+                  "Calm",
+                  "Random"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Ask for help when...",
+                "options": [
+                  "Unsure",
+                  "Everything is clear"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "7",
+            "title": "Lesson 7 — Understanding Measurements",
+            "summary": "Learn simple lengths, weights, and sizes.",
+            "content": {
+              "intro": "Use rulers and cups to compare sizes safely.",
+              "bullets": [
+                "Measure with clear tools.",
+                "Compare heavy vs light.",
+                "Use visuals to check answers."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "A ruler measures...",
+                "options": [
+                  "Length",
+                  "Smell"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Light vs heavy helps you...",
+                "options": [
+                  "Choose safely",
+                  "Ignore"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Cups can measure...",
+                "options": [
+                  "Water",
+                  "Footsteps"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "8",
+            "title": "Lesson 8 — Using a Calculator & Apps",
+            "summary": "Let devices assist your math steps.",
+            "content": {
+              "intro": "Calculators and apps keep numbers tidy and confident.",
+              "bullets": [
+                "Check totals with a calculator.",
+                "Use clear math apps.",
+                "Double-check important payments."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Calculators help...",
+                "options": [
+                  "Check answers",
+                  "Confuse you"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Apps should be...",
+                "options": [
+                  "Clear and simple",
+                  "Hidden"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Important payments need...",
+                "options": [
+                  "Double-check",
+                  "Guessing"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "9",
+            "title": "Lesson 9 — Real-Life Money Management",
+            "summary": "Pay bills safely and on time.",
+            "content": {
+              "intro": "Bills show what to pay and when—keep them in one place.",
+              "bullets": [
+                "Look for due dates.",
+                "Pay safely with help.",
+                "Watch for fees."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "A bill shows...",
+                "options": [
+                  "How much you owe",
+                  "Your hobbies"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Due date means...",
+                "options": [
+                  "Pay by this day",
+                  "Anytime"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Paying late can...",
+                "options": [
+                  "Add fees",
+                  "Add cake"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "10",
+            "title": "Lesson 10 — Independent Numeracy Skills",
+            "summary": "Use numbers daily with confidence.",
+            "content": {
+              "intro": "Combine counting, money, and time to feel independent.",
+              "bullets": [
+                "Review all skills weekly.",
+                "Celebrate small wins.",
+                "Keep practicing calmly."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Independence grows by...",
+                "options": [
+                  "Practice",
+                  "Never trying"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Small wins should be...",
+                "options": [
+                  "Celebrated",
+                  "Ignored"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Math tools help you...",
+                "options": [
+                  "Feel confident",
+                  "Feel lost"
+                ],
+                "answer": 0
+              }
+            ]
+          }
+        ],
+        "content": {
+          "intro": "Numbers are friendly and patient here.",
+          "steps": [
+            "Count objects you enjoy (toys, snacks) and say the number out loud.",
+            "Match coins and notes to prices in a pretend shop.",
+            "Use a daily planner to notice morning, afternoon, and evening times.",
+            "Practice slow breathing if a math problem feels tricky."
+          ]
+        }
+      },
+      {
+        "id": "2",
+        "title": "Level 2: Confident Money Moves",
+        "summary": "Budgeting and safe spending steps.",
+        "free": false,
+        "topics": [
+          "Making a budget",
+          "Need vs want",
+          "Change and receipts"
+        ],
+        "content": {
+          "intro": "Build calm money habits with simple tools.",
+          "steps": [
+            "Plan a weekly budget with three jars: spend, save, share.",
+            "Practice saying no to sudden buys and taking a pause.",
+            "Check receipts for mistakes together with a support person.",
+            "Use a small calculator for quick totals and confidence."
+          ]
+        }
+      }
+    ]
+  },
+  "self-choice-control": {
+    "title": "Self Choice & Control",
+    "icon": "🧭",
+    "color": "linear-gradient(120deg,#fff4e6,#ffe9d7)",
+    "blurb": "Understand your rights, make choices, and plan your own path.",
+    "formLink": "https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor",
+    "levels": [
+      {
+        "id": "1",
+        "title": "Level 1: Your Voice Matters",
+        "summary": "Rights, safe choices, and everyday decisions.",
+        "free": true,
+        "topics": [
+          "My rights",
+          "Trusted people",
+          "Simple decisions"
+        ],
+        "lessons": [
+          {
+            "id": "1",
+            "title": "Lesson 1 — Knowing Myself & My Needs",
+            "summary": "Name what you like, dislike, and need.",
+            "content": {
+              "intro": "Understanding yourself helps you make better choices.",
+              "bullets": [
+                "List favourite foods and calming things.",
+                "Notice what stresses you.",
+                "Share needs with a helper."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Knowing yourself helps you...",
+                "options": [
+                  "Make good choices",
+                  "Be perfect"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "A personal need could be...",
+                "options": [
+                  "Quiet time",
+                  "Everyone liking pizza"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Understanding yourself makes life...",
+                "options": [
+                  "Easier",
+                  "Harder"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "title": "Lesson 2 — Understanding My Rights",
+            "summary": "You deserve safety, respect, and choice.",
+            "content": {
+              "intro": "Rights cannot be taken away—you can say no.",
+              "bullets": [
+                "You deserve privacy and respect.",
+                "No one can force you.",
+                "Ask for help anytime."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "One right is...",
+                "options": [
+                  "To feel safe",
+                  "To be perfect"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "You can say no when...",
+                "options": [
+                  "Uncomfortable",
+                  "Hungry"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Your rights are...",
+                "options": [
+                  "Always yours",
+                  "Temporary"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "title": "Lesson 3 — Making Simple Choices",
+            "summary": "Practice small daily decisions.",
+            "content": {
+              "intro": "Choosing builds independence and confidence.",
+              "bullets": [
+                "Pick between two snacks.",
+                "Choose clothes.",
+                "Notice how you feel."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Making choices helps you feel...",
+                "options": [
+                  "Independent",
+                  "Forced"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Choosing pizza instead of pasta is...",
+                "options": [
+                  "Your choice",
+                  "Wrong"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Simple choice example",
+                "options": [
+                  "What to wear",
+                  "Time the sun rises"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "4",
+            "title": "Lesson 4 — Communicating What I Want",
+            "summary": "Use clear words, writing, or pictures.",
+            "content": {
+              "intro": "You are allowed to say what you want or need.",
+              "bullets": [
+                "Try phrases like 'I would like...'.",
+                "Use pointing or apps.",
+                "Your voice matters, even if quiet."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "You can communicate using...",
+                "options": [
+                  "Talking or pictures",
+                  "Only long speeches"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Saying 'I need help' is...",
+                "options": [
+                  "Good",
+                  "Wrong"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Your voice is...",
+                "options": [
+                  "Important",
+                  "Unnecessary"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "5",
+            "title": "Lesson 5 — Boundaries & Personal Safety",
+            "summary": "Your personal stop sign keeps you safe.",
+            "content": {
+              "intro": "It is okay to say stop, no, or I need space.",
+              "bullets": [
+                "You choose who can touch you.",
+                "Boundaries are healthy, not rude.",
+                "Keep passwords private."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Boundaries help keep you...",
+                "options": [
+                  "Safe",
+                  "Confused"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "You are allowed to say...",
+                "options": [
+                  "No",
+                  "Yes to everything"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Someone asks for your password. That is...",
+                "options": [
+                  "Not OK",
+                  "Always OK"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "6",
+            "title": "Lesson 6 — Asking for Help & Support",
+            "summary": "Asking is strong, not weak.",
+            "content": {
+              "intro": "Everyone needs help sometimes—choose trusted people.",
+              "bullets": [
+                "Ask when unsafe or confused.",
+                "Helpers include family, workers, teachers.",
+                "Use phrases like 'Can you help me?'."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Asking for help is...",
+                "options": [
+                  "OK",
+                  "Bad"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Ask for help when you feel...",
+                "options": [
+                  "Unsafe",
+                  "Bored"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Trusted person is...",
+                "options": [
+                  "Someone who cares about safety",
+                  "Random stranger"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "7",
+            "title": "Lesson 7 — Understanding People & Feelings",
+            "summary": "Notice emotions to respond safely.",
+            "content": {
+              "intro": "Feelings show on faces and body language.",
+              "bullets": [
+                "Smiles often mean friendly.",
+                "Crossed arms may mean upset.",
+                "Give space when someone looks sad."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "If someone is crying, they might feel...",
+                "options": [
+                  "Sad",
+                  "Hungry"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "If someone turns away, they might need...",
+                "options": [
+                  "Space",
+                  "Noise"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Emotions help us...",
+                "options": [
+                  "Understand people",
+                  "Ignore people"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "8",
+            "title": "Lesson 8 — Problem Solving & Decision Skills",
+            "summary": "Use calm steps to solve disagreements.",
+            "content": {
+              "intro": "Pause, list options, pick the safest choice.",
+              "bullets": [
+                "Identify the problem.",
+                "Consider options.",
+                "Ask for help if unsure."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "First problem-solving step",
+                "options": [
+                  "Identify the problem",
+                  "Panic"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Good choices are...",
+                "options": [
+                  "Calm and safe",
+                  "Random"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Is it OK to ask for help deciding?",
+                "options": [
+                  "Yes",
+                  "No"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "9",
+            "title": "Lesson 9 — Self-Advocacy",
+            "summary": "Speak up for your needs and comfort.",
+            "content": {
+              "intro": "Use strong sentences to explain what works for you.",
+              "bullets": [
+                "Say 'I don't feel comfortable.'",
+                "Ask for changes.",
+                "Your voice matters even if others disagree."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Self-advocacy means...",
+                "options": [
+                  "Speaking up",
+                  "Staying silent"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "A good strong statement",
+                "options": [
+                  "I don't feel comfortable",
+                  "Whatever"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Your voice matters...",
+                "options": [
+                  "Always",
+                  "Never"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "10",
+            "title": "Lesson 10 — Being Confident & In Control",
+            "summary": "Confidence grows with practice and small wins.",
+            "content": {
+              "intro": "Try new things, celebrate progress, and ask for help.",
+              "bullets": [
+                "List things you are proud of.",
+                "Set small goals.",
+                "Remember: you lead your life."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Confidence means...",
+                "options": [
+                  "Believing in yourself",
+                  "Being perfect"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "You build confidence by...",
+                "options": [
+                  "Trying new things",
+                  "Never choosing"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Who controls your life?",
+                "options": [
+                  "You",
+                  "Random people"
+                ],
+                "answer": 0
+              }
+            ]
+          }
+        ],
+        "content": {
+          "intro": "You deserve calm spaces to choose what works for you.",
+          "steps": [
+            "List trusted people who can help with big choices.",
+            "Practice saying yes, no, or 'I need time' clearly.",
+            "Use a feelings scale (1-5) to notice comfort levels.",
+            "Celebrate each time you speak up for your needs."
+          ]
+        }
+      },
+      {
+        "id": "2",
+        "title": "Level 2: Planning Your Week",
+        "summary": "Create routines and safe boundaries.",
+        "free": false,
+        "topics": [
+          "Daily planner",
+          "Setting boundaries",
+          "Asking for changes"
+        ],
+        "content": {
+          "intro": "Plans give calm structure and freedom.",
+          "steps": [
+            "Build a weekly schedule with rest times and fun time.",
+            "Practice boundary phrases like 'I need a quiet break.'",
+            "Role-play asking for a change when plans shift.",
+            "Pick a support person to review your plan with you."
+          ]
+        }
+      }
+    ]
+  },
+  "life-skills-independence": {
+    "title": "Life Skills & Independence",
+    "icon": "🏡",
+    "color": "linear-gradient(120deg,#e8fff2,#f1fff7)",
+    "blurb": "Cooking basics, cleaning routines, money safety, and everyday independence.",
+    "formLink": "https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor",
+    "levels": [
+      {
+        "id": "1",
+        "title": "Level 1: Calm Home Basics",
+        "summary": "Kitchen safety, tidy routines, and calm checklists.",
+        "free": true,
+        "topics": [
+          "Safe kitchen steps",
+          "Laundry basics",
+          "Room reset checklist"
+        ],
+        "lessons": [
+          {
+            "id": "1",
+            "title": "Lesson 1 — Personal Hygiene & Self-Care Basics",
+            "summary": "Daily hygiene keeps you healthy and confident.",
+            "content": {
+              "intro": "Brush teeth, shower, wear clean clothes, and use deodorant.",
+              "bullets": [
+                "Make a simple hygiene checklist.",
+                "Tick off tasks each morning.",
+                "Clean clothes help you feel fresh."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Why brush teeth?",
+                "options": [
+                  "Keep mouth healthy",
+                  "Make noise"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Wearing clean clothes helps you...",
+                "options": [
+                  "Smell fresh",
+                  "Run faster"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Part of self-care?",
+                "options": [
+                  "Using deodorant",
+                  "Throwing rubbish"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "title": "Lesson 2 — Simple Kitchen & Food Safety Skills",
+            "summary": "Stay safe when cooking.",
+            "content": {
+              "intro": "Wash hands, separate raw food, and use protection with heat.",
+              "bullets": [
+                "Clean hands before cooking.",
+                "Keep raw and cooked food apart.",
+                "Use oven gloves for hot pans."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Before cooking you should...",
+                "options": [
+                  "Wash hands",
+                  "Sit down"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "To avoid burns...",
+                "options": [
+                  "Use oven gloves",
+                  "Touch hot pots"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Cleaning spills keeps the kitchen...",
+                "options": [
+                  "Safe",
+                  "Loud"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "title": "Lesson 3 — Easy Cooking for Beginners",
+            "summary": "Use simple recipes and timers.",
+            "content": {
+              "intro": "Microwaves and visual recipes make cooking calm.",
+              "bullets": [
+                "Follow short steps.",
+                "Cut slowly and carefully.",
+                "Use a timer to avoid burning food."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "A timer helps you...",
+                "options": [
+                  "Cook safely",
+                  "Burn food"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Simple cooking includes...",
+                "options": [
+                  "Making snacks",
+                  "Fixing a fridge"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "When using a knife...",
+                "options": [
+                  "Be careful and slow",
+                  "Close your eyes"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "4",
+            "title": "Lesson 4 — Cleaning & Home Routines",
+            "summary": "Keep spaces tidy with small habits.",
+            "content": {
+              "intro": "Make a 5-minute reset routine for comfort.",
+              "bullets": [
+                "Make your bed.",
+                "Wipe tables.",
+                "Empty the bin regularly."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Cleaning helps your home stay...",
+                "options": [
+                  "Safe",
+                  "Dirty"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Doing laundry means...",
+                "options": [
+                  "Washing clothes",
+                  "Washing pets"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Emptying the bin stops...",
+                "options": [
+                  "Bugs",
+                  "Sunshine"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "5",
+            "title": "Lesson 5 — Shopping & Community Safety",
+            "summary": "Plan lists and stay aware in public.",
+            "content": {
+              "intro": "Use a list and check surroundings like car parks.",
+              "bullets": [
+                "Look both ways for cars.",
+                "Ask store staff for help.",
+                "Check prices before buying."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "A shopping list helps you...",
+                "options": [
+                  "Remember items",
+                  "Forget"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "In a car park you should...",
+                "options": [
+                  "Look both ways",
+                  "Close eyes"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Store staff can...",
+                "options": [
+                  "Help you find items",
+                  "Bite you"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "6",
+            "title": "Lesson 6 — Travel & Getting Around Safely",
+            "summary": "Use timetables and cross safely.",
+            "content": {
+              "intro": "Plan routes and stay aware of surroundings.",
+              "bullets": [
+                "Check bus or train times.",
+                "Tap on/off when needed.",
+                "Look both ways before crossing."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "You cross the road by looking...",
+                "options": [
+                  "Both ways",
+                  "At your phone"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Timetables show...",
+                "options": [
+                  "Times transport arrives",
+                  "Movie schedules"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Tap on/off is for...",
+                "options": [
+                  "Buses & trains",
+                  "Playing games"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "7",
+            "title": "Lesson 7 — Money & Bills for Everyday Life",
+            "summary": "Read bills and pay safely.",
+            "content": {
+              "intro": "Bills show amounts and due dates—avoid late fees.",
+              "bullets": [
+                "Find the total and due date.",
+                "Pay safely with help.",
+                "Keep receipts."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "A bill shows...",
+                "options": [
+                  "How much you owe",
+                  "Your favourite food"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Paying late can cause...",
+                "options": [
+                  "Extra fees",
+                  "Extra snacks"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Due date means...",
+                "options": [
+                  "Pay by this day",
+                  "Never pay"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "8",
+            "title": "Lesson 8 — Health, Safety & Emergencies",
+            "summary": "Stay calm and know emergency steps.",
+            "content": {
+              "intro": "Call 000 for fire, ambulance, or police—share your name and location.",
+              "bullets": [
+                "Stay calm and listen.",
+                "Follow instructions.",
+                "Ask someone nearby for help if needed."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "000 is for...",
+                "options": [
+                  "Emergencies",
+                  "Ordering food"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "In an emergency stay...",
+                "options": [
+                  "Calm",
+                  "Angry"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Tell operators...",
+                "options": [
+                  "Your name",
+                  "Your favourite colour"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "9",
+            "title": "Lesson 9 — Social Independence & Appointments",
+            "summary": "Check in politely and share needs.",
+            "content": {
+              "intro": "Greet people, ask questions, and explain what you need.",
+              "bullets": [
+                "Say hello to staff.",
+                "Tell your name at appointments.",
+                "Use polite words in public spaces."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "'Hello' is...",
+                "options": [
+                  "Polite",
+                  "Rude"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "At an appointment you should...",
+                "options": [
+                  "Tell staff your name",
+                  "Hide"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Social independence helps you...",
+                "options": [
+                  "Build confidence",
+                  "Avoid people"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "10",
+            "title": "Lesson 10 — Living Independently With Confidence",
+            "summary": "Combine routines, cooking, cleaning, and budgeting.",
+            "content": {
+              "intro": "Independence grows with practice and asking for help when needed.",
+              "bullets": [
+                "Manage routines and meals.",
+                "Keep cleaning habits.",
+                "Ask for support when unsure."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Independence means...",
+                "options": [
+                  "Being confident in daily tasks",
+                  "Never asking for help"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "A routine helps you...",
+                "options": [
+                  "Stay organised",
+                  "Get confused"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Being independent is...",
+                "options": [
+                  "A skill you can build",
+                  "Impossible"
+                ],
+                "answer": 0
+              }
+            ]
+          }
+        ],
+        "content": {
+          "intro": "Small steps make home life feel safe and kind.",
+          "steps": [
+            "Learn kitchen rules: clean hands, clear bench, slow movements.",
+            "Sort clothes by color with a simple chart.",
+            "Create a 'room reset' checklist for morning and evening.",
+            "Use timers with soft sounds to remind you of tasks."
+          ]
+        }
+      },
+      {
+        "id": "2",
+        "title": "Level 2: Planning Meals & Safety",
+        "summary": "Meal prep and emergency basics.",
+        "free": false,
+        "topics": [
+          "Meal planning",
+          "Simple recipes",
+          "Emergency contacts"
+        ],
+        "content": {
+          "intro": "Prepare food safely and know what to do if something goes wrong.",
+          "steps": [
+            "Plan three calm meals for the week with a grocery list.",
+            "Practice knife safety with soft foods first.",
+            "Save emergency numbers in your phone and on the fridge.",
+            "Role-play what to do if you smell smoke or need help."
+          ]
+        }
+      }
+    ]
+  },
+  "psychology-behaviour": {
+    "title": "Psychology & Behaviour",
+    "icon": "💛",
+    "color": "linear-gradient(120deg,#f6ecff,#f9f2ff)",
+    "blurb": "Learn about emotions, relationships, and understanding yourself and others.",
+    "formLink": "https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor",
+    "levels": [
+      {
+        "id": "1",
+        "title": "Level 1: Feelings Map",
+        "summary": "Naming emotions and calm body signals.",
+        "free": true,
+        "topics": [
+          "Emotion words",
+          "Body clues",
+          "Calming toolkit"
+        ],
+        "lessons": [
+          {
+            "id": "1",
+            "title": "Lesson 1 — Understanding My Feelings",
+            "summary": "Everyone has feelings and they are normal.",
+            "content": {
+              "intro": "Feelings help you understand what you need.",
+              "bullets": [
+                "Common feelings: happy, sad, angry, worried, tired, excited.",
+                "Use emoji cards to describe how you feel.",
+                "Feelings guide safe choices."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Everyone has...",
+                "options": [
+                  "Feelings",
+                  "Superpowers"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "A sad emoji looks like...",
+                "options": [
+                  "🙂",
+                  "😢"
+                ],
+                "answer": 1
+              },
+              {
+                "question": "Feelings help you...",
+                "options": [
+                  "Understand yourself",
+                  "Ignore people"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "title": "Lesson 2 — Calming My Body & Mind",
+            "summary": "Use breathing, stretching, and breaks to stay calm.",
+            "content": {
+              "intro": "Calm tools help you make better choices.",
+              "bullets": [
+                "Take five slow breaths.",
+                "Use fidget toys or stretching.",
+                "Find a quiet space when needed."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Deep breaths help you...",
+                "options": [
+                  "Calm down",
+                  "Shout louder"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Counting to 10 is a...",
+                "options": [
+                  "Calming tool",
+                  "Dance move"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "A quiet space can help you feel...",
+                "options": [
+                  "Calm",
+                  "Confused"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "title": "Lesson 3 — Recognising My Triggers",
+            "summary": "Notice what makes you feel upset or stressed.",
+            "content": {
+              "intro": "Triggers are things that make you feel overwhelmed.",
+              "bullets": [
+                "Examples: loud noise, crowds, being yelled at, waiting long.",
+                "Everyone has different triggers.",
+                "Share triggers with a helper."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "A trigger is something that...",
+                "options": [
+                  "Upsets you",
+                  "Gives you snacks"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Loud noise can be a...",
+                "options": [
+                  "Trigger",
+                  "Snack"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Triggers are...",
+                "options": [
+                  "Different for each person",
+                  "Same for everyone"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "4",
+            "title": "Lesson 4 — Healthy Coping Skills",
+            "summary": "Use healthy tools to feel better when stressed.",
+            "content": {
+              "intro": "Coping skills include breathing, asking for help, and taking breaks.",
+              "bullets": [
+                "Drink water or listen to music.",
+                "Go for a short walk.",
+                "Talk to someone safe."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "A coping skill helps you...",
+                "options": [
+                  "Feel better",
+                  "Stay upset"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Healthy coping tool?",
+                "options": [
+                  "Taking deep breaths",
+                  "Breaking things"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Asking for help is...",
+                "options": [
+                  "A coping skill",
+                  "Wrong"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "5",
+            "title": "Lesson 5 — Understanding Other People",
+            "summary": "Notice faces, voices, and body language.",
+            "content": {
+              "intro": "Understanding others builds kind relationships.",
+              "bullets": [
+                "Look at faces and listen to voices.",
+                "Ask how someone feels.",
+                "Use empathy to respond kindly."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Body language helps you see...",
+                "options": [
+                  "Feelings",
+                  "Age"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Smiling usually means...",
+                "options": [
+                  "Happy",
+                  "Angry"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Good relationships need...",
+                "options": [
+                  "Understanding",
+                  "Ignoring"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "6",
+            "title": "Lesson 6 — Communication & Relationships",
+            "summary": "Use listening and kind words.",
+            "content": {
+              "intro": "Good communication uses honesty, respect, and turn-taking.",
+              "bullets": [
+                "Listen before speaking.",
+                "Use kind words.",
+                "Respect boundaries."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Good communication includes...",
+                "options": [
+                  "Listening",
+                  "Yelling"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Kind words help...",
+                "options": [
+                  "Build relationships",
+                  "Start arguments"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Respect means...",
+                "options": [
+                  "Treating others kindly",
+                  "Being rude"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "7",
+            "title": "Lesson 7 — Positive Behaviour Strategies",
+            "summary": "Routines and rewards keep behaviour calm.",
+            "content": {
+              "intro": "Positive behaviour grows with routines and coping tools.",
+              "bullets": [
+                "Follow simple routines.",
+                "Reward yourself for good behaviour.",
+                "Practice patience."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Positive behaviour helps you...",
+                "options": [
+                  "Stay calm",
+                  "Lose control"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Rewards can...",
+                "options": [
+                  "Motivate you",
+                  "Hurt you"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Patience means...",
+                "options": [
+                  "Waiting calmly",
+                  "Rushing"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "8",
+            "title": "Lesson 8 — Handling Conflict & Problems",
+            "summary": "Stay safe during disagreements.",
+            "content": {
+              "intro": "Conflicts can be handled with calm words and space.",
+              "bullets": [
+                "Use 'I feel' statements.",
+                "Walk away if needed.",
+                "Ask for help from a trusted person."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Conflict is...",
+                "options": [
+                  "A disagreement",
+                  "A fruit"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Safe way to handle conflict?",
+                "options": [
+                  "Staying calm",
+                  "Throwing things"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "You can say...",
+                "options": [
+                  "I feel upset",
+                  "You're terrible"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "9",
+            "title": "Lesson 9 — Building Confidence & Emotional Strength",
+            "summary": "Practice skills and celebrate wins.",
+            "content": {
+              "intro": "Confidence grows when you try new things and use positive self-talk.",
+              "bullets": [
+                "Celebrate small wins.",
+                "Practice skills often.",
+                "Use kind words about yourself."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Confidence means...",
+                "options": [
+                  "Believing in yourself",
+                  "Never trying"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Positive self-talk is...",
+                "options": [
+                  "I can do this",
+                  "I'm a failure"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Confidence grows when you...",
+                "options": [
+                  "Practice",
+                  "Hide"
+                ],
+                "answer": 0
+              }
+            ]
+          },
+          {
+            "id": "10",
+            "title": "Lesson 10 — Healthy Relationships & Safe Boundaries",
+            "summary": "Respect, kindness, and space make relationships safe.",
+            "content": {
+              "intro": "Healthy relationships include respect, honesty, and personal space.",
+              "bullets": [
+                "Boundaries protect feelings and safety.",
+                "Look for kindness and listening.",
+                "Say no when uncomfortable."
+              ]
+            },
+            "quiz": [
+              {
+                "question": "Respect means...",
+                "options": [
+                  "Treating people kindly",
+                  "Ignoring feelings"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "Boundaries help you...",
+                "options": [
+                  "Stay safe",
+                  "Get pressured"
+                ],
+                "answer": 0
+              },
+              {
+                "question": "A healthy relationship includes...",
+                "options": [
+                  "Kindness",
+                  "Yelling"
+                ],
+                "answer": 0
+              }
+            ]
+          }
+        ],
+        "content": {
+          "intro": "Feelings are welcome here. We notice them gently.",
+          "steps": [
+            "Match feelings words to colors or icons that feel right to you.",
+            "Notice where feelings show up in your body (warm face, tight hands).",
+            "Create a calm-down kit with music, toys, and breathing cards.",
+            "Share your feelings map with a trusted person."
+          ]
+        }
+      },
+      {
+        "id": "2",
+        "title": "Level 2: Relationships & Signals",
+        "summary": "Reading social cues and setting boundaries.",
+        "free": false,
+        "topics": [
+          "Body language",
+          "Kind scripts",
+          "Support circles"
+        ],
+        "content": {
+          "intro": "Relationships can be clear and kind when we practice.",
+          "steps": [
+            "Practice eye contact alternatives like looking at eyebrows or nose.",
+            "Use short scripts for greetings, goodbyes, and needing space.",
+            "Draw your support circle: who to call for each feeling.",
+            "Set a calm boundary when you feel overwhelmed and need a break."
+          ]
+        }
+      }
+    ]
+  }
+}
