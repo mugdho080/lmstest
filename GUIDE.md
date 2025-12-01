@@ -57,7 +57,7 @@ If you want server-side storage instead of localStorage:
 ## Backend + GoDaddy deployment quick start
 1) In cPanel, create a MySQL database and user. Note the host, db name, user, and password.
 2) Upload the entire project (including the `backend/` folder) into `public_html/`.
-3) In `backend/`, copy `config.sample.php` to `config.php` and fill in your MySQL credentials plus a strong `api_key`.
+3) In `backend/`, update `config.php` with your GoDaddy MySQL credentials and a strong `api_key` (a default config is already included).
 4) In phpMyAdmin, run `backend/schema.sql` to create the tables.
 5) Run `backend/seed.php` once (visit `https://your-domain.com/backend/seed.php`) to load the full chapter/lesson/quiz content into the `chapters` table.
 6) The frontend will call `backend/api.php` to fetch chapters, register/log in clients, and sync progress. Admin tools can call `backend/api.php?action=admin_clients` with the `X-API-Key` header you set.
