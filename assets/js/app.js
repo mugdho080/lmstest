@@ -5,8 +5,9 @@ const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)
 
 const GAMES_URL = 'https://www.crazygames.com/';
 const THEME_KEY = 'ga-theme';
-// Use a relative path so deployments under public_html/academy keep API calls on the same host
-const API_BASE = 'backend/api.php';
+// Auto-detect the base directory (public_html/academy) so API calls always hit the right folder
+const BASE_PATH = window.location.pathname.includes('/academy/') ? '/academy' : '';
+const API_BASE = `${BASE_PATH}/backend/api.php`;
 
 const getChapterFromUrl = () => new URLSearchParams(window.location.search).get('chapter');
 const getLevelFromUrl = () => new URLSearchParams(window.location.search).get('level');
