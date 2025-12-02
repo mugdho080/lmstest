@@ -422,23 +422,18 @@ header.hero button {
 }
 
 .hero-card {
-  background: linear-gradient(145deg, #0b8b8b, #0e7272);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
-  color: #ffffff;
+  color: var(--text);
 }
 
 .hero-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(124, 245, 255, 0.08), transparent 35%),
-    radial-gradient(circle at 80% 0%, rgba(192, 132, 252, 0.15), transparent 40%);
-  pointer-events: none;
+  display: none;
 }
 
 .tag {
@@ -762,10 +757,16 @@ header.hero button {
 }
 
 .progress-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 10px;
+  display: flex;
   align-items: center;
+  gap: 12px;
+}
+
+.progress-visuals {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
 }
 
 .hero-card .progress-row {
@@ -798,16 +799,16 @@ header.hero button {
 }
 
 .progress-row .badge {
-  justify-self: end;
+  margin-left: auto;
 }
 
 .progress-bar {
   width: 100%;
   height: 10px;
-  background: rgba(255, 255, 255, 0.06);
+  background: #eef4f5;
   border-radius: 999px;
   overflow: hidden;
-  border: 1px solid rgba(124, 245, 255, 0.18);
+  border: 1px solid #d9e5e8;
 }
 
 .progress-bar span {
@@ -815,6 +816,36 @@ header.hero button {
   height: 100%;
   border-radius: 999px;
   background: linear-gradient(120deg, var(--primary), var(--accent));
+  transition: width 0.3s ease;
+}
+
+.battery-bar {
+  width: 52px;
+  height: 18px;
+  border: 2px solid #0e7272;
+  border-radius: 6px;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #e4fff3;
+}
+
+.battery-bar::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: -6px;
+  width: 6px;
+  height: 10px;
+  background: #0e7272;
+  border-radius: 2px;
+}
+
+.battery-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #0e7272, #0b8b8b);
+  width: 0;
   transition: width 0.3s ease;
 }
 
@@ -1746,7 +1777,7 @@ select,
 }
 
 :root[data-theme='light'] .hero-card {
-  background: linear-gradient(145deg, #ffffff, #eef3ff);
+  background: var(--card-bg);
   border-color: var(--surface-border);
 }
 
@@ -1757,15 +1788,15 @@ select,
 }
 
 :root[data-theme='light'] .badge {
-  background: rgba(10, 40, 22, 0.12);
-  color: #0b1c2a;
-  border-color: rgba(10, 40, 22, 0.24);
+  background: #e4fff3;
+  color: #0e7272;
+  border-color: #b7e6d8;
 }
 
 :root[data-theme='light'] .badge.locked {
-  background: rgba(148, 38, 38, 0.16);
-  color: #3b0c0c;
-  border-color: rgba(148, 38, 38, 0.32);
+  background: #ffe9dd;
+  color: #fe8427;
+  border-color: #ffd4a8;
 }
 
 :root[data-theme='light'] .mascot {

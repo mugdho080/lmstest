@@ -529,7 +529,10 @@ const renderChapterProgress = (chapterId) => {
     row.className = 'progress-row';
     row.innerHTML = `
       <span>${level.title}</span>
-      <div class="progress-bar"><span style="width:${progress.percent}%"></span></div>
+      <div class="progress-visuals">
+        <div class="progress-bar"><span style="width:${progress.percent}%"></span></div>
+        <div class="battery-bar" aria-hidden="true"><span style="width:${progress.percent}%"></span></div>
+      </div>
       <span class="badge">${progress.percent}%</span>
     `;
     wrap.appendChild(row);
@@ -829,8 +832,10 @@ const renderLevelContent = (chapterId, levelId) => {
 const updateLessonProgressUI = (chapterId, levelId) => {
   const progress = getLevelProgress(chapterId, levelId);
   const bar = qs('#lesson-progress-bar');
+  const battery = qs('#lesson-progress-battery');
   const label = qs('#lesson-progress-label');
   if (bar) bar.style.width = `${progress.percent}%`;
+  if (battery) battery.style.width = `${progress.percent}%`;
   if (label) label.textContent = progress.totalLessons
     ? `${progress.percent}% (${progress.completedLessons.length}/${progress.totalLessons})`
     : `${progress.percent}%`;
