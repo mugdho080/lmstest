@@ -50,6 +50,137 @@ body {
   letter-spacing: 0.01em;
 }
 
+/* Module-inspired skin (matches module-ai-level1.html visual style) */
+body.module-styled[data-theme='light'] {
+  background: #f9fbfc;
+  color: #1a2c37;
+}
+
+body.module-styled[data-theme='light'] .app-shell {
+  padding: 14px;
+  gap: 14px;
+  background: #f3f8fb;
+}
+
+body.module-styled[data-theme='light'] .sidebar {
+  background: #ffffff;
+  border: 1px solid #d9e5e8;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+body.module-styled[data-theme='light'] .brand-text h1 {
+  color: #0e7272;
+}
+
+body.module-styled[data-theme='light'] .brand-text p,
+body.module-styled[data-theme='light'] .side-quote {
+  color: #36505f;
+}
+
+body.module-styled[data-theme='light'] .app-main {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+body.module-styled[data-theme='light'] header.hero {
+  background: linear-gradient(90deg, #0e7272, #0b8b8b);
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+}
+
+body.module-styled[data-theme='light'] .surface,
+body.module-styled[data-theme='light'] .hero-card,
+body.module-styled[data-theme='light'] .gamified-hub,
+body.module-styled[data-theme='light'] .ndis-cta,
+body.module-styled[data-theme='light'] .lesson-card,
+body.module-styled[data-theme='light'] .card,
+body.module-styled[data-theme='light'] .mission-card,
+body.module-styled[data-theme='light'] .badge-card,
+body.module-styled[data-theme='light'] .lesson-card-compact {
+  background: #ffffff;
+  border: 1px solid #e6eef1;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+}
+
+body.module-styled[data-theme='light'] .surface-heading h2,
+body.module-styled[data-theme='light'] .section-title h2,
+body.module-styled[data-theme='light'] .hero-card h3,
+body.module-styled[data-theme='light'] h1,
+body.module-styled[data-theme='light'] h2,
+body.module-styled[data-theme='light'] h3 {
+  color: #1a2c37;
+}
+
+body.module-styled[data-theme='light'] p,
+body.module-styled[data-theme='light'] .subtle,
+body.module-styled[data-theme='light'] .lesson-card p,
+body.module-styled[data-theme='light'] .lesson-meta,
+body.module-styled[data-theme='light'] .lesson-tabs button,
+body.module-styled[data-theme='light'] .progress-label,
+body.module-styled[data-theme='light'] .chapter-card .meta,
+body.module-styled[data-theme='light'] .chapter-card .desc,
+body.module-styled[data-theme='light'] .ticker-track,
+body.module-styled[data-theme='light'] .ticker-track span {
+  color: #344b5c;
+}
+
+body.module-styled[data-theme='light'] .chapter-card,
+body.module-styled[data-theme='light'] .lesson-card,
+body.module-styled[data-theme='light'] .mission-card {
+  background: #ffffff;
+  border-color: #e0eaed;
+}
+
+body.module-styled[data-theme='light'] .chapter-card .title,
+body.module-styled[data-theme='light'] .lesson-card h4,
+body.module-styled[data-theme='light'] .lesson-card .title,
+body.module-styled[data-theme='light'] .lesson-card-compact .title {
+  color: #0f1f2a;
+}
+
+body.module-styled[data-theme='light'] .chapter-card .badge,
+body.module-styled[data-theme='light'] .locked-badge,
+body.module-styled[data-theme='light'] .auth-badge,
+body.module-styled[data-theme='light'] .pill,
+body.module-styled[data-theme='light'] .quiz-card .quiz-status,
+body.module-styled[data-theme='light'] .progress-label span {
+  color: #0e7272;
+  border-color: #b7e6d8;
+}
+
+body.module-styled[data-theme='light'] .chapter-card .tag,
+body.module-styled[data-theme='light'] .chapter-card .badge,
+body.module-styled[data-theme='light'] .badge,
+body.module-styled[data-theme='light'] .status,
+body.module-styled[data-theme='light'] .locked-badge {
+  background: #e9fff3;
+  color: #0f3e2e;
+}
+
+body.module-styled[data-theme='light'] .inspire-ticker,
+body.module-styled[data-theme='light'] .ticker-bar {
+  background: #e6f4eb;
+  border: 1px solid #d4e5d9;
+  color: #1a2c37;
+}
+
+body.module-styled[data-theme='light'] .hero-card .inspire-track span,
+body.module-styled[data-theme='light'] .ticker-track span {
+  color: #1a2c37;
+}
+
+body.module-styled[data-theme='light'] .level-actions .btn,
+body.module-styled[data-theme='light'] .btn-primary,
+body.module-styled[data-theme='light'] .btn-secondary,
+body.module-styled[data-theme='light'] .btn-games,
+body.module-styled[data-theme='light'] .btn-ghost,
+body.module-styled[data-theme='light'] .btn-voice {
+  box-shadow: none;
+}
+
 .app-shell {
   display: flex;
   min-height: 100vh;
