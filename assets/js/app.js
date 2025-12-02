@@ -37,6 +37,39 @@ const STORAGE_KEYS = {
   progress: 'ga-progress'
 };
 
+const GAMIFY_KEY = 'ga-gamify';
+const rewardAudio = new Audio('data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAACcQCAAwACABAAZGF0Yf//kP////////////////////////////8AAAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA');
+
+const BADGE_RULES = [
+  { id: 'calm-hero', label: 'Calm Hero', desc: 'Complete your first lesson', check: (s) => (s.completedLessons?.length || 0) >= 1 },
+  { id: 'focus-star', label: 'Focus Star', desc: 'Earn 150 points', check: (s) => s.points >= 150 },
+  { id: 'maths-champion', label: 'Maths Champion', desc: 'Finish any Math lesson', check: (s) => (s.chapterTallies?.['math-numbers'] || 0) >= 1 },
+  { id: 'life-master', label: 'Life Skills Master', desc: 'Finish any Life Skills lesson', check: (s) => (s.chapterTallies?.['life-skills-independence'] || 0) >= 1 },
+  { id: 'psych-guardian', label: 'Calm Guardian', desc: 'Finish any Psychology lesson', check: (s) => (s.chapterTallies?.['psychology-behaviour'] || 0) >= 1 }
+];
+
+const defaultGamifyState = () => ({
+  points: 0,
+  badges: [],
+  avatar: { character: 'Explorer', color: 'mint', accessory: 'star' },
+  mood: 'Calm',
+  chapterTallies: {},
+  completedLessons: [],
+  choice: 'Free roam'
+});
+
+const loadGamify = () => {
+  try {
+    return { ...defaultGamifyState(), ...(JSON.parse(localStorage.getItem(GAMIFY_KEY)) || {}) };
+  } catch (e) {
+    return defaultGamifyState();
+  }
+};
+
+const saveGamify = (state) => {
+  localStorage.setItem(GAMIFY_KEY, JSON.stringify(state));
+};
+
 const safeJson = async (res) => {
   try {
     return await res.json();
@@ -210,6 +243,61 @@ const markLessonComplete = (chapterId, levelId, lessonId) => {
   return getLevelProgress(chapterId, levelId);
 };
 
+const playRewardChime = () => {
+  try {
+    rewardAudio.currentTime = 0;
+    rewardAudio.play().catch(() => {});
+  } catch (e) {
+    /* noop */
+  }
+};
+
+const triggerCelebrate = () => {
+  const overlay = document.createElement('div');
+  overlay.className = 'celebrate-burst';
+  document.body.appendChild(overlay);
+  setTimeout(() => overlay.remove(), 1200);
+};
+
+const evaluateBadges = (state) => {
+  const updated = { ...state };
+  BADGE_RULES.forEach((rule) => {
+    if (rule.check(updated) && !updated.badges.includes(rule.id)) {
+      updated.badges.push(rule.id);
+      showToast(`Unlocked: ${rule.label}`);
+      playRewardChime();
+    }
+  });
+  saveGamify(updated);
+  updatePlayerHub();
+  return updated;
+};
+
+const awardPoints = (amount = 1, reason = '', options = {}) => {
+  const state = loadGamify();
+  state.points = Math.max(0, Math.round((state.points || 0) + amount));
+  saveGamify(state);
+  if (!options?.silent) {
+    if (options?.celebrate) triggerCelebrate();
+    playRewardChime();
+    showToast(reason || `+${amount} points`);
+  }
+  evaluateBadges(state);
+};
+
+const recordLessonAchievement = (chapterId, levelId, lessonId) => {
+  const state = loadGamify();
+  const key = `${chapterId}:${levelId}:${lessonId}`;
+  if (!state.completedLessons.includes(key)) {
+    state.completedLessons.push(key);
+    state.chapterTallies[chapterId] = (state.chapterTallies[chapterId] || 0) + 1;
+    saveGamify(state);
+    awardPoints(25, 'Well done! Lesson complete', { celebrate: true });
+  } else {
+    evaluateBadges(state);
+  }
+};
+
 const showToast = (message) => {
   const toast = qs('#celebrate-toast');
   if (!toast) return;
@@ -247,6 +335,7 @@ const openGamesPopup = () => {
   if (!win) {
     window.location.href = GAMES_URL;
   }
+  awardPoints(3, 'Break time!');
 };
 
 const bindGamesButtons = () => {
@@ -333,6 +422,7 @@ const renderChapterGrid = () => {
       </div>
       <div class="chapter-icon" style="background:${chapter.color}">${chapter.icon}</div>
       <p>${chapter.blurb}</p>
+      <p class="subtle">Land unlocked: ${chapter.title} — choose this mission to earn bonus points.</p>
       <p class="ndis-note">Time to level up using your own NDIS plan.</p>
       <div class="card-row">
         <span class="badge">Level 1: Open</span>
@@ -444,6 +534,216 @@ const renderChapterProgress = (chapterId) => {
     `;
     wrap.appendChild(row);
   });
+};
+
+const getOverallProgress = () => {
+  let total = 0;
+  let done = 0;
+  Object.entries(chapters || {}).forEach(([chapterId, chapter]) => {
+    (chapter.levels || []).forEach((level) => {
+      const levelTotal = level.lessons?.length || 0;
+      total += levelTotal;
+      const progress = getLevelProgress(chapterId, level.id);
+      done += progress.completedLessons.length;
+    });
+  });
+  const percent = total ? Math.round((done / total) * 100) : 0;
+  return { done, total, percent };
+};
+
+const renderPlayerHub = () => {
+  const hub = qs('#player-hub');
+  if (!hub) return;
+  const overall = getOverallProgress();
+  const state = loadGamify();
+  hub.innerHTML = `
+    <div class="section-title">
+      <h2>Hero hub</h2>
+      <p class="subtle">Earn points, unlock badges, and watch your avatar grow. Choose your mood and mission before you start.</p>
+    </div>
+    <div class="player-grid">
+      <div class="score-card">
+        <div class="score-points">⭐ <span id="score-points">${state.points}</span> pts</div>
+        <div class="progress-row">
+          <span class="subtle">Overall journey</span>
+          <span class="badge" id="score-progress-label">${overall.percent}%</span>
+        </div>
+        <div class="progress-bar"><span id="score-progress-bar" style="width:${overall.percent}%"></span></div>
+        <p class="subtle">Every tap, quiz, and step gives you points. Badges unlock as you explore.</p>
+        <div class="hud-avatar" id="hud-avatar"></div>
+      </div>
+      <div class="score-card">
+        <h3>Badges</h3>
+        <div class="badge-row" id="badge-row"></div>
+      </div>
+      <div class="score-card">
+        <h3>Today’s choices</h3>
+        <div class="choice-row" id="choice-row"></div>
+        <div class="mission-row" id="mission-row"></div>
+      </div>
+    </div>
+  `;
+  updatePlayerHub();
+};
+
+const renderAvatarLab = () => {
+  const lab = qs('#avatar-lab');
+  if (!lab) return;
+  const state = loadGamify();
+  const avatars = [
+    { id: 'Explorer', label: 'Explorer', emoji: '🧑‍🚀' },
+    { id: 'Calm Friend', label: 'Calm Friend', emoji: '🧘' },
+    { id: 'Math Wiz', label: 'Math Wiz', emoji: '🧠' }
+  ];
+  const accessories = [
+    { id: 'star', label: 'Star cap' },
+    { id: 'cape', label: 'Hero cape' },
+    { id: 'sprout', label: 'Sprout hat' }
+  ];
+  lab.innerHTML = `
+    <div class="section-title">
+      <h2>Pick your avatar</h2>
+      <p class="subtle">Choose who you are today. Unlock colors and accessories as you learn.</p>
+    </div>
+    <div class="avatar-grid">
+      <div class="avatar-picker" id="avatar-picker">
+        ${avatars.map((a) => `<button type="button" class="avatar-choice" data-avatar="${a.id}">${a.emoji} ${a.label}</button>`).join('')}
+      </div>
+      <div class="avatar-accessories" id="avatar-accessories">
+        ${accessories.map((a) => `<button type="button" class="avatar-choice ghost" data-accessory="${a.id}">${a.label}</button>`).join('')}
+      </div>
+      <div class="avatar-preview" id="avatar-preview">
+        <div class="avatar-emoji">${state.avatar.character === 'Calm Friend' ? '🧘' : state.avatar.character === 'Math Wiz' ? '🧠' : '🧑‍🚀'}</div>
+        <p class="subtle">Accessory: ${state.avatar.accessory}</p>
+      </div>
+    </div>
+  `;
+
+  qsa('[data-avatar]', lab).forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = loadGamify();
+      next.avatar.character = btn.dataset.avatar;
+      saveGamify(next);
+      awardPoints(5, 'Avatar selected');
+      renderAvatarLab();
+      updatePlayerHub();
+    });
+  });
+
+  qsa('[data-accessory]', lab).forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = loadGamify();
+      next.avatar.accessory = btn.dataset.accessory;
+      saveGamify(next);
+      awardPoints(3, 'Accessory equipped');
+      renderAvatarLab();
+      updatePlayerHub();
+    });
+  });
+};
+
+const renderEmotionZone = () => {
+  const zone = qs('#emotion-zone');
+  if (!zone) return;
+  const feelings = [
+    { id: 'Calm', emoji: '🧘', tip: 'Slow breathing helps your brain.' },
+    { id: 'Happy', emoji: '😄', tip: 'Use that energy to explore a new lesson.' },
+    { id: 'Worried', emoji: '😟', tip: 'Tap the breathing circle to reset.' },
+    { id: 'Excited', emoji: '🤩', tip: 'Channel it into a quick quiz!' }
+  ];
+  zone.innerHTML = `
+    <div class="section-title">
+      <h2>How are you feeling?</h2>
+      <p class="subtle">Pick a mood, try a calming animation, or tap the friendly critter to practice patience.</p>
+    </div>
+    <div class="feeling-row" id="feeling-row">
+      ${feelings.map((f) => `<button type="button" class="mood-chip" data-mood="${f.id}" title="${f.tip}">${f.emoji} ${f.id}</button>`).join('')}
+    </div>
+    <div class="calm-tools">
+      <div class="breathing-card">
+        <div class="breathing-circle" aria-label="Breathing exercise"></div>
+        <p class="subtle">Breathe in as the circle grows, out as it shrinks.</p>
+      </div>
+      <div class="calm-pet" id="calm-pet" role="button" tabindex="0">🐢 Tap the turtle to calm it down</div>
+    </div>
+  `;
+
+  qsa('[data-mood]', zone).forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = loadGamify();
+      next.mood = btn.dataset.mood;
+      saveGamify(next);
+      awardPoints(2, `Mood set: ${next.mood}`);
+      updatePlayerHub();
+    });
+  });
+
+  const pet = qs('#calm-pet', zone);
+  if (pet) {
+    pet.addEventListener('click', () => {
+      pet.classList.add('soothed');
+      setTimeout(() => pet.classList.remove('soothed'), 1200);
+      awardPoints(1, 'Nice calming tap');
+    });
+  }
+};
+
+const updatePlayerHub = () => {
+  const state = loadGamify();
+  const overall = getOverallProgress();
+  const pointsEl = qs('#score-points');
+  if (pointsEl) pointsEl.textContent = state.points;
+  const progressBar = qs('#score-progress-bar');
+  if (progressBar) progressBar.style.width = `${overall.percent}%`;
+  const progressLabel = qs('#score-progress-label');
+  if (progressLabel) progressLabel.textContent = `${overall.percent}%`;
+
+  const badgeRow = qs('#badge-row');
+  if (badgeRow) {
+    badgeRow.innerHTML = '';
+    BADGE_RULES.forEach((rule) => {
+      const has = state.badges.includes(rule.id);
+      const chip = document.createElement('div');
+      chip.className = `badge-chip ${has ? 'on' : 'off'}`;
+      chip.textContent = has ? `🏅 ${rule.label}` : `🔒 ${rule.label}`;
+      chip.title = rule.desc;
+      badgeRow.appendChild(chip);
+    });
+  }
+
+  const choiceRow = qs('#choice-row');
+  if (choiceRow) {
+    choiceRow.innerHTML = `
+      <div class="choice-card">Mood: <strong>${state.mood}</strong></div>
+      <div class="choice-card">Avatar: <strong>${state.avatar.character}</strong></div>
+      <div class="choice-card">Mission: <strong>${state.choice}</strong></div>
+    `;
+  }
+
+  const missionRow = qs('#mission-row');
+  if (missionRow && chapters) {
+    missionRow.innerHTML = '';
+    Object.entries(chapters).forEach(([id, chapter]) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'btn btn-secondary ghost';
+      btn.textContent = `${chapter.icon} ${chapter.title}`;
+      btn.addEventListener('click', () => {
+        const next = loadGamify();
+        next.choice = `${chapter.title} mission`;
+        saveGamify(next);
+        awardPoints(4, 'Mission chosen');
+        updatePlayerHub();
+      });
+      missionRow.appendChild(btn);
+    });
+  }
+
+  const hud = qs('#hud-avatar');
+  if (hud) {
+    const emoji = state.avatar.character === 'Calm Friend' ? '🧘' : state.avatar.character === 'Math Wiz' ? '🧠' : '🧑‍🚀';
+    hud.innerHTML = `<div class="hud-emoji">${emoji}</div><p class="subtle">Accessory: ${state.avatar.accessory}</p>`;
+  }
 };
 
 const createSwipeSteps = (steps = []) => {
@@ -616,10 +916,17 @@ const renderLessonList = (chapterId, levelId, level) => {
       wrap.innerHTML = `<p><strong>Q${idx + 1}.</strong> ${q.question}</p>`;
       const optionsWrap = document.createElement('div');
       optionsWrap.className = 'quiz-options';
+      optionsWrap.dataset.pointsGiven = 'false';
       q.options.forEach((opt, optIdx) => {
         const label = document.createElement('label');
         label.innerHTML = `<input type="radio" name="l${lesson.id}-q${idx}" value="${optIdx}"> ${opt}`;
         optionsWrap.appendChild(label);
+      });
+      optionsWrap.addEventListener('change', () => {
+        if (optionsWrap.dataset.pointsGiven === 'false') {
+          optionsWrap.dataset.pointsGiven = 'true';
+          awardPoints(2, 'Great choice!');
+        }
       });
       wrap.appendChild(optionsWrap);
       form.appendChild(wrap);
@@ -647,6 +954,7 @@ const renderLessonList = (chapterId, levelId, level) => {
 
       if (allCorrect) {
         markLessonComplete(chapterId, levelId, lesson.id);
+        recordLessonAchievement(chapterId, levelId, lesson.id);
         submitBtn.disabled = true;
         submitBtn.textContent = 'Completed';
         result.textContent = '🎉 Perfect! You passed this lesson.';
@@ -659,6 +967,7 @@ const renderLessonList = (chapterId, levelId, level) => {
         showToast('Congrats! Lesson passed');
         updateLessonProgressUI(chapterId, levelId);
         renderChapterProgress(chapterId);
+        updatePlayerHub();
       } else {
         result.textContent = 'Try again — check the hints above and retry.';
       }
@@ -860,6 +1169,9 @@ const init = () => {
   bindThemeToggle();
   const page = document.body.dataset.page;
   hydrateHero();
+  renderPlayerHub();
+  renderAvatarLab();
+  renderEmotionZone();
   renderChapterGrid();
   renderFeatures();
   bindAuthForms();

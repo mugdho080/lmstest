@@ -1035,6 +1035,183 @@ select {
   font-weight: 700;
 }
 
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.score-card {
+  background: var(--surface-raise);
+  border-radius: 16px;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.score-points {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.badge-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.5rem;
+}
+
+.badge-chip {
+  padding: 0.6rem 0.8rem;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  font-weight: 600;
+}
+
+.badge-chip.off {
+  opacity: 0.65;
+}
+
+.choice-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.choice-card {
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px dashed var(--border-strong);
+}
+
+.mission-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.hud-avatar {
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  border-radius: 12px;
+  background: var(--surface);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hud-emoji {
+  font-size: 1.8rem;
+}
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.avatar-choice {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.avatar-choice.ghost {
+  background: transparent;
+}
+
+.avatar-preview {
+  border-radius: 14px;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--surface), var(--surface-raise));
+  text-align: center;
+}
+
+.avatar-emoji {
+  font-size: 2.4rem;
+}
+
+.feeling-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.mood-chip {
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.calm-tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.breathing-card {
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.breathing-circle {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 0.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--primary), var(--surface-raise));
+  animation: breathe 6s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0% { transform: scale(0.9); opacity: 0.85; }
+  50% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.85; }
+}
+
+.calm-pet {
+  padding: 0.9rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  text-align: center;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.calm-pet.soothed {
+  background: linear-gradient(120deg, rgba(64, 225, 166, 0.15), rgba(120, 200, 255, 0.2));
+}
+
+.celebrate-burst {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(255,255,255,0.25), transparent 40%);
+  animation: burst 1s ease-out;
+  z-index: 999;
+}
+
+@keyframes burst {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.15); }
+}
+
 .swipe-nav {
   position: absolute;
   top: 50%;
