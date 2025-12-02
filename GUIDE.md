@@ -38,8 +38,8 @@ This project is a static, neuro-friendly learning experience tailored for autist
 - Follow the semantic card pattern (`.chapter-card`, `.level-card`, `.badge`, `.btn`) to inherit spacing and hover states automatically.
 
 ## Deploying to GoDaddy (static hosting)
-1. Upload everything in this folder to your GoDaddy hosting (typically `public_html/`).
-2. Keep the directory structure intact (`assets/...`), and ensure `index.html` sits at the root so it loads by default.
+1. Upload everything in this folder to your GoDaddy hosting inside `public_html/academy` (keep the same structure).
+2. Keep the directory structure intact (`assets/...`), and ensure `index.html` sits in `public_html/academy` so it loads by default via `your-domain.com/academy/`.
 3. Because the site is static, no build step is required—just upload and visit your domain.
 
 ## Deploying with a GoDaddy backend (optional)
@@ -56,7 +56,7 @@ If you want server-side storage instead of localStorage:
 
 ## Backend + GoDaddy deployment quick start
 1) In cPanel, create a MySQL database and user. Note the host, db name, user, and password.
-2) Upload the entire project (including the `backend/` folder) into `public_html/`.
+2) Upload the entire project (including the `backend/` folder) into `public_html/academy/`.
 3) In `backend/`, update `config.php` with your GoDaddy MySQL credentials and a strong `api_key` (a default config is already included).
 4) In phpMyAdmin, run `backend/schema.sql` to create the tables.
 5) Run `backend/seed.php` once (visit `https://your-domain.com/backend/seed.php`) to load the full chapter/lesson/quiz content into the `chapters` table.
