@@ -407,7 +407,7 @@ nav {
 
 .hero-text p {
   margin: 0 0 20px;
-  color: rgba(255, 255, 255, 0.92);
+  color: #ffffff;
 }
 
 header.hero a,
@@ -768,6 +768,29 @@ header.hero button {
   align-items: center;
 }
 
+.hero-card .progress-row {
+  background: #ffffff;
+  border: 1px solid #d9e5e8;
+  border-radius: 999px;
+  padding: 10px 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.hero-card .progress-row .progress-label,
+.hero-card .progress-row .progress-percentage,
+.hero-card .progress-row .subtle,
+.hero-card .progress-row span {
+  color: #1a2c37;
+  opacity: 1;
+}
+
+.hero-card .progress-row .badge {
+  background: #fff7ee;
+  color: #fe8427;
+  border: 1px solid #ffd4a8;
+  justify-self: end;
+}
+
 .progress-row .subtle,
 .progress-row .progress-label,
 .progress-row .progress-percentage {
@@ -1086,9 +1109,9 @@ select {
   margin-top: 16px;
   overflow: hidden;
   border-radius: 14px;
-  background: linear-gradient(90deg, rgba(98, 129, 255, 0.18), rgba(130, 214, 255, 0.18));
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  background: #e4fff3;
+  border: 1px solid #b7e6d8;
+  box-shadow: none;
 }
 
 .inspire-track {
@@ -1101,8 +1124,8 @@ select {
 }
 
 .inspire-track span {
-  color: #d2e4ff;
-  font-weight: 600;
+  color: #0e7272;
+  font-weight: 700;
   letter-spacing: 0.2px;
 }
 
@@ -1837,12 +1860,12 @@ select,
 }
 
 :root[data-theme='light'] .inspire-ticker {
-  background: linear-gradient(90deg, rgba(29, 156, 102, 0.16), rgba(29, 122, 191, 0.16));
-  border-color: rgba(10, 40, 22, 0.2);
+  background: #e4fff3;
+  border-color: #b7e6d8;
 }
 
 :root[data-theme='light'] .inspire-track span {
-  color: #0b1c2a;
+  color: #0e7272;
 }
 
 :root[data-theme='light'] .swipe-hint {
