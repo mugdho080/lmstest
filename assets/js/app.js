@@ -39,10 +39,11 @@ const STORAGE_KEYS = {
 
 const GAMIFY_KEY = 'ga-gamify';
 const rewardAudio = new Audio('data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAACcQCAAwACABAAZGF0Yf//kP////////////////////////////8AAAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA');
+const clapAudio = new Audio('data:audio/wav;base64,UklGRrh4AABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YZR4AAAY6iX7RPkADUD4ZAUO2vvzRtL+EQsNSRAtB8XeVAwWHnjYafPx55TUexWa9wcuzWKU2D4oaFas4YG4XCZZSIAqlJbWONlGgJznpI/DP1vZdz6wbE0yPvxska8yeVRdrpX9sMtsXN7vKnAuwWoykbH1+yRvhxHCwaY8czZ2oJtXPfsTs/qhexeSotQoV4SbVtyNytkOAwZTJ0W0PaKaLY6OX2k/XP3Y8cb9KsSvHZ7vdZYFeGG5MNzLrX7VdluK9pU/4j3v1rR86TOjFf3kqbH4rZY9kZlnJXGj9KeMB5d6fNJkZtIx0c0OFhjGPqJ0+76Q9MiKk9WG1XcsP0GrTqz3hQJm+wtXS/Y0MYOVUOqt6muk7+ph0yfaICbJt6FoHyZY+2xrWQECiThn2y4bRy8+JQ2mMeoRVM7eGgT5QEGGgFIELZPUzK3By42u09Z9X4nj8/HxsyVXdFMUMAPabzvKHXBrUgv4Bwlrzkr+zYZ4SzGLgF++Q0pM6PCOTTrCcqTW7/Du13/dX+Rx3mxTHn0AvH0mcmjNUno5eROxMTaTvRGPfJHpDaYlsz8fBmslPxl7YmpsxkvAq2g0y0FeXjvrsO7O2Mw6KvHI+eg2/UG1yVvkK8zSkqqA/0o/L1gvd0jZgmJqF6pN6x3XLZMauIpQzsY0vmCY40wuHl3GDj1Gz8Av+av8TKB4iZV44eW9UEFXEuc3UZYk5xZphSLlWfInBIRB4NTyDgphAqaFqrcxsk/A73l6ais1C2HEbDaUYE1qYO2CHe6rGeBg1xZnZwjXgStTFPr52tH7RI0Aru4mz1SY1vPMQiQfTInb5HHWzWyvTNLKKag8je+x1VSxyVlWF2rKlgFOwv4Y8DPLKlyi6NPlqIDMll874bEowjaX19Cj1PZvQtJnI98OaJ1kmHR0AzA74tj7sdjsNdtpZ8hBsVhlxxQfIkkwJ3oY1b3H4MYRh6euaITPqubItJx46LjwWBoNuLtBoXUQhAVwZjdLThy4vL6+XDmL1pskGy83YKtY6ff75u6VjEg7EvME/A/rQ50X3m6zhRJY9WzUzzNhyLTELB7GgNu/8cC0wTV/+P+OwEhBIv+qgHbAF3/DANY+9r7IAPNA8D9FATt/4QC2P2t+yP8cv/wABIBd/x//H4AzPwhAdoBngM//XYEl/qM+/r+d/zQBOj7kQRJAoAA');
 
 const BADGE_RULES = [
   { id: 'calm-hero', label: 'Calm Hero', desc: 'Complete your first lesson', check: (s) => (s.completedLessons?.length || 0) >= 1 },
-  { id: 'focus-star', label: 'Focus Star', desc: 'Earn 150 points', check: (s) => s.points >= 150 },
+  { id: 'focus-star', label: 'Focus Star', desc: 'Earn 150 points', check: (s) => s.points >= 150, pointsRequired: 150 },
   { id: 'maths-champion', label: 'Maths Champion', desc: 'Finish any Math lesson', check: (s) => (s.chapterTallies?.['math-numbers'] || 0) >= 1 },
   { id: 'life-master', label: 'Life Skills Master', desc: 'Finish any Life Skills lesson', check: (s) => (s.chapterTallies?.['life-skills-independence'] || 0) >= 1 },
   { id: 'psych-guardian', label: 'Calm Guardian', desc: 'Finish any Psychology lesson', check: (s) => (s.chapterTallies?.['psychology-behaviour'] || 0) >= 1 }
@@ -247,6 +248,15 @@ const playRewardChime = () => {
   try {
     rewardAudio.currentTime = 0;
     rewardAudio.play().catch(() => {});
+  } catch (e) {
+    /* noop */
+  }
+};
+
+const playClap = () => {
+  try {
+    clapAudio.currentTime = 0;
+    clapAudio.play().catch(() => {});
   } catch (e) {
     /* noop */
   }
@@ -554,6 +564,13 @@ const getOverallProgress = () => {
   return { done, total, percent };
 };
 
+const pointsUntilNextBadge = (state) => {
+  const pending = BADGE_RULES.filter((rule) => rule.pointsRequired && !(state.badges || []).includes(rule.id));
+  if (!pending.length) return 0;
+  const deltas = pending.map((rule) => Math.max(0, (rule.pointsRequired || 0) - (state.points || 0)));
+  return Math.min(...deltas);
+};
+
 const renderPlayerHub = () => {
   const hub = qs('#player-hub');
   if (!hub) return;
@@ -572,6 +589,7 @@ const renderPlayerHub = () => {
           <span class="badge" id="score-progress-label">${overall.percent}%</span>
         </div>
         <div class="progress-bar"><span id="score-progress-bar" style="width:${overall.percent}%"></span></div>
+        <p class="badge-hint" id="badge-points-needed"></p>
         <p class="subtle">Every tap, quiz, and step gives you points. Badges unlock as you explore.</p>
         <div class="hud-avatar" id="hud-avatar"></div>
       </div>
@@ -610,10 +628,10 @@ const renderAvatarLab = () => {
     </div>
     <div class="avatar-grid">
       <div class="avatar-picker" id="avatar-picker">
-        ${avatars.map((a) => `<button type="button" class="avatar-choice" data-avatar="${a.id}">${a.emoji} ${a.label}</button>`).join('')}
+        ${avatars.map((a) => `<button type="button" class="avatar-choice" data-avatar="${a.id}"><span class="avatar-face">${a.emoji}</span><span class="avatar-label">${a.label}</span></button>`).join('')}
       </div>
       <div class="avatar-accessories" id="avatar-accessories">
-        ${accessories.map((a) => `<button type="button" class="avatar-choice ghost" data-accessory="${a.id}">${a.label}</button>`).join('')}
+        ${accessories.map((a) => `<button type="button" class="avatar-choice ghost" data-accessory="${a.id}"><span class="avatar-label">${a.label}</span></button>`).join('')}
       </div>
       <div class="avatar-preview" id="avatar-preview">
         <div class="avatar-emoji">${state.avatar.character === 'Calm Friend' ? '🧘' : state.avatar.character === 'Math Wiz' ? '🧠' : '🧑‍🚀'}</div>
@@ -660,7 +678,7 @@ const renderEmotionZone = () => {
       <p class="subtle">Pick a mood, try a calming animation, or tap the friendly critter to practice patience.</p>
     </div>
     <div class="feeling-row" id="feeling-row">
-      ${feelings.map((f) => `<button type="button" class="mood-chip" data-mood="${f.id}" title="${f.tip}">${f.emoji} ${f.id}</button>`).join('')}
+      ${feelings.map((f) => `<button type="button" class="mood-chip mood-large" data-mood="${f.id}" title="${f.tip}">${f.emoji} ${f.id}</button>`).join('')}
     </div>
     <div class="calm-tools">
       <div class="breathing-card">
@@ -684,8 +702,8 @@ const renderEmotionZone = () => {
   const pet = qs('#calm-pet', zone);
   if (pet) {
     pet.addEventListener('click', () => {
-      pet.classList.add('soothed');
-      setTimeout(() => pet.classList.remove('soothed'), 1200);
+      pet.classList.add('soothed', 'wiggle');
+      setTimeout(() => pet.classList.remove('soothed', 'wiggle'), 1200);
       awardPoints(1, 'Nice calming tap');
     });
   }
@@ -698,6 +716,11 @@ const updatePlayerHub = () => {
   if (pointsEl) pointsEl.textContent = state.points;
   const progressBar = qs('#score-progress-bar');
   if (progressBar) progressBar.style.width = `${overall.percent}%`;
+  const badgeHint = qs('#badge-points-needed');
+  if (badgeHint) {
+    const remaining = pointsUntilNextBadge(state);
+    badgeHint.textContent = remaining > 0 ? `${remaining} pts to your next badge` : 'All point badges unlocked — keep exploring missions!';
+  }
   const progressLabel = qs('#score-progress-label');
   if (progressLabel) progressLabel.textContent = `${overall.percent}%`;
 
@@ -964,16 +987,17 @@ const renderLessonList = (chapterId, levelId, level) => {
         submitBtn.textContent = 'Completed';
         result.textContent = '🎉 Perfect! You passed this lesson.';
         const status = card.querySelector('[data-lesson-status]');
-        if (status) {
-          status.textContent = 'Completed';
-          status.classList.remove('locked');
-        }
-        tabBtn.classList.add('completed');
-        showToast('Congrats! Lesson passed');
-        updateLessonProgressUI(chapterId, levelId);
-        renderChapterProgress(chapterId);
-        updatePlayerHub();
-      } else {
+      if (status) {
+        status.textContent = 'Completed';
+        status.classList.remove('locked');
+      }
+      tabBtn.classList.add('completed');
+      playClap();
+      showToast('Congrats! Lesson passed');
+      updateLessonProgressUI(chapterId, levelId);
+      renderChapterProgress(chapterId);
+      updatePlayerHub();
+    } else {
         result.textContent = 'Try again — check the hints above and retry.';
       }
     });

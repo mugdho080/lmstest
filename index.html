@@ -62,31 +62,34 @@
         </div>
       </header>
 
-      <main class="container">
-        <section class="surface" id="player-hub"></section>
+      <main class="container layout-with-dock">
+        <div class="main-stack">
+          <section class="surface" id="player-hub"></section>
 
-        <section class="surface" id="avatar-lab"></section>
+          <section id="ndis" class="surface ndis-cta">
+            <div>
+              <h2>Level up with your NDIS plan</h2>
+              <p class="subtle">One friendly signup unlocks every level across all chapters. Keep your growth in one place and celebrate each win.</p>
+            </div>
+            <div class="ndis-actions">
+              <button class="btn btn-primary" type="button" id="auth-button-cta">Unlock with my NDIS details</button>
+              <a class="btn btn-secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">View service agreement</a>
+            </div>
+          </section>
 
-        <section class="surface" id="emotion-zone"></section>
+          <section id="chapters" class="surface">
+            <div class="section-title">
+              <h2>Chapters</h2>
+              <p class="subtle">Level 1 is open to everyone. Sign up once to unlock Levels 2+ across every chapter.</p>
+            </div>
+            <div id="chapter-grid" class="chapter-grid" aria-live="polite"></div>
+          </section>
+        </div>
 
-        <section id="ndis" class="surface ndis-cta">
-          <div>
-            <h2>Level up with your NDIS plan</h2>
-            <p class="subtle">One friendly signup unlocks every level across all chapters. Keep your growth in one place and celebrate each win.</p>
-          </div>
-          <div class="ndis-actions">
-            <button class="btn btn-primary" type="button" id="auth-button-cta">Unlock with my NDIS details</button>
-            <a class="btn btn-secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSeJvh3EDbSGaI5uTzQkXIaUNqAN46JVl-U6zPSPBcaNFggBBg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">View service agreement</a>
-          </div>
-        </section>
-
-        <section id="chapters" class="surface">
-          <div class="section-title">
-            <h2>Chapters</h2>
-            <p class="subtle">Level 1 is open to everyone. Sign up once to unlock Levels 2+ across every chapter.</p>
-          </div>
-          <div id="chapter-grid" class="chapter-grid" aria-live="polite"></div>
-        </section>
+        <aside class="wellness-dock" aria-label="Avatar and mood controls">
+          <section class="surface dock-card" id="avatar-lab"></section>
+          <section class="surface dock-card" id="emotion-zone"></section>
+        </aside>
       </main>
 
       <footer class="footer">
