@@ -321,14 +321,14 @@ img {
   padding: 0 20px 64px;
 }
 
-header {
-  background: linear-gradient(135deg, rgba(16, 24, 40, 0.9), rgba(18, 28, 48, 0.92));
+header.hero {
+  background: linear-gradient(120deg, #0e7272, #0b8b8b);
   position: relative;
   top: auto;
   z-index: 1;
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(124, 245, 255, 0.14);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  border: none;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16);
+  color: #ffffff;
 }
 
 .topbar {
@@ -402,11 +402,17 @@ nav {
 .hero-text h1 {
   font-size: clamp(2.1rem, 3vw, 2.8rem);
   margin: 6px 0 12px;
+  color: inherit;
 }
 
 .hero-text p {
   margin: 0 0 20px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+header.hero a,
+header.hero button {
+  color: #ffffff;
 }
 
 .ndis-promise {
@@ -416,13 +422,14 @@ nav {
 }
 
 .hero-card {
-  background: linear-gradient(145deg, rgba(17, 24, 39, 0.9), rgba(17, 27, 46, 0.9));
-  border: 1px solid rgba(124, 245, 255, 0.18);
+  background: linear-gradient(145deg, #0b8b8b, #0e7272);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
+  color: #ffffff;
 }
 
 .hero-card::after {
@@ -439,12 +446,12 @@ nav {
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: rgba(124, 245, 255, 0.14);
-  color: #c8f8ff;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
   border-radius: 12px;
   font-weight: 700;
   letter-spacing: 0.03em;
-  border: 1px solid rgba(124, 245, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .btn {
@@ -596,11 +603,11 @@ nav {
 
 .chapter-card,
 .level-card {
-  background: var(--surface-2);
+  background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 18px;
-  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.28);
+  box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
   transition: transform 0.18s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -669,6 +676,40 @@ nav {
   color: var(--muted);
 }
 
+.level-card header {
+  background: #0b2433;
+  color: #f9fffd;
+  padding: 12px 14px;
+  margin: -18px -18px 12px -18px;
+  border-radius: var(--radius) var(--radius) 10px 10px;
+  border-bottom: 1px solid #123347;
+}
+
+.level-card header h3 {
+  margin: 0;
+  color: #f9fffd;
+}
+
+.level-card header .status-pill {
+  background: #e4fff3;
+  color: #0e7272;
+  border-color: #b7e6d8;
+}
+
+.level-card header .badge {
+  background: #e4fff3;
+  color: #0e7272;
+  border-color: #b7e6d8;
+}
+
+.card-row .badge,
+.chapter-card .badge,
+.level-card .badge {
+  background: #e4fff3;
+  color: #0e7272;
+  border-color: #b7e6d8;
+}
+
 .chapter-icon {
   width: 56px;
   height: 56px;
@@ -687,16 +728,18 @@ nav {
   gap: 6px;
   padding: 6px 10px;
   border-radius: 12px;
-  background: rgba(124, 245, 255, 0.14);
-  color: #c7f6ff;
+  background: #e4fff3;
+  color: #0e7272;
   font-weight: 700;
   font-size: 0.9rem;
   letter-spacing: 0.01em;
+  border: 1px solid #b7e6d8;
 }
 
 .badge.locked {
-  background: rgba(252, 165, 165, 0.12);
-  color: #ffc2c2;
+  background: #ffe9dd;
+  color: #fe8427;
+  border-color: #ffd4a8;
 }
 
 .card-row,
@@ -725,6 +768,12 @@ nav {
   align-items: center;
 }
 
+.progress-row .subtle,
+.progress-row .progress-label,
+.progress-row .progress-percentage {
+  color: #1a2c37;
+}
+
 .progress-row .badge {
   justify-self: end;
 }
@@ -749,10 +798,10 @@ nav {
 .status-pill {
   padding: 6px 10px;
   border-radius: 12px;
-  border: 1px solid rgba(124, 245, 255, 0.25);
+  border: 1px solid #b7e6d8;
   font-weight: 700;
-  color: var(--primary);
-  background: rgba(124, 245, 255, 0.08);
+  color: #0e7272;
+  background: #e4fff3;
 }
 
 .checklist {
@@ -1201,9 +1250,9 @@ header.hero h3 {
 }
 
 .progress-row .badge {
-  background: rgba(254, 132, 39, 0.08);
-  border-color: #ffd6b0;
-  color: #b05808;
+  background: #fff7ee;
+  border-color: #ffd4a8;
+  color: #fe8427;
 }
 
 .btn,
