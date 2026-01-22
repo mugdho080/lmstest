@@ -23,6 +23,7 @@ This repo is a static, data-driven LMS for Goodwill Care Academy with an optiona
 - `ga-progress`: nested object keyed by client id, chapter id, level id.
 - `ga-gamify`: points, badges, avatar, mood, completed lessons.
 - `ga-theme`: theme mode.
+- `ga-voice`: preferred SpeechSynthesis voice.
 
 ## Backend endpoints
 - `chapters` (GET) returns the chapter payload.
@@ -32,10 +33,11 @@ This repo is a static, data-driven LMS for Goodwill Care Academy with an optiona
 
 ## Core behaviors in `assets/js/app.js`
 - Boot flow: `boot()` calls `fetchChaptersFromApi()` then `init()`.
-- Rendering: chapter cards, level cards, lesson panels, progress bars.
+- Rendering: chapter cards, level cards, flashcard lesson flow, progress bars.
 - Gamification: points, badges, avatar, mood, celebratory effects.
 - Auth: signup/login modal uses local storage; optionally syncs to API.
 - Progress: per-lesson completion stored locally; optionally synced to API.
+- Voice: local voice picker for read-aloud, persisted in local storage.
 
 ## Common tasks
 - Add or update content: edit `assets/js/chapters.js` (and `backend/data/chapters.json` if using backend).

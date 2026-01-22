@@ -23,9 +23,18 @@ This project is a static, neuro-friendly learning experience tailored for autist
 4. The Chapter page will render an extra card, and the Level page will show the intro and checklist you supply.
 
 ## Changing the visual design
-- Update colors, fonts, and spacing in `assets/css/theme.css`. Key variables near the top of the file control background, accent, and text shades for consistency.
+- Update colors, fonts, and spacing in `assets/css/theme.css`. Key variables near the top of the file control light/dark palettes, accents, and text shades for consistency.
 - Button and card styles are shared across all pages; tweaking them updates the entire experience.
 - The CSS respects `prefers-reduced-motion`; you can adjust the transitions under the `@media (prefers-reduced-motion)` section if needed.
+
+## Lesson flow and progress
+- Level pages render lessons as a single flashcard with previous/next controls.
+- The lesson status area uses a single progress bar tied to completed lessons (no duplicate bars).
+
+## Read-aloud voice selection
+- The Level overview includes a voice picker that uses available browser SpeechSynthesis voices.
+- The chosen voice is stored in `localStorage` under `ga-voice` and reused across sessions.
+- If the list looks sparse, add new voices via your OS accessibility settings.
 
 ## How registration gating works
 - The registration link is stored in `registrationLink` at the top of `assets/js/chapters.js` and reused for every chapter.

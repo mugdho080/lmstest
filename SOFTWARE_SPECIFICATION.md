@@ -42,6 +42,7 @@ Out of scope:
 ### Front-end
 - No external JavaScript libraries. Pure HTML, CSS, and vanilla JavaScript.
 - Uses built-in Web APIs: DOM, Fetch, URLSearchParams, LocalStorage, SpeechSynthesis, and Audio.
+- SpeechSynthesis supports a user-selected voice for read-aloud content.
 - Embedded content and media:
   - YouTube (nocookie) iframe for lesson video.
   - OpenMoji image assets loaded by URL.
@@ -60,6 +61,7 @@ Primary routes:
 - `index.html` - chapter overview, signup/login modal, and gamified hub.
 - `chapter.html?chapter=<slug>` - chapter-specific view with level cards and progress bars.
 - `level.html?chapter=<slug>&level=<id>` - lesson view for a specific level; renders lessons and quizzes.
+  - Lessons appear as a single flashcard with previous/next navigation and a single progress bar.
 - `admin.html` - local admin view for toggling unlocks (local storage only).
 
 Supplemental static pages (standalone or legacy):
@@ -91,6 +93,7 @@ Lesson object:
 - `ga-progress`: progress by learner id, chapter id, and level id.
 - `ga-gamify`: points, badges, avatar, mood, chapterTallies, completedLessons.
 - `ga-theme`: theme mode (light or dark).
+- `ga-voice`: preferred read-aloud voice (voice URI or name).
 
 ### Database schema
 - `clients`: learner identity and unlock state.
@@ -108,14 +111,15 @@ The codebase is mostly functional rather than class-based. The following files a
   - Data helpers: `getChapterFromUrl`, `fetchChaptersFromApi`, `postApi`.
   - Progress tracking: `readProgress`, `markLessonComplete`, `syncProgressToApi`.
   - Gamification: points, badges, avatar, mood, and celebratory UI.
-  - UI rendering: chapter grid, level cards, lesson panels, progress bars.
+  - UI rendering: chapter grid, level cards, flashcard lessons, progress bars.
+  - Read-aloud voice selection and persistence.
   - Auth UI: signup/login modal, local storage persistence, optional API sync.
   - Admin UI: client table render and local unlock toggles.
   - Boot logic: fetch, hydrate, and page-specific initialization.
 
 - `assets/css/theme.css`
   - Design tokens, typography, layout grids, and component styles.
-  - Light/dark theme handling.
+  - Light/dark theme handling via shared color variables.
 
 - `backend/api.php`
   - Entry point for API actions (`chapters`, `signup`, `login`, `progress_get`, `progress_save`, admin actions).

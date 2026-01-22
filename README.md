@@ -7,7 +7,9 @@ The UI emphasizes clear layouts, large controls, gentle motion, and supportive l
 ## Key features
 - Data-driven chapters, levels, lessons, and quizzes.
 - Learner progress tracking, points, badges, and avatar choices.
-- Read-aloud support using the browser speech synthesis API.
+- Read-aloud support using the browser speech synthesis API with a local voice picker.
+- Flashcard-style lesson flow with a single progress bar per level.
+- Token-based light/dark theming for consistent color palettes.
 - Optional backend for signup, login, and progress sync.
 - Admin view for toggling access to locked levels (local storage).
 
@@ -16,6 +18,8 @@ The UI emphasizes clear layouts, large controls, gentle motion, and supportive l
 - On startup, `assets/js/app.js` tries to fetch content from `backend/api.php?action=chapters`. If the API is unavailable, it keeps the local `chapters.js` data.
 - Progress and learner profile data are stored in `localStorage` by default. If the backend is configured, progress and login can sync to MySQL.
 - Navigation is file based: `index.html` lists chapters, `chapter.html` lists levels for a chosen chapter, and `level.html` renders lessons and quizzes for a chosen level.
+- Level lessons render as a single flashcard with previous/next controls, and the progress bar reflects completed lessons.
+- Read-aloud voice choice is stored locally so it persists across sessions.
 
 ## Project structure
 - `index.html` - landing page with chapter grid, signup modal, and hero content.
@@ -24,7 +28,7 @@ The UI emphasizes clear layouts, large controls, gentle motion, and supportive l
 - `admin.html` - admin helper page for locking/unlocking levels (local storage).
 - `assets/js/chapters.js` - primary content source (chapters, levels, lessons).
 - `assets/js/app.js` - rendering, progress, auth, gamification, and UI behavior.
-- `assets/css/theme.css` - shared theme and layout styles.
+- `assets/css/theme.css` - shared theme and layout styles, including light/dark tokens.
 - `backend/` - optional PHP/MySQL API and seed data.
 - `GUIDE.md` - step-by-step customization guide.
 
