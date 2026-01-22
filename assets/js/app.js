@@ -980,16 +980,16 @@ const renderLevelContent = (chapterId, levelId) => {
 const updateLessonProgressUI = (chapterId, levelId) => {
   const progress = getLevelProgress(chapterId, levelId);
   const bar = qs('#lesson-progress-bar');
-  const battery = qs('#lesson-progress-battery');
   const label = qs('#lesson-progress-label');
+  const track = qs('#lesson-progress-track');
   const inlineBar = qs('#lesson-progress-inline-bar');
   const inlineLabel = qs('#lesson-progress-inline-label');
   const inlinePercent = qs('#lesson-progress-inline-percent');
   if (bar) bar.style.width = `${progress.percent}%`;
-  if (battery) battery.style.width = `${progress.percent}%`;
   if (label) label.textContent = progress.totalLessons
     ? `${progress.percent}% (${progress.completedLessons.length}/${progress.totalLessons})`
     : `${progress.percent}%`;
+  if (track) track.setAttribute('aria-valuenow', `${progress.percent}`);
   if (inlineBar) inlineBar.style.width = `${progress.percent}%`;
   if (inlineLabel) inlineLabel.textContent = progress.totalLessons
     ? `${progress.completedLessons.length}/${progress.totalLessons} lessons complete`

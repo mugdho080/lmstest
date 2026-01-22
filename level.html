@@ -52,8 +52,9 @@
             <div class="progress-row">
               <span class="subtle">Lessons complete</span>
               <div class="progress-visuals">
-                <div class="progress-bar"><span id="lesson-progress-bar" style="width:0%"></span></div>
-                <div class="battery-bar" aria-hidden="true"><span id="lesson-progress-battery"></span></div>
+                <div class="progress-bar" id="lesson-progress-track" role="progressbar" aria-label="Lesson completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <span id="lesson-progress-bar" style="width:0%"></span>
+                </div>
               </div>
               <span class="badge" id="lesson-progress-label">0%</span>
             </div>
