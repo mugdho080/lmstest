@@ -14,6 +14,107 @@ const getLevelFromUrl = () => new URLSearchParams(window.location.search).get('l
 
 // Speech helpers for read-aloud support
 const canSpeak = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+const VOICE_KEY = 'ga-voice';
+let availableVoices = [];
+const voiceSelectors = new Set();
+
+const loadVoices = () => {
+  if (!canSpeak) return [];
+  availableVoices = window.speechSynthesis.getVoices() || [];
+  return availableVoices;
+};
+
+const getVoicePreference = () => localStorage.getItem(VOICE_KEY);
+
+const setVoicePreference = (voiceOrKey) => {
+  if (!voiceOrKey) return;
+  const key = typeof voiceOrKey === 'string' ? voiceOrKey : (voiceOrKey.voiceURI || voiceOrKey.name);
+  if (key) localStorage.setItem(VOICE_KEY, key);
+};
+
+const voiceScore = (voice) => {
+  const name = `${voice.name} ${voice.voiceURI}`.toLowerCase();
+  const lang = (voice.lang || '').toLowerCase();
+  let score = 0;
+  if (lang.startsWith('en')) score += 6;
+  if (lang.startsWith('en-us')) score += 1;
+  if (voice.default) score += 1;
+  if (name.includes('natural')) score += 4;
+  if (name.includes('neural')) score += 4;
+  if (name.includes('premium')) score += 2;
+  if (name.includes('enhanced')) score += 2;
+  if (name.includes('siri')) score += 1;
+  if (name.includes('google')) score += 1;
+  return score;
+};
+
+const pickBestVoice = (voices) => {
+  if (!voices?.length) return null;
+  const localVoices = voices.filter((voice) => voice.localService);
+  const pool = localVoices.length ? localVoices : voices;
+  return pool.reduce((best, voice) => (voiceScore(voice) > voiceScore(best) ? voice : best), pool[0]);
+};
+
+const getVoiceByKey = (voices, key) => voices?.find((voice) => voice.voiceURI === key || voice.name === key);
+
+const resolveVoice = () => {
+  const voices = availableVoices.length ? availableVoices : loadVoices();
+  if (!voices.length) return null;
+  const stored = getVoicePreference();
+  const storedVoice = stored ? getVoiceByKey(voices, stored) : null;
+  if (storedVoice) return storedVoice;
+  const best = pickBestVoice(voices);
+  if (best) setVoicePreference(best);
+  return best;
+};
+
+const refreshVoiceSelector = (select) => {
+  if (!select) return;
+  const voices = availableVoices.length ? availableVoices : loadVoices();
+  if (!voices.length) {
+    select.innerHTML = '<option>Loading voices...</option>';
+    select.disabled = true;
+    return;
+  }
+
+  select.disabled = false;
+  const currentVoice = resolveVoice();
+  select.innerHTML = '';
+  voices.forEach((voice) => {
+    const option = document.createElement('option');
+    option.value = voice.voiceURI || voice.name;
+    const lang = voice.lang ? ` (${voice.lang})` : '';
+    const source = voice.localService ? '' : ' - online';
+    option.textContent = `${voice.name}${lang}${source}`;
+    select.appendChild(option);
+  });
+  if (currentVoice) {
+    select.value = currentVoice.voiceURI || currentVoice.name;
+  }
+};
+
+const registerVoiceSelector = (select) => {
+  if (!canSpeak || !select) return;
+  voiceSelectors.add(select);
+  select.addEventListener('change', () => {
+    const voices = availableVoices.length ? availableVoices : loadVoices();
+    const selected = getVoiceByKey(voices, select.value) || select.value;
+    setVoicePreference(selected);
+  });
+  refreshVoiceSelector(select);
+};
+
+const initVoiceSupport = () => {
+  if (!canSpeak) return;
+  loadVoices();
+  if (typeof window.speechSynthesis?.addEventListener === 'function') {
+    window.speechSynthesis.addEventListener('voiceschanged', () => {
+      loadVoices();
+      voiceSelectors.forEach((select) => refreshVoiceSelector(select));
+    });
+  }
+};
+
 const stopSpeech = () => {
   if (canSpeak) {
     window.speechSynthesis.cancel();
@@ -24,7 +125,13 @@ const speakText = (text) => {
   if (!canSpeak || !text) return;
   stopSpeech();
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-US';
+  const voice = resolveVoice();
+  if (voice) {
+    utterance.voice = voice;
+    utterance.lang = voice.lang || 'en-US';
+  } else {
+    utterance.lang = 'en-US';
+  }
   utterance.rate = 0.97;
   utterance.pitch = 1;
   window.speechSynthesis.speak(utterance);
@@ -820,6 +927,22 @@ const makeReadButton = (label, text) => {
   return btn;
 };
 
+const createVoiceSelector = () => {
+  if (!canSpeak) return null;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'voice-picker';
+  const label = document.createElement('span');
+  const labelId = `voice-label-${Math.random().toString(36).slice(2, 8)}`;
+  label.id = labelId;
+  label.className = 'voice-picker-label';
+  label.textContent = 'Voice';
+  const select = document.createElement('select');
+  select.setAttribute('aria-labelledby', labelId);
+  registerVoiceSelector(select);
+  wrapper.append(label, select);
+  return wrapper;
+};
+
 const renderLevelContent = (chapterId, levelId) => {
   const intro = qs('#level-intro');
   if (!intro || !chapters[chapterId]) return;
@@ -846,6 +969,8 @@ const renderLevelContent = (chapterId, levelId) => {
     makeReadButton('🔊 Read this overview aloud', `${level.content.intro}. ${level.content.steps.join('. ')}`)
   );
   intro.appendChild(overviewActions);
+  const voiceSelector = createVoiceSelector();
+  if (voiceSelector) intro.appendChild(voiceSelector);
   intro.appendChild(createSwipeSteps(level.content.steps));
 
   renderLessonList(chapterId, levelId, level);
@@ -1270,6 +1395,7 @@ const hydrateHero = () => {
 
 const init = () => {
   bindThemeToggle();
+  initVoiceSupport();
   const page = document.body.dataset.page;
   hydrateHero();
   renderPlayerHub();

@@ -1084,6 +1084,23 @@ select {
   flex-wrap: wrap;
 }
 
+.voice-picker {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.voice-picker-label {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.voice-picker select {
+  min-width: 220px;
+}
+
 .lesson-flash-viewport {
   position: relative;
   overflow: hidden;
