@@ -93,9 +93,9 @@
   --quote-bg: rgba(110, 219, 214, 0.12);
   --quote-border: rgba(110, 219, 214, 0.3);
   --quote-text: #d3eef0;
-  --ticker-bg: rgba(110, 219, 214, 0.16);
-  --ticker-border: rgba(110, 219, 214, 0.4);
-  --ticker-text: #dff7f5;
+  --ticker-bg: var(--surface-2);
+  --ticker-border: var(--surface-border);
+  --ticker-text: var(--text);
   --status-bg: rgba(110, 219, 214, 0.2);
   --status-border: rgba(110, 219, 214, 0.5);
   --status-text: #dff7f5;
@@ -187,7 +187,7 @@ body.module-styled .lesson-card-compact {
 
 body.module-styled .surface-heading h2,
 body.module-styled .section-title h2,
-body.module-styled .hero-card h3,
+body.module-styled .hero-card h3:not(.hero-ticker-title),
 body.module-styled h1,
 body.module-styled h2,
 body.module-styled h3 {
@@ -551,7 +551,7 @@ header.hero .hero-text button {
 }
 
 header.hero .hero-card,
-header.hero .hero-card h3,
+header.hero .hero-card h3:not(.hero-ticker-title),
 header.hero .hero-card p,
 header.hero .hero-card .subtle {
   color: var(--text);
@@ -1507,7 +1507,7 @@ header.hero .hero-text h3 {
 .chapter-card .title,
 .level-card .title,
 .surface h2,
-.hero-card h3,
+.hero-card h3:not(.hero-ticker-title),
 .section-title h2,
 .lesson-card h4,
 .lesson-card .title {
