@@ -857,11 +857,19 @@ const updateLessonProgressUI = (chapterId, levelId) => {
   const bar = qs('#lesson-progress-bar');
   const battery = qs('#lesson-progress-battery');
   const label = qs('#lesson-progress-label');
+  const inlineBar = qs('#lesson-progress-inline-bar');
+  const inlineLabel = qs('#lesson-progress-inline-label');
+  const inlinePercent = qs('#lesson-progress-inline-percent');
   if (bar) bar.style.width = `${progress.percent}%`;
   if (battery) battery.style.width = `${progress.percent}%`;
   if (label) label.textContent = progress.totalLessons
     ? `${progress.percent}% (${progress.completedLessons.length}/${progress.totalLessons})`
     : `${progress.percent}%`;
+  if (inlineBar) inlineBar.style.width = `${progress.percent}%`;
+  if (inlineLabel) inlineLabel.textContent = progress.totalLessons
+    ? `${progress.completedLessons.length}/${progress.totalLessons} lessons complete`
+    : 'No lessons tracked yet';
+  if (inlinePercent) inlinePercent.textContent = `${progress.percent}%`;
 };
 
 const renderLessonList = (chapterId, levelId, level) => {
@@ -872,44 +880,72 @@ const renderLessonList = (chapterId, levelId, level) => {
     return;
   }
 
-  const progress = getLevelProgress(chapterId, levelId);
   list.innerHTML = '';
+  const lessons = level.lessons;
 
-  const tabBar = document.createElement('div');
-  tabBar.className = 'lesson-tabs';
-  const panelWrap = document.createElement('div');
-  panelWrap.className = 'lesson-panels';
+  const shell = document.createElement('div');
+  shell.className = 'lesson-flash-shell';
 
-  const initialLesson = progress.completedLessons.at(-1) || level.lessons[0].id;
+  const header = document.createElement('div');
+  header.className = 'lesson-flash-header';
 
-  const setActive = (lessonId) => {
-    stopSpeech();
-    qsa('.lesson-tab', tabBar).forEach((tab) => {
-      tab.classList.toggle('active', tab.dataset.lesson === String(lessonId));
-    });
-    qsa('.lesson-panel', panelWrap).forEach((panel) => {
-      panel.classList.toggle('active', panel.dataset.lesson === String(lessonId));
-    });
+  const stepLabel = document.createElement('div');
+  stepLabel.className = 'lesson-flash-step';
+  stepLabel.id = 'lesson-flash-step';
+
+  const progressWrap = document.createElement('div');
+  progressWrap.className = 'lesson-flash-progress';
+  progressWrap.innerHTML = `
+    <div class="progress-row">
+      <span class="subtle" id="lesson-progress-inline-label"></span>
+      <span class="badge" id="lesson-progress-inline-percent"></span>
+    </div>
+    <div class="progress-bar"><span id="lesson-progress-inline-bar" style="width:0%"></span></div>
+  `;
+
+  const nav = document.createElement('div');
+  nav.className = 'lesson-flash-nav';
+
+  const prevBtn = document.createElement('button');
+  prevBtn.type = 'button';
+  prevBtn.className = 'btn btn-secondary ghost';
+  prevBtn.textContent = 'Previous lesson';
+
+  const nextBtn = document.createElement('button');
+  nextBtn.type = 'button';
+  nextBtn.className = 'btn btn-secondary ghost';
+  nextBtn.textContent = 'Next lesson';
+
+  nav.append(prevBtn, nextBtn);
+  header.append(stepLabel, progressWrap, nav);
+
+  const viewport = document.createElement('div');
+  viewport.className = 'lesson-flash-viewport';
+
+  const cardWrap = document.createElement('div');
+  cardWrap.className = 'lesson-flashcard';
+
+  viewport.appendChild(cardWrap);
+  shell.append(header, viewport);
+  list.appendChild(shell);
+
+  const completedLessons = () => getLevelProgress(chapterId, levelId).completedLessons;
+  let activeIndex = lessons.findIndex((lesson) => !completedLessons().includes(lesson.id));
+  if (activeIndex === -1) activeIndex = Math.max(lessons.length - 1, 0);
+
+  const updateHeader = () => {
+    stepLabel.textContent = `Lesson ${activeIndex + 1} of ${lessons.length}`;
+    prevBtn.disabled = activeIndex <= 0;
+    nextBtn.disabled = activeIndex >= lessons.length - 1;
+    updateLessonProgressUI(chapterId, levelId);
   };
 
-  level.lessons.forEach((lesson) => {
-    const completed = progress.completedLessons.includes(lesson.id);
+  const buildLessonCard = (lesson) => {
+    const completed = completedLessons().includes(lesson.id);
     const lessonSpeech = `Lesson ${lesson.id}: ${lesson.title}. ${lesson.summary}. ${lesson.content.intro}. ${lesson.content.bullets.join('. ')}`;
     const quizSpeech = `Quiz for ${lesson.title}. ${lesson.quiz
       .map((q, idx) => `Question ${idx + 1}: ${q.question}. Options: ${q.options.join(', ')}`)
       .join('. ')}`;
-
-    const tabBtn = document.createElement('button');
-    tabBtn.type = 'button';
-    tabBtn.className = `lesson-tab ${completed ? 'completed' : ''}`;
-    tabBtn.dataset.lesson = lesson.id;
-    tabBtn.textContent = `Lesson ${lesson.id}: ${lesson.title}`;
-    tabBtn.addEventListener('click', () => setActive(lesson.id));
-    tabBar.appendChild(tabBtn);
-
-    const panel = document.createElement('div');
-    panel.className = 'lesson-panel';
-    panel.dataset.lesson = lesson.id;
 
     const card = document.createElement('article');
     card.className = 'lesson-card';
@@ -920,7 +956,7 @@ const renderLessonList = (chapterId, levelId, level) => {
           <span class="badge">Lesson ${lesson.id}</span>
           <strong>${lesson.title}</strong>
         </div>
-        <span class="badge ${completed ? '' : 'locked'}" data-lesson-status> ${completed ? 'Completed' : 'Take the quiz'} </span>
+        <span class="badge ${completed ? '' : 'locked'}" data-lesson-status>${completed ? 'Completed' : 'Take the quiz'}</span>
       </header>
       <div class="lesson-body">
         <p>${lesson.summary}</p>
@@ -987,29 +1023,67 @@ const renderLessonList = (chapterId, levelId, level) => {
         submitBtn.textContent = 'Completed';
         result.textContent = '🎉 Perfect! You passed this lesson.';
         const status = card.querySelector('[data-lesson-status]');
-      if (status) {
-        status.textContent = 'Completed';
-        status.classList.remove('locked');
-      }
-      tabBtn.classList.add('completed');
-      playClap();
-      showToast('Congrats! Lesson passed');
-      updateLessonProgressUI(chapterId, levelId);
-      renderChapterProgress(chapterId);
-      updatePlayerHub();
-    } else {
+        if (status) {
+          status.textContent = 'Completed';
+          status.classList.remove('locked');
+        }
+        playClap();
+        showToast('Congrats! Lesson passed');
+        updateLessonProgressUI(chapterId, levelId);
+        renderChapterProgress(chapterId);
+        updatePlayerHub();
+
+        const lessonIndex = lessons.findIndex((item) => item.id === lesson.id);
+        if (lessonIndex >= 0 && lessonIndex < lessons.length - 1) {
+          setTimeout(() => swapLesson(lessonIndex + 1, 'next'), 360);
+        }
+      } else {
         result.textContent = 'Try again — check the hints above and retry.';
       }
     });
 
     card.appendChild(form);
-    panel.appendChild(card);
-    panelWrap.appendChild(panel);
-  });
+    return card;
+  };
 
-  list.appendChild(tabBar);
-  list.appendChild(panelWrap);
-  setActive(initialLesson);
+  let isAnimating = false;
+  const swapLesson = (nextIndex, direction = 'next', animate = true) => {
+    if (nextIndex < 0 || nextIndex >= lessons.length) return;
+    if (isAnimating) return;
+    stopSpeech();
+    const outClass = direction === 'prev' ? 'flash-out-left' : 'flash-out-right';
+    const inClass = direction === 'prev' ? 'flash-in-right' : 'flash-in-left';
+
+    const mount = () => {
+      cardWrap.innerHTML = '';
+      cardWrap.appendChild(buildLessonCard(lessons[nextIndex]));
+      activeIndex = nextIndex;
+      updateHeader();
+    };
+
+    if (!animate || !cardWrap.firstElementChild) {
+      mount();
+      return;
+    }
+
+    isAnimating = true;
+    cardWrap.classList.remove('flash-in-left', 'flash-in-right', 'flash-out-left', 'flash-out-right');
+    cardWrap.classList.add(outClass);
+    window.setTimeout(() => {
+      cardWrap.classList.remove(outClass);
+      mount();
+      cardWrap.classList.add(inClass);
+      window.setTimeout(() => {
+        cardWrap.classList.remove(inClass);
+        isAnimating = false;
+      }, 420);
+    }, 360);
+  };
+
+  prevBtn.addEventListener('click', () => swapLesson(activeIndex - 1, 'prev'));
+  nextBtn.addEventListener('click', () => swapLesson(activeIndex + 1, 'next'));
+
+  swapLesson(activeIndex, 'next', false);
 };
 
 const openAuthModal = (mode = 'signup') => {

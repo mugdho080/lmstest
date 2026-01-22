@@ -1063,6 +1063,105 @@ select {
   gap: 14px;
 }
 
+.lesson-flash-shell {
+  display: grid;
+  gap: 14px;
+}
+
+.lesson-flash-header {
+  display: grid;
+  gap: 12px;
+}
+
+.lesson-flash-step {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.lesson-flash-nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.lesson-flash-viewport {
+  position: relative;
+  overflow: hidden;
+}
+
+.lesson-flashcard {
+  position: relative;
+}
+
+.lesson-flashcard.flash-in-left {
+  animation: flash-in-left 0.45s ease both;
+}
+
+.lesson-flashcard.flash-in-right {
+  animation: flash-in-right 0.45s ease both;
+}
+
+.lesson-flashcard.flash-out-left {
+  animation: flash-out-left 0.4s ease both;
+}
+
+.lesson-flashcard.flash-out-right {
+  animation: flash-out-right 0.4s ease both;
+}
+
+@keyframes flash-in-left {
+  from {
+    transform: translateX(-18%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flash-in-right {
+  from {
+    transform: translateX(18%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flash-out-left {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-18%);
+    opacity: 0;
+  }
+}
+
+@keyframes flash-out-right {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(18%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lesson-flashcard.flash-in-left,
+  .lesson-flashcard.flash-in-right,
+  .lesson-flashcard.flash-out-left,
+  .lesson-flashcard.flash-out-right {
+    animation: none;
+  }
+}
+
 .lesson-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(124, 245, 255, 0.18);
